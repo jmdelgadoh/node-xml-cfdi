@@ -1,4 +1,4 @@
-import { RegimenFiscalEnum } from '../enums';
+import { RegimenFiscalEnum } from '../catalog/enums';
 
 export class ComprobanteConceptoACuentaTerceros {
     private _RfcACuentaTerceros: string;

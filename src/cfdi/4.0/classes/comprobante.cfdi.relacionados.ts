@@ -1,9 +1,21 @@
-import { TipoRelacionEnum } from '../enums';
+import { TipoRelacionEnum } from '../catalog/enums';
 import { ComprobanteCfdiRelacionadosCfdiRelacionado } from './';
+import { AttributesComprobanteCfdiRelacionadosElement } from '../types';
+
 
 export class ComprobanteCfdiRelacionados {
     private _CfdiRelacionado: ComprobanteCfdiRelacionadosCfdiRelacionado[]
     private _TipoRelacion: TipoRelacionEnum;
+
+    set AttributesCfdiRelacionados(params: AttributesComprobanteCfdiRelacionadosElement) {
+        this.TipoRelacion = params.TipoRelacion;
+    }
+
+    get AttributesCfdiRelacionados(): AttributesComprobanteCfdiRelacionadosElement {
+        return {
+            TipoRelacion: this.TipoRelacion,
+        }
+    }
 
     get TipoRelacion(): TipoRelacionEnum {
         return this._TipoRelacion;

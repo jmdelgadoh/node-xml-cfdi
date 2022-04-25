@@ -1,21 +1,11 @@
-import { ImpuestoEnum, TipoFactorEnum } from '../enums';
+import { ImpuestoEnum, TipoFactorEnum } from '../catalog/enums';
 
 export class ComprobanteConceptoImpuestosTraslado {
     private _Base: number;
     private _Impuesto: ImpuestoEnum;
     private _TipoFactor: TipoFactorEnum;
     private _TasaOCuota: number;
-    private _TasaOCuotaSpecified: boolean;
     private _Importe: number;
-    private _ImporteSpecified: boolean;
-
-    get ImporteSpecified(): boolean {
-        return this._ImporteSpecified;
-    }
-
-    set ImporteSpecified(value: boolean) {
-        this._ImporteSpecified = value;
-    }
 
     get Importe(): number {
         return this._Importe;
@@ -23,14 +13,6 @@ export class ComprobanteConceptoImpuestosTraslado {
 
     set Importe(value: number) {
         this._Importe = value;
-    }
-
-    get TasaOCuotaSpecified(): boolean {
-        return this._TasaOCuotaSpecified;
-    }
-
-    set TasaOCuotaSpecified(value: boolean) {
-        this._TasaOCuotaSpecified = value;
     }
 
     get TasaOCuota(): number {

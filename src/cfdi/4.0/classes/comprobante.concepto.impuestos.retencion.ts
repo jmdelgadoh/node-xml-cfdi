@@ -1,4 +1,4 @@
-import { ImpuestoEnum, TipoFactorEnum } from '../enums';
+import { ImpuestoEnum, TipoFactorEnum } from '../catalog/enums';
 
 export class ComprobanteConceptoImpuestosRetencion {
     private _Base: number;

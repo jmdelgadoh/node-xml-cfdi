@@ -1,3 +1,18 @@
-export { ClaveProdServType } from './clave.prod.serv.type';
-export { ClaveUnidadType } from './clave.unidad.type';
-export { CodigoPostalType } from './codigo.postal.type';
+export { ComprobanteElement, AttributesComprobanteElement } from './comprobante.element'
+export {
+    ComprobanteInformacionGlobalElement, AttributesComprobanteInformacionGlobalElement
+} from './comprobante.informacion.global.element'
+export {
+    ComprobanteCfdiRelacionadosElement,
+    AttributesComprobanteCfdiRelacionadosElement,
+    AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement
+} from './comprobante.cfdi.relacionados.element'
+export {
+    ComprobanteCfdiRelacionadosCfdiRelacionadoElement, AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement
+} from './comprobante.cfdi.relacionados.cfdi.relacionado.element'
+export {
+    ComprobanteEmisorElement, AttributesComprobanteEmisorElement
+} from './comprobante.cfdi.emisor.element'
+export {
+    ComprobanteReceptorElement, AttributesComprobanteReceptorElement
+} from './comprobante.cfdi.receptor.element'

@@ -1,4 +1,4 @@
-import { ImpuestoEnum } from '../enums';
+import { ImpuestoEnum } from '../catalog/enums';
 
 export class ComprobanteImpuestosRetencion {
     private _Impuesto: ImpuestoEnum;

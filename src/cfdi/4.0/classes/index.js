@@ -1,0 +1,50 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+exports.__esModule = true;
+exports.Comprobante = exports.ComprobanteInformacionGlobal = exports.ComprobanteCfdiRelacionados = exports.ComprobanteCfdiRelacionadosCfdiRelacionado = exports.ComprobanteEmisor = exports.ComprobanteReceptor = exports.ComprobanteConcepto = exports.ComprobanteConceptoImpuestos = exports.ComprobanteConceptoImpuestosTraslado = exports.ComprobanteConceptoImpuestosRetencion = exports.ComprobanteConceptoACuentaTerceros = exports.ComprobanteConceptoInformacionAduanera = exports.ComprobanteConceptoCuentaPredial = exports.ComprobanteConceptoParte = exports.ComprobanteImpuestos = exports.ComprobanteConceptoParteInformacionAduanera = exports.ComprobanteImpuestosRetencion = exports.ComprobanteImpuestosTraslado = void 0;
+var comprobante_impuestos_traslado_class_1 = require("./comprobante.impuestos.traslado.class");
+__createBinding(exports, comprobante_impuestos_traslado_class_1, "ComprobanteImpuestosTraslado");
+var comprobante_impuestos_retencion_class_1 = require("./comprobante.impuestos.retencion.class");
+__createBinding(exports, comprobante_impuestos_retencion_class_1, "ComprobanteImpuestosRetencion");
+var comprobante_concepto_parte_informacion_aduanera_1 = require("./comprobante.concepto.parte.informacion.aduanera");
+__createBinding(exports, comprobante_concepto_parte_informacion_aduanera_1, "ComprobanteConceptoParteInformacionAduanera");
+var comprobante_impuestos_1 = require("./comprobante.impuestos");
+__createBinding(exports, comprobante_impuestos_1, "ComprobanteImpuestos");
+var comprobante_concepto_parte_1 = require("./comprobante.concepto.parte");
+__createBinding(exports, comprobante_concepto_parte_1, "ComprobanteConceptoParte");
+var comprobante_concepto_cuenta_predial_1 = require("./comprobante.concepto.cuenta.predial");
+__createBinding(exports, comprobante_concepto_cuenta_predial_1, "ComprobanteConceptoCuentaPredial");
+var comprobante_concepto_informacion_aduanera_1 = require("./comprobante.concepto.informacion.aduanera");
+__createBinding(exports, comprobante_concepto_informacion_aduanera_1, "ComprobanteConceptoInformacionAduanera");
+var comprobante_concepto_a_cuenta_terceros_1 = require("./comprobante.concepto.a.cuenta.terceros");
+__createBinding(exports, comprobante_concepto_a_cuenta_terceros_1, "ComprobanteConceptoACuentaTerceros");
+var comprobante_concepto_impuestos_retencion_1 = require("./comprobante.concepto.impuestos.retencion");
+__createBinding(exports, comprobante_concepto_impuestos_retencion_1, "ComprobanteConceptoImpuestosRetencion");
+var comprobante_concepto_impuestos_traslado_1 = require("./comprobante.concepto.impuestos.traslado");
+__createBinding(exports, comprobante_concepto_impuestos_traslado_1, "ComprobanteConceptoImpuestosTraslado");
+var comprobante_concepto_impuestos_1 = require("./comprobante.concepto.impuestos");
+__createBinding(exports, comprobante_concepto_impuestos_1, "ComprobanteConceptoImpuestos");
+var comprobante_concepto_1 = require("./comprobante.concepto");
+__createBinding(exports, comprobante_concepto_1, "ComprobanteConcepto");
+var comprobante_receptor_1 = require("./comprobante.receptor");
+__createBinding(exports, comprobante_receptor_1, "ComprobanteReceptor");
+var comprobante_emisor_1 = require("./comprobante.emisor");
+__createBinding(exports, comprobante_emisor_1, "ComprobanteEmisor");
+var comprobante_cfdi_relacionados_cfdi_relacionado_1 = require("./comprobante.cfdi.relacionados.cfdi.relacionado");
+__createBinding(exports, comprobante_cfdi_relacionados_cfdi_relacionado_1, "ComprobanteCfdiRelacionadosCfdiRelacionado");
+var comprobante_cfdi_relacionados_1 = require("./comprobante.cfdi.relacionados");
+__createBinding(exports, comprobante_cfdi_relacionados_1, "ComprobanteCfdiRelacionados");
+var comprobante_informacion_global_1 = require("./comprobante.informacion.global");
+__createBinding(exports, comprobante_informacion_global_1, "ComprobanteInformacionGlobal");
+var comprobante_1 = require("./comprobante");
+__createBinding(exports, comprobante_1, "Comprobante");

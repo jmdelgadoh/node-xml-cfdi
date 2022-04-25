@@ -4,17 +4,7 @@ export class ComprobanteImpuestos {
     private _Retenciones: ComprobanteImpuestosRetencion[];
     private _Traslados: ComprobanteImpuestosTraslado[];
     private _TotalImpuestosRetenidos: number;
-    private _TotalImpuestosRetenidosSpecified: boolean;
     private _TotalImpuestosTrasladados: number;
-    private _TotalImpuestosTrasladadosSpecified: boolean;
-
-    get TotalImpuestosTrasladadosSpecified(): boolean {
-        return this._TotalImpuestosTrasladadosSpecified;
-    }
-
-    set TotalImpuestosTrasladadosSpecified(value: boolean) {
-        this._TotalImpuestosTrasladadosSpecified = value;
-    }
 
     get TotalImpuestosTrasladados(): number {
         return this._TotalImpuestosTrasladados;
@@ -22,14 +12,6 @@ export class ComprobanteImpuestos {
 
     set TotalImpuestosTrasladados(value: number) {
         this._TotalImpuestosTrasladados = value;
-    }
-
-    get TotalImpuestosRetenidosSpecified(): boolean {
-        return this._TotalImpuestosRetenidosSpecified;
-    }
-
-    set TotalImpuestosRetenidosSpecified(value: boolean) {
-        this._TotalImpuestosRetenidosSpecified = value;
     }
 
     get TotalImpuestosRetenidos(): number {

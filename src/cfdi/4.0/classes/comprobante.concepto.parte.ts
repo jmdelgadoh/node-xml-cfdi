@@ -1,5 +1,5 @@
 import { ComprobanteConceptoParteInformacionAduanera } from './';
-import { ClaveProdServType } from '../types';
+import { ClaveProdServType } from '../catalog/types';
 
 export class ComprobanteConceptoParte {
     private _InformacionAduanera: ComprobanteConceptoParteInformacionAduanera[];
@@ -9,17 +9,7 @@ export class ComprobanteConceptoParte {
     private _Unidad: string;
     private _Descripcion: string;
     private _ValorUnitario: number;
-    private _ValorUnitarioSpecified: boolean;
     private _Importe: number;
-    private _ImporteSpecified: boolean;
-
-    get ImporteSpecified(): boolean {
-        return this._ImporteSpecified;
-    }
-
-    set ImporteSpecified(value: boolean) {
-        this._ImporteSpecified = value;
-    }
 
     get Importe(): number {
         return this._Importe;
@@ -27,14 +17,6 @@ export class ComprobanteConceptoParte {
 
     set Importe(value: number) {
         this._Importe = value;
-    }
-
-    get ValorUnitarioSpecified(): boolean {
-        return this._ValorUnitarioSpecified;
-    }
-
-    set ValorUnitarioSpecified(value: boolean) {
-        this._ValorUnitarioSpecified = value;
     }
 
     get ValorUnitario(): number {

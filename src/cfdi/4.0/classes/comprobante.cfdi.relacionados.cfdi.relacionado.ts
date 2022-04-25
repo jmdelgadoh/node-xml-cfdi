@@ -1,5 +1,19 @@
+import {
+    AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement
+} from '../types';
+
 export class ComprobanteCfdiRelacionadosCfdiRelacionado {
     private _UUID: string;
+
+    set AttributesCfdiRelacionadosCfdiRelacionado(params: AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement) {
+        this.UUID = params.UUID;
+    }
+
+    get AttributesCfdiRelacionadosCfdiRelacionado(): AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement {
+        return {
+            UUID: this.UUID,
+        }
+    }
 
     get UUID(): string {
         return this._UUID;

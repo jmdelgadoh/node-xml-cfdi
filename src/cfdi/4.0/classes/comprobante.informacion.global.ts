@@ -1,16 +1,31 @@
-import { MesesEnum, PeriodicidadEnum } from '../enums';
+import { MesesEnum, PeriodicidadEnum } from '../catalog/enums';
+import { AttributesComprobanteInformacionGlobalElement } from '../types';
 
 export class ComprobanteInformacionGlobal {
     private _Periodicidad: PeriodicidadEnum;
     private _Meses: MesesEnum;
-    private _Anio: string;
+    private _Año: string;
 
-    get Anio(): string {
-        return this._Anio;
+    set AttributesInformacionGlobal(params: AttributesComprobanteInformacionGlobalElement) {
+        this.Periodicidad = params.Periodicidad;
+        this.Meses = params.Meses;
+        this.Año = params.Año;
     }
 
-    set Anio(value: string) {
-        this._Anio = value;
+    get AttributesInformacionGlobal(): AttributesComprobanteInformacionGlobalElement {
+        return {
+            Periodicidad: this.Periodicidad,
+            Meses: this.Meses,
+            Año: this.Año
+        }
+    }
+
+    get Año(): string {
+        return this._Año;
+    }
+
+    set Año(value: string) {
+        this._Año = value;
     }
 
     get Meses(): MesesEnum {

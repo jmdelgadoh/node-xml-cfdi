@@ -1,16 +1,35 @@
-import { RegimenFiscalEnum } from '../enums';
+import { RegimenFiscalEnum } from '../catalog/enums';
+import {
+    AttributesComprobanteEmisorElement
+} from '../types';
 
 export class ComprobanteEmisor {
     private _Rfc: string;
     private _Nombre: string;
     private _RegimenFiscal: RegimenFiscalEnum;
-    private _FacAtrAdquirente: string;
+    private _FacAtrAdquirente?: string;
 
-    get FacAtrAdquirente(): string {
+    set AttributesEmisor(params: AttributesComprobanteEmisorElement) {
+        this.Rfc = params.Rfc;
+        this.Nombre = params.Nombre;
+        this.RegimenFiscal = params.RegimenFiscal;
+        this.FacAtrAdquirente = params.FacAtrAdquirente;
+    }
+
+    get AttributesEmisor(): AttributesComprobanteEmisorElement {
+        return {
+            Rfc: this.Rfc,
+            Nombre: this.Nombre,
+            RegimenFiscal: this.RegimenFiscal,
+            FacAtrAdquirente: this.FacAtrAdquirente
+        }
+    }
+
+    get FacAtrAdquirente(): string | undefined {
         return this._FacAtrAdquirente;
     }
 
-    set FacAtrAdquirente(value: string) {
+    set FacAtrAdquirente(value: string | undefined) {
         this._FacAtrAdquirente = value;
     }
 

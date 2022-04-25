@@ -5,8 +5,8 @@ import {
     ComprobanteConceptoInformacionAduanera,
     ComprobanteConceptoParte
 } from './';
-import { ClaveProdServType, ClaveUnidadType } from '../types';
-import { ObjetoImpEnum } from '../enums';
+import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
+import { ObjetoImpEnum } from '../catalog/enums';
 
 export class ComprobanteConcepto {
     private _Impuestos: ComprobanteConceptoImpuestos;
@@ -24,7 +24,6 @@ export class ComprobanteConcepto {
     private _ValorUnitario: number;
     private _Importe: number;
     private _Descuento: number;
-    private _DescuentoSpecified: boolean;
     private _ObjetoImp: ObjetoImpEnum;
 
     get ObjetoImp(): ObjetoImpEnum {
@@ -33,14 +32,6 @@ export class ComprobanteConcepto {
 
     set ObjetoImp(value: ObjetoImpEnum) {
         this._ObjetoImp = value;
-    }
-
-    get DescuentoSpecified(): boolean {
-        return this._DescuentoSpecified;
-    }
-
-    set DescuentoSpecified(value: boolean) {
-        this._DescuentoSpecified = value;
     }
 
     get Descuento(): number {

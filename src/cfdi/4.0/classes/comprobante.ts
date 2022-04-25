@@ -1,55 +1,105 @@
-import { CodigoPostalType } from '../types';
-import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../enums';
+import { CodigoPostalType } from '../catalog/types';
+import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../catalog/enums';
 import {
     ComprobanteCfdiRelacionados,
     ComprobanteConcepto,
-    ComprobanteEmisor, ComprobanteImpuestos,
+    ComprobanteEmisor,
+    ComprobanteImpuestos,
     ComprobanteInformacionGlobal,
-    ComprobanteReceptor
+    ComprobanteReceptor,
+    XmlTags
 } from './';
+import { AttributesComprobanteElement } from '../types';
 
-export class Comprobante {
-    private _InformacionGlobal: ComprobanteInformacionGlobal;
-    private _CfdiRelacionados: ComprobanteCfdiRelacionados[];
+export class Comprobante extends XmlTags {
+    private _InformacionGlobal?: ComprobanteInformacionGlobal;
+    private _CfdiRelacionados?: ComprobanteCfdiRelacionados[];
     private _Emisor: ComprobanteEmisor;
     private _Receptor: ComprobanteReceptor;
     private _Conceptos: ComprobanteConcepto[];
-    private _Impuestos: ComprobanteImpuestos;
+    private _Impuestos?: ComprobanteImpuestos;
     // private _Complemento: ComprobanteComplemento;
     // private _Addenda: ComprobanteAddenda;
     private _Version: string;
-    private _Serie: string;
-    private _Folio: string;
-    private _Fecha: Date;
+    private _Serie?: string;
+    private _Folio?: string;
+    private _Fecha: string;
     private _Sello: string;
-    private _FormaPago: FormaPagoEnum;
-    private _FormaPagoSpecified: boolean;
+    private _FormaPago?: FormaPagoEnum;
     private _NoCertificado: string;
     private _Certificado: string;
-    private _CondicionesDePago: string;
-    private _SubTotal: number;
-    private _Descuento: number;
-    private _DescuentoSpecified: boolean;
+    private _CondicionesDePago?: string;
+    private _SubTotal: string;
+    private _Descuento?: string;
     private _Moneda: MonedaEnum;
-    private _TipoCambio: number;
-    private _TipoCambioSpecified: boolean;
-    private _Total: number;
+    private _TipoCambio?: number;
+    private _Total: string;
     private _TipoDeComprobante: TipoComprobanteEnum;
     private _Exportacion: ExportacionEnum;
-    private _MetodoPago: MetodoPagoEnum;
-    private _MetodoPagoSpecified: boolean;
+    private _MetodoPago?: MetodoPagoEnum;
     private _LugarExpedicion: CodigoPostalType;
-    private _Confirmacion: string;
+    private _Confirmacion?: string;
 
-    public Comprobante() {
-        this.Version = "4.0";
+    public constructor() {
+        super();
+        this.Version = '4.0'
+        this.addAttributes('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+        this.addAttributes('xmlns:cfdi', 'http://www.sat.gob.mx/cfd/4');
+        this.addAttributes('xsi:schemaLocation', 'http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd');
     }
 
-    get Confirmacion(): string {
+    set AttributesComprobante(params: AttributesComprobanteElement) {
+        this.Version = params.Version;
+        this.Serie = params.Serie;
+        this.Folio = params.Folio;
+        this.Fecha = params.Fecha;
+        this.Sello = params.Sello;
+        this.FormaPago = params.FormaPago;
+        this.NoCertificado = params.NoCertificado;
+        this.Certificado = params.Certificado;
+        this.CondicionesDePago = params.CondicionesDePago;
+        this.SubTotal = params.SubTotal;
+        this.Descuento = params.Descuento;
+        this.Moneda = params.Moneda;
+        this.TipoCambio = params.TipoCambio;
+        this.Total = params.Total;
+        this.TipoDeComprobante = params.TipoDeComprobante;
+        this.Exportacion = params.Exportacion;
+        this.MetodoPago = params.MetodoPago;
+        this.LugarExpedicion = params.LugarExpedicion;
+        this.Confirmacion = params.Confirmacion;
+    }
+
+    get AttributesComprobante(): AttributesComprobanteElement {
+        return {
+            ...this.getAttributes(),
+            Version: this.Version,
+            Serie: this.Serie,
+            Folio: this.Folio,
+            Fecha: this.Fecha,
+            Sello: this.Sello,
+            FormaPago: this.FormaPago,
+            NoCertificado: this.NoCertificado,
+            Certificado: this.Certificado,
+            CondicionesDePago: this.CondicionesDePago,
+            SubTotal: this.SubTotal,
+            Descuento: this.Descuento,
+            Moneda: this.Moneda,
+            TipoCambio: this.TipoCambio,
+            Total: this.Total,
+            TipoDeComprobante: this.TipoDeComprobante,
+            Exportacion: this.Exportacion,
+            MetodoPago: this.MetodoPago,
+            LugarExpedicion: this.LugarExpedicion,
+            Confirmacion: this.Confirmacion,
+        }
+    }
+
+    get Confirmacion(): string | undefined {
         return this._Confirmacion;
     }
 
-    set Confirmacion(value: string) {
+    set Confirmacion(value: string | undefined) {
         this._Confirmacion = value;
     }
 
@@ -61,19 +111,11 @@ export class Comprobante {
         this._LugarExpedicion = value;
     }
 
-    get MetodoPagoSpecified(): boolean {
-        return this._MetodoPagoSpecified;
-    }
-
-    set MetodoPagoSpecified(value: boolean) {
-        this._MetodoPagoSpecified = value;
-    }
-
-    get MetodoPago(): MetodoPagoEnum {
+    get MetodoPago(): MetodoPagoEnum | undefined {
         return this._MetodoPago;
     }
 
-    set MetodoPago(value: MetodoPagoEnum) {
+    set MetodoPago(value: MetodoPagoEnum | undefined) {
         this._MetodoPago = value;
     }
 
@@ -93,27 +135,19 @@ export class Comprobante {
         this._TipoDeComprobante = value;
     }
 
-    get Total(): number {
+    get Total(): string {
         return this._Total;
     }
 
-    set Total(value: number) {
+    set Total(value: string) {
         this._Total = value;
     }
 
-    get TipoCambioSpecified(): boolean {
-        return this._TipoCambioSpecified;
-    }
-
-    set TipoCambioSpecified(value: boolean) {
-        this._TipoCambioSpecified = value;
-    }
-
-    get TipoCambio(): number {
+    get TipoCambio(): number | undefined {
         return this._TipoCambio;
     }
 
-    set TipoCambio(value: number) {
+    set TipoCambio(value: number | undefined) {
         this._TipoCambio = value;
     }
 
@@ -125,35 +159,27 @@ export class Comprobante {
         this._Moneda = value;
     }
 
-    get DescuentoSpecified(): boolean {
-        return this._DescuentoSpecified;
-    }
-
-    set DescuentoSpecified(value: boolean) {
-        this._DescuentoSpecified = value;
-    }
-
-    get Descuento(): number {
+    get Descuento(): string | undefined {
         return this._Descuento;
     }
 
-    set Descuento(value: number) {
+    set Descuento(value: string | undefined) {
         this._Descuento = value;
     }
 
-    get SubTotal(): number {
+    get SubTotal(): string {
         return this._SubTotal;
     }
 
-    set SubTotal(value: number) {
+    set SubTotal(value: string) {
         this._SubTotal = value;
     }
 
-    get CondicionesDePago(): string {
+    get CondicionesDePago(): string | undefined {
         return this._CondicionesDePago;
     }
 
-    set CondicionesDePago(value: string) {
+    set CondicionesDePago(value: string | undefined) {
         this._CondicionesDePago = value;
     }
 
@@ -173,19 +199,11 @@ export class Comprobante {
         this._NoCertificado = value;
     }
 
-    get FormaPagoSpecified(): boolean {
-        return this._FormaPagoSpecified;
-    }
-
-    set FormaPagoSpecified(value: boolean) {
-        this._FormaPagoSpecified = value;
-    }
-
-    get FormaPago(): FormaPagoEnum {
+    get FormaPago(): FormaPagoEnum | undefined {
         return this._FormaPago;
     }
 
-    set FormaPago(value: FormaPagoEnum) {
+    set FormaPago(value: FormaPagoEnum | undefined) {
         this._FormaPago = value;
     }
 
@@ -197,27 +215,27 @@ export class Comprobante {
         this._Sello = value;
     }
 
-    get Fecha(): Date {
+    get Fecha(): string {
         return this._Fecha;
     }
 
-    set Fecha(value: Date) {
+    set Fecha(value: string) {
         this._Fecha = value;
     }
 
-    get Folio(): string {
+    get Folio(): string | undefined {
         return this._Folio;
     }
 
-    set Folio(value: string) {
+    set Folio(value: string | undefined) {
         this._Folio = value;
     }
 
-    get Serie(): string {
+    get Serie(): string | undefined {
         return this._Serie;
     }
 
-    set Serie(value: string) {
+    set Serie(value: string | undefined) {
         this._Serie = value;
     }
 
@@ -229,11 +247,11 @@ export class Comprobante {
         this._Version = value;
     }
 
-    get Impuestos(): ComprobanteImpuestos {
+    get Impuestos(): ComprobanteImpuestos | undefined {
         return this._Impuestos;
     }
 
-    set Impuestos(value: ComprobanteImpuestos) {
+    set Impuestos(value: ComprobanteImpuestos | undefined) {
         this._Impuestos = value;
     }
 
@@ -261,19 +279,19 @@ export class Comprobante {
         this._Emisor = value;
     }
 
-    get CfdiRelacionados(): ComprobanteCfdiRelacionados[] {
+    get CfdiRelacionados(): ComprobanteCfdiRelacionados[] | undefined {
         return this._CfdiRelacionados;
     }
 
-    set CfdiRelacionados(value: ComprobanteCfdiRelacionados[]) {
+    set CfdiRelacionados(value: ComprobanteCfdiRelacionados[] | undefined) {
         this._CfdiRelacionados = value;
     }
 
-    get InformacionGlobal(): ComprobanteInformacionGlobal {
+    get InformacionGlobal(): ComprobanteInformacionGlobal | undefined {
         return this._InformacionGlobal;
     }
 
-    set InformacionGlobal(value: ComprobanteInformacionGlobal) {
+    set InformacionGlobal(value: ComprobanteInformacionGlobal | undefined) {
         this._InformacionGlobal = value;
     }
 }
