@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_TipoDeComprobante
+* Cfdi V4.0 - c_TipoDeComprobante
 * */
 export enum TipoComprobanteEnum {
     /*

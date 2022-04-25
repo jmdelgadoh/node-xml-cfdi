@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_Exportacion
+* Cfdi V4.0 - c_Exportacion
 * */
 export enum ExportacionEnum {
     /*

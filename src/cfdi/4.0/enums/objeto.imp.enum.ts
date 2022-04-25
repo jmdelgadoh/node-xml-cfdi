@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_ObjetoImp
+* Cfdi V4.0 - c_ObjetoImp
 * */
 export enum ObjetoImpEnum {
     /*

@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_Impuesto
+* Cfdi V4.0 - c_Impuesto
 * */
 export enum ImpuestoEnum {
     /*

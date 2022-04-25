@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_Moneda
+* Cfdi V4.0 - c_Moneda
 * */
 export enum MonedaEnum {
     /*

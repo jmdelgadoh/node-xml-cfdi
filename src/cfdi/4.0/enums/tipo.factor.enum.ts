@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_TipoFactor
+* Cfdi V4.0 - c_TipoFactor
 * */
 export enum TipoFactorEnum {
     /*

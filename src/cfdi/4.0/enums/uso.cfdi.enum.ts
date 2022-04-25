@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_UsoCFDI
+* Cfdi V4.0 - c_UsoCFDI
 * */
 export enum UsoCfdiEnum {
     /*

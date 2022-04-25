@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_Periodicidad
+* Cfdi V4.0 - c_Periodicidad
 * */
 export enum PeriodicidadEnum {
     /*

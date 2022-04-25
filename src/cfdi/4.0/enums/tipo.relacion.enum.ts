@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_TipoRelacion
+* Cfdi V4.0 - c_TipoRelacion
 * */
 export enum TipoRelacionEnum {
     /*
@@ -15,7 +15,7 @@ export enum TipoRelacionEnum {
     * */
     TR03 = '03',
     /*
-    * @value Sustitución de los CFDI previos
+    * @value Sustitución de los Cfdi previos
     * */
     TR04 = '04',
     /*
@@ -27,7 +27,7 @@ export enum TipoRelacionEnum {
     * */
     TR06 = '06',
     /*
-    * @value CFDI por aplicación de anticipo
+    * @value Cfdi por aplicación de anticipo
     * */
     TR07 = '07',
     /*

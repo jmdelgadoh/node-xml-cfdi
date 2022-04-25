@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_RegimenFiscal
+* Cfdi V4.0 - c_RegimenFiscal
 * */
 export enum RegimenFiscalEnum {
     /*

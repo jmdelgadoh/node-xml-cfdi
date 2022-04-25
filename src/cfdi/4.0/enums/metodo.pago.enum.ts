@@ -1,5 +1,5 @@
 /*
-* CFDI V4.0 - c_MetodoPago
+* Cfdi V4.0 - c_MetodoPago
 * */
 export enum MetodoPagoEnum {
     /*
