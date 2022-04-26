@@ -18,7 +18,7 @@ import {
 const test = async () => {
     const cfdi = new CFDIService();
 
-    const comprobante = cfdi.comprobante({
+    const comprobante = cfdi.crearComprobante({
         Version: '4.0',
         Serie: 'Serie',
         Folio: 'Folio',
@@ -64,7 +64,7 @@ const test = async () => {
         UsoCFDI: UsoCfdiEnum.G01
     });
 
-    const concepto = comprobante.concepto({
+    const concepto = cfdi.crearConcepto({
         ClaveProdServ: '50211503',
         Cantidad: '1.00',
         ClaveUnidad: 'H87',
@@ -115,7 +115,7 @@ const test = async () => {
         Numero: '15956011002'
     });
 
-    const parte = concepto.parte({
+    const parte = cfdi.crearParte({
         ClaveProdServ: '50211503',
         Cantidad: '2.00',
         ValorUnitario: '100.00',
@@ -128,11 +128,11 @@ const test = async () => {
         NumeroPedimento: '104738078003832'
     });
 
-    concepto.agregarParte(parte);
+    concepto.parte(parte);
 
-    comprobante.agregarConcepto(concepto);
+    comprobante.concepto(concepto);
 
-    const impuestos = comprobante.impuestos({
+    const impuestos = cfdi.crearImpuestos({
         TotalImpuestosTrasladados: '32.00',
         TotalImpuestosRetenidos: '32.00'
     });
@@ -150,7 +150,7 @@ const test = async () => {
         Importe: '32.00'
     });
 
-    comprobante.agregarImpuestos(impuestos)
+    comprobante.impuestos(impuestos)
 
     const xml = await cfdi.getXML(comprobante);
 

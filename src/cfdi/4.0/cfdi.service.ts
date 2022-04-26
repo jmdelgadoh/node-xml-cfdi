@@ -19,16 +19,30 @@ import {
     ComprobanteReceptorElement,
     ComprobanteConceptoParteElement,
     ComprobanteImpuestosRetencionesRetencionElement,
-    ComprobanteImpuestosTrasladosTrasladoElement
+    ComprobanteImpuestosTrasladosTrasladoElement,
+    AttributesComprobanteConceptoElement,
+    AttributesComprobanteImpuestosElement, AttributesComprobanteConceptoParteElement
 } from './types';
-import { Comprobante } from './classes';
+import { Comprobante, ComprobanteConcepto, ComprobanteConceptoParte, ComprobanteImpuestos } from './classes';
 
 export class CFDIService {
     constructor() {
     }
 
-    public comprobante(params: AttributesComprobanteElement): Comprobante {
+    public crearComprobante(params: AttributesComprobanteElement): Comprobante {
         return new Comprobante(params)
+    }
+
+    public crearConcepto(params: AttributesComprobanteConceptoElement): ComprobanteConcepto {
+        return new ComprobanteConcepto(params);
+    }
+
+    public crearImpuestos(params: AttributesComprobanteImpuestosElement) {
+        return new ComprobanteImpuestos(params)
+    }
+
+    public crearParte(params: AttributesComprobanteConceptoParteElement): ComprobanteConceptoParte {
+        return new ComprobanteConceptoParte(params)
     }
 
 

@@ -13,7 +13,6 @@ import {
     AttributesComprobanteConceptoCuentaPredialElement,
     AttributesComprobanteConceptoElement,
     AttributesComprobanteConceptoInformacionAduaneraElement,
-    AttributesComprobanteConceptoParteElement
 } from '../types';
 
 export class ComprobanteConcepto extends XmlTags {
@@ -43,11 +42,7 @@ export class ComprobanteConcepto extends XmlTags {
         this.Parte = [];
     }
 
-    public parte(params: AttributesComprobanteConceptoParteElement): ComprobanteConceptoParte {
-        return new ComprobanteConceptoParte(params)
-    }
-
-    public agregarParte(parte: ComprobanteConceptoParte) {
+    public parte(parte: ComprobanteConceptoParte) {
         this.Parte.push(parte)
     }
 

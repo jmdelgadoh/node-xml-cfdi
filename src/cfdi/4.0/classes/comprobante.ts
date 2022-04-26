@@ -12,10 +12,8 @@ import {
 } from './';
 import {
     AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
-    AttributesComprobanteConceptoElement,
     AttributesComprobanteElement,
     AttributesComprobanteEmisorElement,
-    AttributesComprobanteImpuestosElement,
     AttributesComprobanteInformacionGlobalElement,
     AttributesComprobanteReceptorElement
 } from '../types';
@@ -83,19 +81,11 @@ export class Comprobante extends XmlTags {
         this.Receptor = new ComprobanteReceptor(params);
     }
 
-    public agregarConcepto(concepto: ComprobanteConcepto) {
+    public concepto(concepto: ComprobanteConcepto) {
         this.Conceptos.push(concepto);
     }
 
-    public concepto(params: AttributesComprobanteConceptoElement): ComprobanteConcepto {
-        return new ComprobanteConcepto(params);
-    }
-
-    public impuestos(params: AttributesComprobanteImpuestosElement) {
-        return new ComprobanteImpuestos(params)
-    }
-
-    public agregarImpuestos(impuestos: ComprobanteImpuestos) {
+    public impuestos(impuestos: ComprobanteImpuestos) {
         this.Impuestos = impuestos;
     }
 
