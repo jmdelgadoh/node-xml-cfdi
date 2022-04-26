@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComprobanteConceptoParte = void 0;
+const _1 = require("./");
 class ComprobanteConceptoParte {
     _InformacionAduanera;
     _ClaveProdServ;
@@ -10,6 +11,33 @@ class ComprobanteConceptoParte {
     _Descripcion;
     _ValorUnitario;
     _Importe;
+    constructor(params) {
+        this.AttributesParte = params;
+        this.InformacionAduanera = [];
+    }
+    informacionAduanera(params) {
+        this.InformacionAduanera.push(new _1.ComprobanteConceptoParteInformacionAduanera(params));
+    }
+    set AttributesParte(params) {
+        this.ClaveProdServ = params.ClaveProdServ;
+        this.NoIdentificacion = params.NoIdentificacion;
+        this.Cantidad = params.Cantidad;
+        this.Unidad = params.Unidad;
+        this.Descripcion = params.Descripcion;
+        this.ValorUnitario = params.ValorUnitario;
+        this.Importe = params.Importe;
+    }
+    get AttributesParte() {
+        return {
+            ClaveProdServ: this.ClaveProdServ,
+            NoIdentificacion: this.NoIdentificacion,
+            Cantidad: this.Cantidad,
+            Unidad: this.Unidad,
+            Descripcion: this.Descripcion,
+            ValorUnitario: this.ValorUnitario,
+            Importe: this.Importe,
+        };
+    }
     get Importe() {
         return this._Importe;
     }

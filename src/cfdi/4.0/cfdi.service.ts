@@ -1,80 +1,39 @@
 import { Element, json2xml } from 'xml-js';
 import {
     AttributesComprobanteElement,
-    AttributesComprobanteInformacionGlobalElement,
     ComprobanteElement,
     ComprobanteInformacionGlobalElement,
     ComprobanteCfdiRelacionadosElement,
     ComprobanteCfdiRelacionadosCfdiRelacionadoElement,
-    AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
-    AttributesComprobanteEmisorElement,
-    ComprobanteEmisorElement
+    ComprobanteEmisorElement,
+    ComprobanteReceptorElement,
+    ComprobanteConceptosElement,
+    ComprobanteConceptoElement,
+    ComprobanteConceptoImpuestosRetencionesRetencionElement,
+    ComprobanteConceptoImpuestosTrasladosTrasladoElement,
+    ComprobanteConceptoImpuestosElement,
+    ComprobanteConceptoImpuestosTrasladosElement,
+    ComprobanteConceptoImpuestosRetencionesElement,
+    ComprobanteConceptoACuentaTercerosElement,
+    ComprobanteConceptoInformacionAduaneraElement,
+    ComprobanteConceptoCuentaPredialElement
 } from './types';
-import {
-    Comprobante,
-    ComprobanteCfdiRelacionados,
-    ComprobanteCfdiRelacionadosCfdiRelacionado, ComprobanteEmisor,
-    ComprobanteInformacionGlobal, ComprobanteReceptor
-} from './classes';
-import {
-    AttributesComprobanteReceptorElement,
-    ComprobanteReceptorElement
-} from './types/comprobante.cfdi.receptor.element';
+import { Comprobante, ComprobanteConceptoCuentaPredial } from './classes';
+import { ComprobanteConceptoParteElement } from './types/comprobante.cfdi.concepto.parte.element';
 
 export class CFDIService {
-    private _comprobante: Comprobante;
-    private jsonComprobante: ComprobanteElement = {
-        type: 'element',
-        name: "cfdi:Comprobante",
-        elements: []
-    }
-
     constructor() {
-        this._comprobante = new Comprobante();
     }
 
-    public comprobante(params: AttributesComprobanteElement) {
-        this._comprobante.AttributesComprobante = params;
+    public comprobante(params: AttributesComprobanteElement): Comprobante {
+        return new Comprobante(params)
     }
 
-    public informacionGlobal(params: AttributesComprobanteInformacionGlobalElement) {
-        this._comprobante.InformacionGlobal = new ComprobanteInformacionGlobal();
-        this._comprobante.InformacionGlobal.AttributesInformacionGlobal = params;
-    }
 
-    public cfdiRelacionados(params: AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement) {
-        if (params.CfdiRelacionado?.length) {
-            if (this._comprobante.CfdiRelacionados?.length) {
-                const index = this._comprobante.CfdiRelacionados.findIndex((value) => value.TipoRelacion === params.TipoRelacion);
-
-                if (index >= 0) {
-                    this._comprobante.CfdiRelacionados[index].CfdiRelacionado = this.generarCfdiRelacionado(params.CfdiRelacionado);
-                } else {
-                    this._comprobante.CfdiRelacionados.push(this.generarCfdiRelacionados(params))
-                }
-            } else {
-                this._comprobante.CfdiRelacionados = [this.generarCfdiRelacionados(params)];
-            }
-        }
-    }
-
-    public emisor(params: AttributesComprobanteEmisorElement) {
-        this._comprobante.Emisor = new ComprobanteEmisor();
-        this._comprobante.Emisor.AttributesEmisor = params;
-    }
-
-    public receptor(params: AttributesComprobanteReceptorElement) {
-        this._comprobante.Receptor = new ComprobanteReceptor();
-        this._comprobante.Receptor.AttributesReceptor = params;
-    }
-
-    public concepto() {
-    }
-
-    public async getXML(): Promise<string> {
+    public async getXML(comprobante: Comprobante): Promise<string> {
         return new Promise((resolve, reject) => {
             try {
-                const xml = json2xml(JSON.stringify(this.JsonCFDI));
+                const xml = json2xml(JSON.stringify(this.getJsonCFDI(comprobante)));
                 resolve(xml);
             } catch (err) {
                 reject(err);
@@ -82,37 +41,31 @@ export class CFDIService {
         });
     }
 
-    private generarCfdiRelacionados(params: AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement) {
-        const cfdiRelacionados = new ComprobanteCfdiRelacionados();
-        cfdiRelacionados.AttributesCfdiRelacionados = params;
-        if (params.CfdiRelacionado?.length) {
-            cfdiRelacionados.CfdiRelacionado = this.generarCfdiRelacionado(params.CfdiRelacionado);
-        }
-        return cfdiRelacionados;
-    }
+    private getJsonCFDI(comprobante: Comprobante): Element {
+        const jsonComprobante = {
+            type: 'element',
+            name: "cfdi:Comprobante",
+            elements: []
+        } as ComprobanteElement;
 
-    private generarCfdiRelacionado(params: string[]): ComprobanteCfdiRelacionadosCfdiRelacionado[] {
-        return params.map((UUID) => {
-            const cfdiRelacionadosCfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado();
-            cfdiRelacionadosCfdiRelacionado.AttributesCfdiRelacionadosCfdiRelacionado = {UUID};
-            return cfdiRelacionadosCfdiRelacionado
-        })
-    }
+        jsonComprobante.attributes = comprobante.AttributesComprobante;
 
-    private get JsonCFDI(): Element {
-        this.jsonComprobante.elements = [];
-        this.jsonComprobante.attributes = this._comprobante.AttributesComprobante;
-
-        if (this._comprobante.InformacionGlobal) {
-            this.jsonComprobante.elements?.push({
+        /*
+        * Se agrega la informacion fiscal, solo si cuenta con el atributo
+        * */
+        if (comprobante.InformacionGlobal) {
+            jsonComprobante.elements?.push({
                 type: 'element',
                 name: 'cfdi:InformacionGlobal',
-                attributes: this._comprobante.InformacionGlobal.AttributesInformacionGlobal
+                attributes: comprobante.InformacionGlobal.AttributesInformacionGlobal
             } as ComprobanteInformacionGlobalElement)
         }
 
-        if (this._comprobante.CfdiRelacionados?.length) {
-            for (const cfdiRelacionadosValue of this._comprobante.CfdiRelacionados) {
+        /*
+        * Se agregam los cfdis relaciona con tipo de relacion
+        * */
+        if (comprobante.CfdiRelacionados?.length) {
+            for (const cfdiRelacionadosValue of comprobante.CfdiRelacionados) {
                 const cfdiRelacionados = {
                     type: 'element',
                     name: 'cfdi:CfdiRelacionados',
@@ -130,24 +83,169 @@ export class CFDIService {
                     cfdiRelacionados.elements?.push(cfdiRelacionado);
                 }
 
-                this.jsonComprobante.elements?.push(cfdiRelacionados)
+                jsonComprobante.elements?.push(cfdiRelacionados)
             }
         }
 
-        if (this._comprobante.Emisor) {
-            this.jsonComprobante.elements?.push({
+        /*
+        * Se agrega el emisor
+        * */
+        if (comprobante.Emisor) {
+            jsonComprobante.elements?.push({
                 type: 'element',
                 name: 'cfdi:Emisor',
-                attributes: this._comprobante.Emisor.AttributesEmisor
+                attributes: comprobante.Emisor.AttributesEmisor
             } as ComprobanteEmisorElement)
         }
 
-        if (this._comprobante.Receptor) {
-            this.jsonComprobante.elements?.push({
+        /*
+        * Se agrega el receptor
+        * */
+        if (comprobante.Receptor) {
+            jsonComprobante.elements?.push({
                 type: 'element',
                 name: 'cfdi:Receptor',
-                attributes: this._comprobante.Receptor.AttributesReceptor
+                attributes: comprobante.Receptor.AttributesReceptor
             } as ComprobanteReceptorElement)
+        }
+
+        /*
+        * Se agrega el agregan los conceptos
+        * */
+        if (comprobante.Conceptos.length) {
+            const elements: ComprobanteConceptoElement[] = [];
+
+            for (const conceptoValue of comprobante.Conceptos) {
+                const conceptoElement: ComprobanteConceptoElement = {
+                    type: 'element',
+                    name: 'cfdi:Concepto',
+                    attributes: conceptoValue.AttributesConcepto,
+                    elements: []
+                }
+
+                /*
+                * Se agregan los impuestos del concepto
+                * */
+                if (conceptoValue?.Impuestos) {
+                    const retencionElements: ComprobanteConceptoImpuestosRetencionesRetencionElement[] = [];
+                    const trasladoElements: ComprobanteConceptoImpuestosTrasladosTrasladoElement[] = [];
+                    /*
+                    * Se agregan los impuestos en retencion
+                    * */
+                    for (const retencionValue of conceptoValue?.Impuestos.Retenciones) {
+                        const element: ComprobanteConceptoImpuestosRetencionesRetencionElement = {
+                            type: 'element',
+                            name: 'cfdi:Retencion',
+                            attributes: retencionValue.AttributesConceptoImpuestosRetencion
+                        }
+
+                        retencionElements.push(element)
+                    }
+                    /*
+                    * Se agregan los impuestos traladados
+                    * */
+                    for (const trasladosValue of conceptoValue?.Impuestos.Traslados) {
+                        const element: ComprobanteConceptoImpuestosTrasladosTrasladoElement = {
+                            type: 'element',
+                            name: 'cfdi:Traslado',
+                            attributes: trasladosValue.AttributesConceptoImpuestosTraslado
+                        }
+
+                        trasladoElements.push(element)
+                    }
+                    /*
+                    * Se el nodo de impuestos si existe impuestos trasladados o impuestos retenidos
+                    * */
+                    if (retencionElements.length || trasladoElements.length) {
+                        const impuestosElement: ComprobanteConceptoImpuestosElement = {
+                            type: 'element',
+                            name: 'cfdi:Impuestos',
+                            elements: []
+                        }
+
+                        if (trasladoElements.length) {
+                            impuestosElement.elements?.push({
+                                type: 'element',
+                                name: 'cfdi:Traslados',
+                                elements: trasladoElements
+                            } as ComprobanteConceptoImpuestosTrasladosElement)
+                        }
+
+                        if (retencionElements.length) {
+                            impuestosElement.elements?.push({
+                                type: 'element',
+                                name: 'cfdi:Retenciones',
+                                elements: retencionElements
+                            } as ComprobanteConceptoImpuestosRetencionesElement)
+                        }
+
+                        conceptoElement.elements?.push(impuestosElement);
+                    }
+                }
+                /*
+                * Se agrega la cuenta a terceros
+                * */
+                if (conceptoValue?.ACuentaTerceros) {
+                    conceptoElement.elements?.push({
+                        type: 'element',
+                        name: 'cfdi:ACuentaTerceros',
+                        attributes: conceptoValue?.ACuentaTerceros.AttributesACuentaTerceros
+                    } as ComprobanteConceptoACuentaTercerosElement)
+                }
+                /*
+                * Se agrega cuentas a terceros
+                * */
+                if (conceptoValue?.InformacionAduanera?.length) {
+                    for (const informacionAduaneraValue of conceptoValue?.InformacionAduanera) {
+                        conceptoElement.elements?.push({
+                            type: 'element',
+                            name: 'cfdi:InformacionAduanera',
+                            attributes: informacionAduaneraValue.AttributesInformacionAduanera
+                        } as ComprobanteConceptoInformacionAduaneraElement)
+                    }
+                }
+
+                if (conceptoValue?.CuentaPredial?.length) {
+                    for (const cuentaPredialValue of conceptoValue?.CuentaPredial) {
+                        conceptoElement.elements?.push({
+                            type: 'element',
+                            name: 'cfdi:CuentaPredial',
+                            attributes: cuentaPredialValue.AttributesCuentaPredial
+                        } as ComprobanteConceptoCuentaPredialElement)
+                    }
+                }
+
+                if (conceptoValue?.Parte?.length) {
+                    for (const parteValue of conceptoValue?.Parte) {
+                        const parteElement = {
+                            type: 'element',
+                            name: 'cfdi:Parte',
+                            attributes: parteValue.AttributesParte,
+                            elements: []
+                        } as ComprobanteConceptoParteElement;
+
+                        for (const informacionAduaneraValue of parteValue.InformacionAduanera) {
+                            parteElement.elements?.push({
+                                type: 'element',
+                                name: 'cfdi:InformacionAduanera',
+                                attributes: informacionAduaneraValue.AttributesInformacionAduanera
+                            } as ComprobanteConceptoInformacionAduaneraElement)
+                        }
+
+                        conceptoElement.elements?.push(parteElement)
+                    }
+                }
+
+                elements.push(conceptoElement)
+            }
+
+            if (elements.length) {
+                jsonComprobante.elements?.push({
+                    type: 'element',
+                    name: 'cfdi:Conceptos',
+                    elements
+                } as ComprobanteConceptosElement)
+            }
         }
 
         return {
@@ -158,7 +256,7 @@ export class CFDIService {
                 }
             },
             elements: [
-                this.jsonComprobante
+                jsonComprobante
             ]
         }
     }

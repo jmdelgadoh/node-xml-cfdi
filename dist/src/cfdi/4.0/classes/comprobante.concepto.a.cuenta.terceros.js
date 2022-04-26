@@ -6,6 +6,23 @@ class ComprobanteConceptoACuentaTerceros {
     _NombreACuentaTerceros;
     _RegimenFiscalACuentaTerceros;
     _DomicilioFiscalACuentaTerceros;
+    constructor(params) {
+        this.AttributesACuentaTerceros = params;
+    }
+    set AttributesACuentaTerceros(params) {
+        this.RfcACuentaTerceros = params.RfcACuentaTerceros;
+        this.NombreACuentaTerceros = params.NombreACuentaTerceros;
+        this.RegimenFiscalACuentaTerceros = params.RegimenFiscalACuentaTerceros;
+        this.DomicilioFiscalACuentaTerceros = params.DomicilioFiscalACuentaTerceros;
+    }
+    get AttributesACuentaTerceros() {
+        return {
+            RfcACuentaTerceros: this.RfcACuentaTerceros,
+            NombreACuentaTerceros: this.NombreACuentaTerceros,
+            RegimenFiscalACuentaTerceros: this.RegimenFiscalACuentaTerceros,
+            DomicilioFiscalACuentaTerceros: this.DomicilioFiscalACuentaTerceros,
+        };
+    }
     get DomicilioFiscalACuentaTerceros() {
         return this._DomicilioFiscalACuentaTerceros;
     }

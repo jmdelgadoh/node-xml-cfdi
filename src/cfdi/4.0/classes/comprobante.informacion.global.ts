@@ -6,6 +6,10 @@ export class ComprobanteInformacionGlobal {
     private _Meses: MesesEnum;
     private _Año: string;
 
+    constructor(params: AttributesComprobanteInformacionGlobalElement) {
+        this.AttributesInformacionGlobal = params;
+    }
+
     set AttributesInformacionGlobal(params: AttributesComprobanteInformacionGlobalElement) {
         this.Periodicidad = params.Periodicidad;
         this.Meses = params.Meses;

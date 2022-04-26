@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComprobanteConcepto = void 0;
-class ComprobanteConcepto {
+const _1 = require("./");
+class ComprobanteConcepto extends _1.XmlTags {
     _Impuestos;
     _ACuentaTerceros;
     _InformacionAduanera;
@@ -18,6 +19,56 @@ class ComprobanteConcepto {
     _Importe;
     _Descuento;
     _ObjetoImp;
+    constructor(params) {
+        super();
+        this.AttributesConcepto = params;
+        this.Impuestos = new _1.ComprobanteConceptoImpuestos();
+        this.InformacionAduanera = [];
+        this.CuentaPredial = [];
+        this.Parte = [];
+    }
+    parte(params) {
+        return new _1.ComprobanteConceptoParte(params);
+    }
+    agregarParte(parte) {
+        this.Parte.push(parte);
+    }
+    cuentaPredial(params) {
+        this.CuentaPredial.push(new _1.ComprobanteConceptoCuentaPredial(params));
+    }
+    informacionAduanera(params) {
+        this.InformacionAduanera.push(new _1.ComprobanteConceptoInformacionAduanera(params));
+    }
+    aCuentaTerceros(params) {
+        this.ACuentaTerceros = new _1.ComprobanteConceptoACuentaTerceros(params);
+    }
+    get AttributesConcepto() {
+        return {
+            ...this.getAttributes(),
+            ClaveProdServ: this.ClaveProdServ,
+            NoIdentificacion: this.NoIdentificacion,
+            Cantidad: this.Cantidad,
+            ClaveUnidad: this.ClaveUnidad,
+            Unidad: this.Unidad,
+            Descripcion: this.Descripcion,
+            ValorUnitario: this.ValorUnitario,
+            Importe: this.Importe,
+            Descuento: this.Descuento,
+            ObjetoImp: this.ObjetoImp,
+        };
+    }
+    set AttributesConcepto(params) {
+        this.ClaveProdServ = params.ClaveProdServ;
+        this.NoIdentificacion = params.NoIdentificacion;
+        this.Cantidad = params.Cantidad;
+        this.ClaveUnidad = params.ClaveUnidad;
+        this.Unidad = params.Unidad;
+        this.Descripcion = params.Descripcion;
+        this.ValorUnitario = params.ValorUnitario;
+        this.Importe = params.Importe;
+        this.Descuento = params.Descuento;
+        this.ObjetoImp = params.ObjetoImp;
+    }
     get ObjetoImp() {
         return this._ObjetoImp;
     }

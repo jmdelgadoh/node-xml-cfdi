@@ -1,11 +1,5 @@
-export class ComprobanteConceptoParteInformacionAduanera {
-    private _NumeroPedimento: string;
+import { ComprobanteConceptoInformacionAduanera } from './comprobante.concepto.informacion.aduanera';
 
-    get NumeroPedimento(): string {
-        return this._NumeroPedimento;
-    }
+export class ComprobanteConceptoParteInformacionAduanera extends ComprobanteConceptoInformacionAduanera {
 
-    set NumeroPedimento(value: string) {
-        this._NumeroPedimento = value;
-    }
 }

@@ -7,6 +7,25 @@ class ComprobanteConceptoImpuestosTraslado {
     _TipoFactor;
     _TasaOCuota;
     _Importe;
+    constructor(params) {
+        this.AttributesConceptoImpuestosTraslado = params;
+    }
+    set AttributesConceptoImpuestosTraslado(params) {
+        this.Base = params.Base;
+        this.Impuesto = params.Impuesto;
+        this.TipoFactor = params.TipoFactor;
+        this.TasaOCuota = params.TasaOCuota;
+        this.Importe = params.Importe;
+    }
+    get AttributesConceptoImpuestosTraslado() {
+        return {
+            Base: this.Base,
+            Impuesto: this.Impuesto,
+            TipoFactor: this.TipoFactor,
+            TasaOCuota: this.TasaOCuota,
+            Importe: this.Importe
+        };
+    }
     get Importe() {
         return this._Importe;
     }

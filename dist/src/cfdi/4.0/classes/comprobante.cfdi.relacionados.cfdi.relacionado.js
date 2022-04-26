@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComprobanteCfdiRelacionadosCfdiRelacionado = void 0;
 class ComprobanteCfdiRelacionadosCfdiRelacionado {
     _UUID;
+    constructor(params) {
+        this.AttributesCfdiRelacionadosCfdiRelacionado = params;
+    }
     set AttributesCfdiRelacionadosCfdiRelacionado(params) {
         this.UUID = params.UUID;
     }

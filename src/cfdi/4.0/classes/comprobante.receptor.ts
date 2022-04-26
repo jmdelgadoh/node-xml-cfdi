@@ -11,6 +11,10 @@ export class ComprobanteReceptor {
     private _RegimenFiscalReceptor: RegimenFiscalEnum;
     private _UsoCFDI: UsoCfdiEnum;
 
+    constructor(params: AttributesComprobanteReceptorElement) {
+        this.AttributesReceptor = params;
+    }
+
     set AttributesReceptor(params: AttributesComprobanteReceptorElement) {
         this.Rfc = params.Rfc;
         this.Nombre = params.Nombre;

@@ -5,6 +5,10 @@ import {
 export class ComprobanteCfdiRelacionadosCfdiRelacionado {
     private _UUID: string;
 
+    constructor(params: AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement) {
+        this.AttributesCfdiRelacionadosCfdiRelacionado = params;
+    }
+
     set AttributesCfdiRelacionadosCfdiRelacionado(params: AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement) {
         this.UUID = params.UUID;
     }

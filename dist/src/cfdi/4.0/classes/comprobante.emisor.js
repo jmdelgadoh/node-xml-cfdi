@@ -6,6 +6,23 @@ class ComprobanteEmisor {
     _Nombre;
     _RegimenFiscal;
     _FacAtrAdquirente;
+    constructor(params) {
+        this.AttributesEmisor = params;
+    }
+    set AttributesEmisor(params) {
+        this.Rfc = params.Rfc;
+        this.Nombre = params.Nombre;
+        this.RegimenFiscal = params.RegimenFiscal;
+        this.FacAtrAdquirente = params.FacAtrAdquirente;
+    }
+    get AttributesEmisor() {
+        return {
+            Rfc: this.Rfc,
+            Nombre: this.Nombre,
+            RegimenFiscal: this.RegimenFiscal,
+            FacAtrAdquirente: this.FacAtrAdquirente
+        };
+    }
     get FacAtrAdquirente() {
         return this._FacAtrAdquirente;
     }

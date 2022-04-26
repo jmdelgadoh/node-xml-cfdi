@@ -3,28 +3,93 @@ import {
     ComprobanteConceptoCuentaPredial,
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoInformacionAduanera,
-    ComprobanteConceptoParte
+    ComprobanteConceptoParte,
+    XmlTags
 } from './';
 import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
 import { ObjetoImpEnum } from '../catalog/enums';
+import {
+    AttributesComprobanteConceptoACuentaTercerosElement, AttributesComprobanteConceptoCuentaPredialElement,
+    AttributesComprobanteConceptoElement,
+    AttributesComprobanteConceptoInformacionAduaneraElement
+} from '../types';
+import { AttributesComprobanteConceptoParteElement } from '../types/comprobante.cfdi.concepto.parte.element';
 
-export class ComprobanteConcepto {
+export class ComprobanteConcepto extends XmlTags {
     private _Impuestos: ComprobanteConceptoImpuestos;
-    private _ACuentaTerceros: ComprobanteConceptoACuentaTerceros;
+    private _ACuentaTerceros?: ComprobanteConceptoACuentaTerceros;
     private _InformacionAduanera: ComprobanteConceptoInformacionAduanera[];
     private _CuentaPredial: ComprobanteConceptoCuentaPredial[];
     // private _ComplementoConcepto: ComprobanteConceptoComplementoConcepto;
     private _Parte: ComprobanteConceptoParte[];
     private _ClaveProdServ: ClaveProdServType;
-    private _NoIdentificacion: string;
-    private _Cantidad: number;
+    private _NoIdentificacion?: string;
+    private _Cantidad: string;
     private _ClaveUnidad: ClaveUnidadType;
-    private _Unidad: string;
+    private _Unidad?: string;
     private _Descripcion: string;
-    private _ValorUnitario: number;
-    private _Importe: number;
-    private _Descuento: number;
+    private _ValorUnitario: string;
+    private _Importe: string;
+    private _Descuento?: string;
     private _ObjetoImp: ObjetoImpEnum;
+
+    constructor(params: AttributesComprobanteConceptoElement) {
+        super();
+        this.AttributesConcepto = params;
+        this.Impuestos = new ComprobanteConceptoImpuestos();
+        this.InformacionAduanera = [];
+        this.CuentaPredial = [];
+        this.Parte = [];
+    }
+
+    public parte(params: AttributesComprobanteConceptoParteElement): ComprobanteConceptoParte {
+        return new ComprobanteConceptoParte(params)
+    }
+
+    public agregarParte(parte: ComprobanteConceptoParte) {
+        this.Parte.push(parte)
+    }
+
+    public cuentaPredial(params: AttributesComprobanteConceptoCuentaPredialElement) {
+        this.CuentaPredial.push(new ComprobanteConceptoCuentaPredial(params))
+    }
+
+    public informacionAduanera(params: AttributesComprobanteConceptoInformacionAduaneraElement) {
+        this.InformacionAduanera.push(new ComprobanteConceptoInformacionAduanera(params))
+    }
+
+    public aCuentaTerceros(params: AttributesComprobanteConceptoACuentaTercerosElement) {
+        this.ACuentaTerceros = new ComprobanteConceptoACuentaTerceros(params);
+    }
+
+    get AttributesConcepto(): AttributesComprobanteConceptoElement {
+        return {
+            ...this.getAttributes(),
+            ClaveProdServ: this.ClaveProdServ,
+            NoIdentificacion: this.NoIdentificacion,
+            Cantidad: this.Cantidad,
+            ClaveUnidad: this.ClaveUnidad,
+            Unidad: this.Unidad,
+            Descripcion: this.Descripcion,
+            ValorUnitario: this.ValorUnitario,
+            Importe: this.Importe,
+            Descuento: this.Descuento,
+            ObjetoImp: this.ObjetoImp,
+        }
+    }
+
+    set AttributesConcepto(params: AttributesComprobanteConceptoElement) {
+        this.ClaveProdServ = params.ClaveProdServ;
+        this.NoIdentificacion = params.NoIdentificacion;
+        this.Cantidad = params.Cantidad;
+        this.ClaveUnidad = params.ClaveUnidad;
+        this.Unidad = params.Unidad;
+        this.Descripcion = params.Descripcion;
+        this.ValorUnitario = params.ValorUnitario;
+        this.Importe = params.Importe;
+        this.Descuento = params.Descuento;
+        this.ObjetoImp = params.ObjetoImp;
+    }
 
     get ObjetoImp(): ObjetoImpEnum {
         return this._ObjetoImp;
@@ -34,27 +99,27 @@ export class ComprobanteConcepto {
         this._ObjetoImp = value;
     }
 
-    get Descuento(): number {
+    get Descuento(): string | undefined {
         return this._Descuento;
     }
 
-    set Descuento(value: number) {
+    set Descuento(value: string | undefined) {
         this._Descuento = value;
     }
 
-    get Importe(): number {
+    get Importe(): string {
         return this._Importe;
     }
 
-    set Importe(value: number) {
+    set Importe(value: string) {
         this._Importe = value;
     }
 
-    get ValorUnitario(): number {
+    get ValorUnitario(): string {
         return this._ValorUnitario;
     }
 
-    set ValorUnitario(value: number) {
+    set ValorUnitario(value: string) {
         this._ValorUnitario = value;
     }
 
@@ -66,11 +131,11 @@ export class ComprobanteConcepto {
         this._Descripcion = value;
     }
 
-    get Unidad(): string {
+    get Unidad(): string | undefined {
         return this._Unidad;
     }
 
-    set Unidad(value: string) {
+    set Unidad(value: string | undefined) {
         this._Unidad = value;
     }
 
@@ -82,19 +147,19 @@ export class ComprobanteConcepto {
         this._ClaveUnidad = value;
     }
 
-    get Cantidad(): number {
+    get Cantidad(): string {
         return this._Cantidad;
     }
 
-    set Cantidad(value: number) {
+    set Cantidad(value: string) {
         this._Cantidad = value;
     }
 
-    get NoIdentificacion(): string {
+    get NoIdentificacion(): string | undefined {
         return this._NoIdentificacion;
     }
 
-    set NoIdentificacion(value: string) {
+    set NoIdentificacion(value: string | undefined) {
         this._NoIdentificacion = value;
     }
 
@@ -130,11 +195,11 @@ export class ComprobanteConcepto {
         this._InformacionAduanera = value;
     }
 
-    get ACuentaTerceros(): ComprobanteConceptoACuentaTerceros {
+    get ACuentaTerceros(): ComprobanteConceptoACuentaTerceros | undefined {
         return this._ACuentaTerceros;
     }
 
-    set ACuentaTerceros(value: ComprobanteConceptoACuentaTerceros) {
+    set ACuentaTerceros(value: ComprobanteConceptoACuentaTerceros | undefined) {
         this._ACuentaTerceros = value;
     }
 

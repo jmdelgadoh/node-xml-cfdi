@@ -30,33 +30,40 @@ class Comprobante extends _1.XmlTags {
     _MetodoPago;
     _LugarExpedicion;
     _Confirmacion;
-    constructor() {
+    constructor(params) {
         super();
-        this.Version = '4.0';
-        this.addAttributes('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+        this.Conceptos = [];
+        this.CfdiRelacionados = [];
+        this.AttributesComprobante = params;
         this.addAttributes('xmlns:cfdi', 'http://www.sat.gob.mx/cfd/4');
+        this.addAttributes('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
         this.addAttributes('xsi:schemaLocation', 'http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd');
     }
-    set AttributesComprobante(params) {
-        this.Version = params.Version;
-        this.Serie = params.Serie;
-        this.Folio = params.Folio;
-        this.Fecha = params.Fecha;
-        this.Sello = params.Sello;
-        this.FormaPago = params.FormaPago;
-        this.NoCertificado = params.NoCertificado;
-        this.Certificado = params.Certificado;
-        this.CondicionesDePago = params.CondicionesDePago;
-        this.SubTotal = params.SubTotal;
-        this.Descuento = params.Descuento;
-        this.Moneda = params.Moneda;
-        this.TipoCambio = params.TipoCambio;
-        this.Total = params.Total;
-        this.TipoDeComprobante = params.TipoDeComprobante;
-        this.Exportacion = params.Exportacion;
-        this.MetodoPago = params.MetodoPago;
-        this.LugarExpedicion = params.LugarExpedicion;
-        this.Confirmacion = params.Confirmacion;
+    informacionGlobal(params) {
+        this.InformacionGlobal = new _1.ComprobanteInformacionGlobal(params);
+    }
+    cfdiRelacionados(params) {
+        if (params.CfdiRelacionado.length) {
+            const index = this.CfdiRelacionados.findIndex((value) => value.TipoRelacion === params.TipoRelacion);
+            if (index >= 0) {
+                this.CfdiRelacionados[index].CfdiRelacionado = this.generarCfdiRelacionado(params.CfdiRelacionado);
+            }
+            else {
+                this.CfdiRelacionados.push(this.generarCfdiRelacionados(params));
+            }
+        }
+    }
+    emisor(params) {
+        this.Emisor = new _1.ComprobanteEmisor(params);
+    }
+    receptor(params) {
+        this.Receptor = new _1.ComprobanteReceptor(params);
+    }
+    agregarConcepto(concepto) {
+        this.Conceptos.push(concepto);
+    }
+    concepto(params) {
+        return new _1.ComprobanteConcepto(params);
     }
     get AttributesComprobante() {
         return {
@@ -81,6 +88,27 @@ class Comprobante extends _1.XmlTags {
             LugarExpedicion: this.LugarExpedicion,
             Confirmacion: this.Confirmacion,
         };
+    }
+    set AttributesComprobante(params) {
+        this.Version = params.Version;
+        this.Serie = params.Serie;
+        this.Folio = params.Folio;
+        this.Fecha = params.Fecha;
+        this.Sello = params.Sello;
+        this.FormaPago = params.FormaPago;
+        this.NoCertificado = params.NoCertificado;
+        this.Certificado = params.Certificado;
+        this.CondicionesDePago = params.CondicionesDePago;
+        this.SubTotal = params.SubTotal;
+        this.Descuento = params.Descuento;
+        this.Moneda = params.Moneda;
+        this.TipoCambio = params.TipoCambio;
+        this.Total = params.Total;
+        this.TipoDeComprobante = params.TipoDeComprobante;
+        this.Exportacion = params.Exportacion;
+        this.MetodoPago = params.MetodoPago;
+        this.LugarExpedicion = params.LugarExpedicion;
+        this.Confirmacion = params.Confirmacion;
     }
     get Confirmacion() {
         return this._Confirmacion;
@@ -231,6 +259,16 @@ class Comprobante extends _1.XmlTags {
     }
     set InformacionGlobal(value) {
         this._InformacionGlobal = value;
+    }
+    generarCfdiRelacionados(params) {
+        const cfdiRelacionados = new _1.ComprobanteCfdiRelacionados(params);
+        if (params.CfdiRelacionado?.length) {
+            cfdiRelacionados.CfdiRelacionado = this.generarCfdiRelacionado(params.CfdiRelacionado);
+        }
+        return cfdiRelacionados;
+    }
+    generarCfdiRelacionado(params) {
+        return params.map((UUID) => new _1.ComprobanteCfdiRelacionadosCfdiRelacionado({ UUID }));
     }
 }
 exports.Comprobante = Comprobante;

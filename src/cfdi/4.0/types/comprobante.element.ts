@@ -72,7 +72,7 @@ export type AttributesComprobanteElement = Attributes & {
     * automática, una clave de confirmación para ratificar que el valor es correcto e integrar dicha clave en el
     * atributo Confirmacion.
     * */
-    TipoCambio?: number;
+    TipoCambio?: string;
     /*
     * Atributo requerido para representar la suma del subtotal, menos los descuentos aplicables, más las contribuciones
     * recibidas (impuestos trasladados - federales y/o locales, derechos, productos, aprovechamientos, aportaciones de

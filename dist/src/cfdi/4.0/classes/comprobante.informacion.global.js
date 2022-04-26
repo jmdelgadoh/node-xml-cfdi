@@ -5,6 +5,9 @@ class ComprobanteInformacionGlobal {
     _Periodicidad;
     _Meses;
     _Año;
+    constructor(params) {
+        this.AttributesInformacionGlobal = params;
+    }
     set AttributesInformacionGlobal(params) {
         this.Periodicidad = params.Periodicidad;
         this.Meses = params.Meses;

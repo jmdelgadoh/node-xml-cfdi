@@ -9,6 +9,10 @@ export class ComprobanteEmisor {
     private _RegimenFiscal: RegimenFiscalEnum;
     private _FacAtrAdquirente?: string;
 
+    constructor(params: AttributesComprobanteEmisorElement) {
+        this.AttributesEmisor = params;
+    }
+
     set AttributesEmisor(params: AttributesComprobanteEmisorElement) {
         this.Rfc = params.Rfc;
         this.Nombre = params.Nombre;

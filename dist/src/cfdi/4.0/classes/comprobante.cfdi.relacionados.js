@@ -4,6 +4,9 @@ exports.ComprobanteCfdiRelacionados = void 0;
 class ComprobanteCfdiRelacionados {
     _CfdiRelacionado;
     _TipoRelacion;
+    constructor(params) {
+        this.AttributesCfdiRelacionados = params;
+    }
     set AttributesCfdiRelacionados(params) {
         this.TipoRelacion = params.TipoRelacion;
     }

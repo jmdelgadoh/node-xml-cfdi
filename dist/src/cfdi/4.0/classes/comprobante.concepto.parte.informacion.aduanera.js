@@ -1,13 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ComprobanteConceptoParteInformacionAduanera = void 0;
-class ComprobanteConceptoParteInformacionAduanera {
-    _NumeroPedimento;
-    get NumeroPedimento() {
-        return this._NumeroPedimento;
-    }
-    set NumeroPedimento(value) {
-        this._NumeroPedimento = value;
-    }
+const comprobante_concepto_informacion_aduanera_1 = require("./comprobante.concepto.informacion.aduanera");
+class ComprobanteConceptoParteInformacionAduanera extends comprobante_concepto_informacion_aduanera_1.ComprobanteConceptoInformacionAduanera {
 }
 exports.ComprobanteConceptoParteInformacionAduanera = ComprobanteConceptoParteInformacionAduanera;
