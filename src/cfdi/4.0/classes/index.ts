@@ -1,11 +1,11 @@
 export { XmlTags } from './xml.tags';
 export { ComprobanteImpuestosTraslado } from './comprobante.impuestos.traslado.class';
 export { ComprobanteImpuestosRetencion } from './comprobante.impuestos.retencion.class';
+export { ComprobanteConceptoParte } from './comprobante.concepto.parte';
+export { ComprobanteConceptoInformacionAduanera } from './comprobante.concepto.informacion.aduanera';
 export { ComprobanteConceptoParteInformacionAduanera } from './comprobante.concepto.parte.informacion.aduanera';
 export { ComprobanteImpuestos } from './comprobante.impuestos';
-export { ComprobanteConceptoParte } from './comprobante.concepto.parte';
 export { ComprobanteConceptoCuentaPredial } from './comprobante.concepto.cuenta.predial';
-export { ComprobanteConceptoInformacionAduanera } from './comprobante.concepto.informacion.aduanera';
 export { ComprobanteConceptoACuentaTerceros } from './comprobante.concepto.a.cuenta.terceros';
 export { ComprobanteConceptoImpuestosRetencion } from './comprobante.concepto.impuestos.retencion';
 export { ComprobanteConceptoImpuestosTraslado } from './comprobante.concepto.impuestos.traslado';

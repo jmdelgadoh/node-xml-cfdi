@@ -1,25 +1,27 @@
 import { Element, json2xml } from 'xml-js';
 import {
     AttributesComprobanteElement,
-    ComprobanteElement,
-    ComprobanteInformacionGlobalElement,
-    ComprobanteCfdiRelacionadosElement,
     ComprobanteCfdiRelacionadosCfdiRelacionadoElement,
-    ComprobanteEmisorElement,
-    ComprobanteReceptorElement,
-    ComprobanteConceptosElement,
-    ComprobanteConceptoElement,
-    ComprobanteConceptoImpuestosRetencionesRetencionElement,
-    ComprobanteConceptoImpuestosTrasladosTrasladoElement,
-    ComprobanteConceptoImpuestosElement,
-    ComprobanteConceptoImpuestosTrasladosElement,
-    ComprobanteConceptoImpuestosRetencionesElement,
+    ComprobanteCfdiRelacionadosElement,
     ComprobanteConceptoACuentaTercerosElement,
+    ComprobanteConceptoCuentaPredialElement,
+    ComprobanteConceptoElement,
+    ComprobanteConceptoImpuestosElement,
+    ComprobanteConceptoImpuestosRetencionesElement,
+    ComprobanteConceptoImpuestosRetencionesRetencionElement,
+    ComprobanteConceptoImpuestosTrasladosElement,
+    ComprobanteConceptoImpuestosTrasladosTrasladoElement,
     ComprobanteConceptoInformacionAduaneraElement,
-    ComprobanteConceptoCuentaPredialElement
+    ComprobanteConceptosElement,
+    ComprobanteElement,
+    ComprobanteEmisorElement,
+    ComprobanteInformacionGlobalElement,
+    ComprobanteReceptorElement,
+    ComprobanteConceptoParteElement,
+    ComprobanteImpuestosRetencionesRetencionElement,
+    ComprobanteImpuestosTrasladosTrasladoElement
 } from './types';
-import { Comprobante, ComprobanteConceptoCuentaPredial } from './classes';
-import { ComprobanteConceptoParteElement } from './types/comprobante.cfdi.concepto.parte.element';
+import { Comprobante } from './classes';
 
 export class CFDIService {
     constructor() {
@@ -246,6 +248,71 @@ export class CFDIService {
                     elements
                 } as ComprobanteConceptosElement)
             }
+        }
+
+        /*
+        * Se agregan los impuestos del concepto
+        * */
+        if (comprobante.Impuestos) {
+            const retencionElements: ComprobanteImpuestosRetencionesRetencionElement[] = [];
+            const trasladoElements: ComprobanteImpuestosTrasladosTrasladoElement[] = [];
+            /*
+            * Se agregan los impuestos en retencion
+            * */
+            for (const retencionValue of comprobante?.Impuestos.Retenciones) {
+                const element: ComprobanteImpuestosRetencionesRetencionElement = {
+                    type: 'element',
+                    name: 'cfdi:Retencion',
+                    attributes: retencionValue.AttributesImpuestosRetencion
+                }
+
+                retencionElements.push(element)
+            }
+            /*
+            * Se agregan los impuestos traladados
+            * */
+            for (const trasladosValue of comprobante?.Impuestos.Traslados) {
+                const element: ComprobanteImpuestosTrasladosTrasladoElement = {
+                    type: 'element',
+                    name: 'cfdi:Traslado',
+                    attributes: trasladosValue.AttributesImpuestosRetencion
+                }
+
+                trasladoElements.push(element)
+            }
+            /*
+            * Se el nodo de impuestos si existe impuestos trasladados o impuestos retenidos
+            * */
+            const impuestosElement: ComprobanteConceptoImpuestosElement = {
+                type: 'element',
+                name: 'cfdi:Impuestos',
+                elements: []
+            }
+
+            if (comprobante?.Impuestos) {
+                impuestosElement.attributes = comprobante.Impuestos.AttributesImpuestos;
+            }
+
+            if (retencionElements.length || trasladoElements.length) {
+
+                if (trasladoElements.length) {
+                    impuestosElement.elements?.push({
+                        type: 'element',
+                        name: 'cfdi:Traslados',
+                        elements: trasladoElements
+                    } as ComprobanteConceptoImpuestosTrasladosElement)
+                }
+
+                if (retencionElements.length) {
+                    impuestosElement.elements?.push({
+                        type: 'element',
+                        name: 'cfdi:Retenciones',
+                        elements: retencionElements
+                    } as ComprobanteConceptoImpuestosRetencionesElement)
+                }
+
+            }
+            jsonComprobante.elements?.push(impuestosElement);
         }
 
         return {

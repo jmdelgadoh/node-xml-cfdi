@@ -2,13 +2,16 @@ import {
     CFDIService,
     ExportacionEnum,
     FormaPagoEnum,
-    ImpuestoEnum, MesesEnum,
+    ImpuestoEnum,
+    MesesEnum,
     MetodoPagoEnum,
     MonedaEnum,
-    ObjetoImpEnum, PeriodicidadEnum,
+    ObjetoImpEnum,
+    PeriodicidadEnum,
     RegimenFiscalEnum,
     TipoComprobanteEnum,
-    TipoFactorEnum, TipoRelacionEnum,
+    TipoFactorEnum,
+    TipoRelacionEnum,
     UsoCfdiEnum
 } from '../src/cfdi/4.0';
 
@@ -128,6 +131,26 @@ const test = async () => {
     concepto.agregarParte(parte);
 
     comprobante.agregarConcepto(concepto);
+
+    const impuestos = comprobante.impuestos({
+        TotalImpuestosTrasladados: '32.00',
+        TotalImpuestosRetenidos: '32.00'
+    });
+
+    impuestos.traslado({
+        Base: '168.00',
+        Impuesto: ImpuestoEnum.I001,
+        TasaOCuota: '0.160000',
+        Importe: '32.00',
+        TipoFactor: TipoFactorEnum.Tasa
+    });
+
+    impuestos.retencion({
+        Impuesto: ImpuestoEnum.I001,
+        Importe: '32.00'
+    });
+
+    comprobante.agregarImpuestos(impuestos)
 
     const xml = await cfdi.getXML(comprobante);
 

@@ -1,24 +1,58 @@
-import { ComprobanteImpuestosRetencion, ComprobanteImpuestosTraslado } from './';
+import {
+    ComprobanteImpuestosRetencion,
+    ComprobanteImpuestosTraslado
+} from './';
+import {
+    AttributesComprobanteImpuestosElement,
+    AttributesComprobanteImpuestosRetencionesRetencionElement,
+    AttributesComprobanteImpuestosTrasladosTrasladoElement
+} from '../types';
 
 export class ComprobanteImpuestos {
-    private _Retenciones: ComprobanteImpuestosRetencion[];
     private _Traslados: ComprobanteImpuestosTraslado[];
-    private _TotalImpuestosRetenidos: number;
-    private _TotalImpuestosTrasladados: number;
+    private _Retenciones: ComprobanteImpuestosRetencion[];
+    private _TotalImpuestosRetenidos?: string;
+    private _TotalImpuestosTrasladados?: string;
 
-    get TotalImpuestosTrasladados(): number {
+    constructor(params: AttributesComprobanteImpuestosElement = {}) {
+        this.AttributesImpuestos = params;
+        this.Retenciones = [];
+        this.Traslados = [];
+    }
+
+    public retencion(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
+        this.Retenciones.push(new ComprobanteImpuestosRetencion(params))
+    }
+
+    public traslado(params: AttributesComprobanteImpuestosTrasladosTrasladoElement) {
+        this.Traslados.push(new ComprobanteImpuestosTraslado(params))
+    }
+
+    set AttributesImpuestos(params: AttributesComprobanteImpuestosElement) {
+        this.TotalImpuestosTrasladados = params.TotalImpuestosTrasladados;
+        this.TotalImpuestosRetenidos = params.TotalImpuestosRetenidos;
+    }
+
+    get AttributesImpuestos(): AttributesComprobanteImpuestosElement {
+        return {
+            TotalImpuestosTrasladados: this.TotalImpuestosTrasladados,
+            TotalImpuestosRetenidos: this.TotalImpuestosRetenidos,
+        }
+    }
+
+    get TotalImpuestosTrasladados(): string | undefined {
         return this._TotalImpuestosTrasladados;
     }
 
-    set TotalImpuestosTrasladados(value: number) {
+    set TotalImpuestosTrasladados(value: string | undefined) {
         this._TotalImpuestosTrasladados = value;
     }
 
-    get TotalImpuestosRetenidos(): number {
+    get TotalImpuestosRetenidos(): string | undefined {
         return this._TotalImpuestosRetenidos;
     }
 
-    set TotalImpuestosRetenidos(value: number) {
+    set TotalImpuestosRetenidos(value: string | undefined) {
         this._TotalImpuestosRetenidos = value;
     }
 

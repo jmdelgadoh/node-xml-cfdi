@@ -1,6 +1,5 @@
 import { Element } from 'xml-js';
-import { RegimenFiscalEnum } from '../catalog/enums';
-import { ClaveProdServType, CodigoPostalType } from '../catalog/types';
+import { ClaveProdServType } from '../catalog/types';
 
 export type AttributesComprobanteConceptoParteElement = {
     /*

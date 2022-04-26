@@ -1,10 +1,9 @@
-import { ComprobanteConceptoInformacionAduanera, ComprobanteConceptoParteInformacionAduanera } from './';
+import { ComprobanteConceptoParteInformacionAduanera } from './';
 import { ClaveProdServType } from '../catalog/types';
 import {
-    AttributesComprobanteConceptoCuentaPredialElement,
-    AttributesComprobanteConceptoInformacionAduaneraElement
+    AttributesComprobanteConceptoInformacionAduaneraElement,
+    AttributesComprobanteConceptoParteElement
 } from '../types';
-import { AttributesComprobanteConceptoParteElement } from '../types/comprobante.cfdi.concepto.parte.element';
 
 export class ComprobanteConceptoParte {
     private _InformacionAduanera: ComprobanteConceptoParteInformacionAduanera[];

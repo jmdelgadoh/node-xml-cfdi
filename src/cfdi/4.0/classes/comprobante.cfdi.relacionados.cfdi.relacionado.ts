@@ -1,6 +1,4 @@
-import {
-    AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement
-} from '../types';
+import { AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement } from '../types';
 
 export class ComprobanteCfdiRelacionadosCfdiRelacionado {
     private _UUID: string;

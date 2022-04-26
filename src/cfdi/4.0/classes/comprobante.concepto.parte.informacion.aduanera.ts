@@ -1,4 +1,4 @@
-import { ComprobanteConceptoInformacionAduanera } from './comprobante.concepto.informacion.aduanera';
+import { ComprobanteConceptoInformacionAduanera } from '.';
 
 export class ComprobanteConceptoParteInformacionAduanera extends ComprobanteConceptoInformacionAduanera {
 

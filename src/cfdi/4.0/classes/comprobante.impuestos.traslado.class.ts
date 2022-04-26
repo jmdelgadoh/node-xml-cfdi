@@ -1,25 +1,50 @@
 import { ImpuestoEnum, TipoFactorEnum } from '../catalog/enums';
+import {
+    AttributesComprobanteImpuestosTrasladosTrasladoElement
+} from '../types';
 
 export class ComprobanteImpuestosTraslado {
-    private _Base: number;
+    private _Base: string;
     private _Impuesto: ImpuestoEnum;
     private _TipoFactor: TipoFactorEnum;
-    private _TasaOCuota: number;
-    private _Importe: number;
+    private _TasaOCuota?: string;
+    private _Importe?: string;
 
-    get Importe(): number {
+    constructor(params: AttributesComprobanteImpuestosTrasladosTrasladoElement) {
+        this.AttributesImpuestosRetencion = params;
+    }
+
+    set AttributesImpuestosRetencion(params: AttributesComprobanteImpuestosTrasladosTrasladoElement) {
+        this.Base = params.Base;
+        this.Impuesto = params.Impuesto;
+        this.TipoFactor = params.TipoFactor;
+        this.TasaOCuota = params.TasaOCuota;
+        this.Importe = params.Importe;
+    }
+
+    get AttributesImpuestosRetencion(): AttributesComprobanteImpuestosTrasladosTrasladoElement {
+        return {
+            Base: this.Base,
+            Impuesto: this.Impuesto,
+            TipoFactor: this.TipoFactor,
+            TasaOCuota: this.TasaOCuota,
+            Importe: this.Importe,
+        }
+    }
+
+    get Importe(): string | undefined {
         return this._Importe;
     }
 
-    set Importe(value: number) {
+    set Importe(value: string | undefined) {
         this._Importe = value;
     }
 
-    get TasaOCuota(): number {
+    get TasaOCuota(): string | undefined {
         return this._TasaOCuota;
     }
 
-    set TasaOCuota(value: number) {
+    set TasaOCuota(value: string | undefined) {
         this._TasaOCuota = value;
     }
 
@@ -39,11 +64,11 @@ export class ComprobanteImpuestosTraslado {
         this._Impuesto = value;
     }
 
-    get Base(): number {
+    get Base(): string {
         return this._Base;
     }
 
-    set Base(value: number) {
+    set Base(value: string) {
         this._Base = value;
     }
 }

@@ -36,7 +36,7 @@ export {
 export {
     ComprobanteConceptoImpuestosRetencionesRetencionElement,
     AttributesComprobanteConceptoImpuestosRetencionesRetencionElement,
-} from './comprobante.cfdi.concepto.impuestos.retencion.element';
+} from './comprobante.cfdi.concepto.impuestos.retenciones.element';
 export {
     ComprobanteConceptoImpuestosTrasladosTrasladoElement,
     AttributesComprobanteConceptoImpuestosTrasladosTrasladoElement
@@ -53,3 +53,21 @@ export {
     ComprobanteConceptoCuentaPredialElement,
     AttributesComprobanteConceptoCuentaPredialElement
 } from './comprobante.cfdi.concepto.cuenta.predial.element';
+export {
+    ComprobanteConceptoParteElement,
+    AttributesComprobanteConceptoParteElement
+} from './comprobante.cfdi.concepto.parte.element';
+export {
+    AttributesComprobanteImpuestosElement,
+    ComprobanteImpuestosRetencionesElement,
+    ComprobanteImpuestosTrasladosElement,
+    ComprobanteImpuestosElement
+} from './comprobante.cfdi.impuestos.element';
+export {
+    AttributesComprobanteImpuestosRetencionesRetencionElement,
+    ComprobanteImpuestosRetencionesRetencionElement
+} from './comprobante.cfdi.impuestos.retencion.element';
+export {
+    AttributesComprobanteImpuestosTrasladosTrasladoElement,
+    ComprobanteImpuestosTrasladosTrasladoElement
+} from './comprobante.cfdi.impuestos.traslados.element';

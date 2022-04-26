@@ -1,7 +1,5 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
-import {
-    AttributesComprobanteEmisorElement
-} from '../types';
+import { AttributesComprobanteEmisorElement } from '../types';
 
 export class ComprobanteEmisor {
     private _Rfc: string;

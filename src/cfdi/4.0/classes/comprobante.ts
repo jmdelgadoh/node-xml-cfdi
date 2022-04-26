@@ -1,7 +1,8 @@
 import { CodigoPostalType } from '../catalog/types';
 import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../catalog/enums';
 import {
-    ComprobanteCfdiRelacionados, ComprobanteCfdiRelacionadosCfdiRelacionado,
+    ComprobanteCfdiRelacionados,
+    ComprobanteCfdiRelacionadosCfdiRelacionado,
     ComprobanteConcepto,
     ComprobanteEmisor,
     ComprobanteImpuestos,
@@ -10,9 +11,13 @@ import {
     XmlTags
 } from './';
 import {
-    AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement, AttributesComprobanteConceptoElement,
-    AttributesComprobanteElement, AttributesComprobanteEmisorElement,
-    AttributesComprobanteInformacionGlobalElement, AttributesComprobanteReceptorElement
+    AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
+    AttributesComprobanteConceptoElement,
+    AttributesComprobanteElement,
+    AttributesComprobanteEmisorElement,
+    AttributesComprobanteImpuestosElement,
+    AttributesComprobanteInformacionGlobalElement,
+    AttributesComprobanteReceptorElement
 } from '../types';
 
 export class Comprobante extends XmlTags {
@@ -84,6 +89,14 @@ export class Comprobante extends XmlTags {
 
     public concepto(params: AttributesComprobanteConceptoElement): ComprobanteConcepto {
         return new ComprobanteConcepto(params);
+    }
+
+    public impuestos(params: AttributesComprobanteImpuestosElement) {
+        return new ComprobanteImpuestos(params)
+    }
+
+    public agregarImpuestos(impuestos: ComprobanteImpuestos) {
+        this.Impuestos = impuestos;
     }
 
     get AttributesComprobante(): AttributesComprobanteElement {

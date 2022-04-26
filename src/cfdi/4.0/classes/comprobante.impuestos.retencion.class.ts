@@ -1,14 +1,33 @@
 import { ImpuestoEnum } from '../catalog/enums';
+import {
+    AttributesComprobanteImpuestosRetencionesRetencionElement
+} from '../types';
 
 export class ComprobanteImpuestosRetencion {
     private _Impuesto: ImpuestoEnum;
-    private _Importe: number;
+    private _Importe: string;
 
-    get Importe(): number {
+    constructor(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
+        this.AttributesImpuestosRetencion = params;
+    }
+
+    set AttributesImpuestosRetencion(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
+        this.Importe = params.Importe;
+        this.Impuesto = params.Impuesto;
+    }
+
+    get AttributesImpuestosRetencion(): AttributesComprobanteImpuestosRetencionesRetencionElement {
+        return {
+            Importe: this.Importe,
+            Impuesto: this.Impuesto,
+        }
+    }
+
+    get Importe(): string {
         return this._Importe;
     }
 
-    set Importe(value: number) {
+    set Importe(value: string) {
         this._Importe = value;
     }
 

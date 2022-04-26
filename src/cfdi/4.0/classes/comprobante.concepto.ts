@@ -9,11 +9,12 @@ import {
 import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
 import { ObjetoImpEnum } from '../catalog/enums';
 import {
-    AttributesComprobanteConceptoACuentaTercerosElement, AttributesComprobanteConceptoCuentaPredialElement,
+    AttributesComprobanteConceptoACuentaTercerosElement,
+    AttributesComprobanteConceptoCuentaPredialElement,
     AttributesComprobanteConceptoElement,
-    AttributesComprobanteConceptoInformacionAduaneraElement
+    AttributesComprobanteConceptoInformacionAduaneraElement,
+    AttributesComprobanteConceptoParteElement
 } from '../types';
-import { AttributesComprobanteConceptoParteElement } from '../types/comprobante.cfdi.concepto.parte.element';
 
 export class ComprobanteConcepto extends XmlTags {
     private _Impuestos: ComprobanteConceptoImpuestos;

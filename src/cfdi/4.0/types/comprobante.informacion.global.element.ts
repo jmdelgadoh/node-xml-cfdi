@@ -1,8 +1,5 @@
 import { Element } from 'xml-js';
-import {
-    MesesEnum,
-    PeriodicidadEnum,
-} from '../catalog/enums';
+import { MesesEnum, PeriodicidadEnum, } from '../catalog/enums';
 
 export type AttributesComprobanteInformacionGlobalElement = {
     /*
