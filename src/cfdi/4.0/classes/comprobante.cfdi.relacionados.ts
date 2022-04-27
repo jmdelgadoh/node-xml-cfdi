@@ -1,6 +1,10 @@
 import { TipoRelacionEnum } from '../catalog/enums';
 import { ComprobanteCfdiRelacionadosCfdiRelacionado } from './';
-import { AttributesComprobanteCfdiRelacionadosElement } from '../types';
+import {
+    AttributesComprobanteCfdiRelacionadosElement,
+    ComprobanteCfdiRelacionadosCfdiRelacionadoElement
+} from '../types';
+import { Element } from 'xml-js';
 
 
 export class ComprobanteCfdiRelacionados {
@@ -20,6 +24,20 @@ export class ComprobanteCfdiRelacionados {
         return {
             TipoRelacion: this.TipoRelacion,
         }
+    }
+
+    get Elements(): Element[] {
+        const elements: Element[] = []
+
+        for (const cfdiRelacionadoValue of this.CfdiRelacionado) {
+            elements.push({
+                type: 'element',
+                name: 'cfdi:CfdiRelacionado',
+                attributes: cfdiRelacionadoValue.Attributes,
+            } as ComprobanteCfdiRelacionadosCfdiRelacionadoElement);
+        }
+
+        return elements;
     }
 
     get TipoRelacion(): TipoRelacionEnum {

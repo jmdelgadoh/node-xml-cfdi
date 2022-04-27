@@ -1,8 +1,8 @@
-import { Attributes, Element } from 'xml-js';
+import { Element } from 'xml-js';
 import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../catalog/enums';
 import { CodigoPostalType } from '../catalog/types';
 
-export type AttributesComprobanteElement = Attributes & {
+export type AttributesComprobanteElement = {
     /*
     * Atributo requerido con valor prefijado a 4.0 que indica la versión del estándar bajo el que se encuentra
     * expresado el comprobante
@@ -112,4 +112,5 @@ export type ComprobanteElement = {
     type: 'element',
     name: 'cfdi:Comprobante',
     attributes?: AttributesComprobanteElement,
+    elements: Element[]
 } & Element

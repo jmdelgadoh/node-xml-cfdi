@@ -1,3 +1,4 @@
+import { Element } from 'xml-js';
 import { CodigoPostalType } from '../catalog/types';
 import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../catalog/enums';
 import {
@@ -13,6 +14,21 @@ import {
 import {
     AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
     AttributesComprobanteElement,
+    ComprobanteCfdiRelacionadosElement,
+    ComprobanteConceptoACuentaTercerosElement,
+    ComprobanteConceptoCuentaPredialElement,
+    ComprobanteConceptoElement,
+    ComprobanteConceptoImpuestosElement,
+    ComprobanteConceptoImpuestosRetencionesElement,
+    ComprobanteConceptoImpuestosRetencionesRetencionElement,
+    ComprobanteConceptoImpuestosTrasladosElement,
+    ComprobanteConceptoImpuestosTrasladosTrasladoElement,
+    ComprobanteConceptoInformacionAduaneraElement,
+    ComprobanteConceptoParteElement,
+    ComprobanteConceptosElement,
+    ComprobanteEmisorElement,
+    ComprobanteInformacionGlobalElement,
+    ComprobanteReceptorElement,
 } from '../types';
 
 export class Comprobante extends XmlTags {
@@ -52,6 +68,73 @@ export class Comprobante extends XmlTags {
         this.addAttributes('xmlns:cfdi', 'http://www.sat.gob.mx/cfd/4');
         this.addAttributes('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
         this.addAttributes('xsi:schemaLocation', 'http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd');
+    }
+
+    get Elements(): Element[] {
+        const elements: Element[] = [];
+
+        if (this.InformacionGlobal) {
+            elements?.push({
+                type: 'element',
+                name: 'cfdi:InformacionGlobal',
+                attributes: this.InformacionGlobal.Attributes
+            } as ComprobanteInformacionGlobalElement)
+        }
+
+        for (const cfdiRelacionadosValue of this.CfdiRelacionados) {
+            elements?.push({
+                type: 'element',
+                name: 'cfdi:CfdiRelacionados',
+                attributes: cfdiRelacionadosValue.Attributes,
+                elements: cfdiRelacionadosValue.Elements
+            } as ComprobanteCfdiRelacionadosElement)
+        }
+
+        if (this.Emisor) {
+            elements.push({
+                type: 'element',
+                name: 'cfdi:Emisor',
+                attributes: this.Emisor.Attributes
+            } as ComprobanteEmisorElement)
+        }
+
+        if (this.Receptor) {
+            elements.push({
+                type: 'element',
+                name: 'cfdi:Receptor',
+                attributes: this.Receptor.Attributes
+            } as ComprobanteReceptorElement)
+        }
+
+        if (this.Conceptos.length) {
+            const conceptElements: ComprobanteConceptoElement[] = [];
+
+            for (const conceptoValue of this.Conceptos) {
+                conceptElements.push({
+                    type: 'element',
+                    name: 'cfdi:Concepto',
+                    attributes: conceptoValue.Attributes,
+                    elements: conceptoValue.Elements
+                } as ComprobanteConceptoElement)
+            }
+
+            elements.push({
+                type: 'element',
+                name: 'cfdi:Conceptos',
+                elements: conceptElements
+            } as ComprobanteConceptosElement)
+        }
+
+        if (this.Impuestos) {
+            elements.push({
+                type: 'element',
+                name: 'cfdi:Impuestos',
+                attributes: this.Impuestos.Attributes,
+                elements: this.Impuestos.Elements
+            } as ComprobanteConceptoImpuestosElement);
+        }
+
+        return elements;
     }
 
     get Attributes(): AttributesComprobanteElement {

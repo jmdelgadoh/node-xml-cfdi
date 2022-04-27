@@ -2,9 +2,10 @@ import { ComprobanteConceptoParteInformacionAduanera } from './';
 import { ClaveProdServType } from '../catalog/types';
 import {
     AttributesComprobanteConceptoInformacionAduaneraElement,
-    AttributesComprobanteConceptoParteElement
+    AttributesComprobanteConceptoParteElement, ComprobanteConceptoInformacionAduaneraElement
 } from '../types';
 import { sanitizeValues } from '../../utils';
+import { Element } from 'xml-js';
 
 export class ComprobanteConceptoParte {
     private _InformacionAduanera: ComprobanteConceptoParteInformacionAduanera[];
@@ -41,6 +42,20 @@ export class ComprobanteConceptoParte {
             ValorUnitario: this.ValorUnitario,
             Importe: this.Importe,
         }
+    }
+
+    get Elements(): Element[] {
+        const elements: Element[] = [];
+
+        for (const informacionAduaneraValue of this.InformacionAduanera) {
+            elements?.push({
+                type: 'element',
+                name: 'cfdi:InformacionAduanera',
+                attributes: informacionAduaneraValue.Attributes
+            } as ComprobanteConceptoInformacionAduaneraElement)
+        }
+
+        return elements;
     }
 
     get Importe(): string | undefined {

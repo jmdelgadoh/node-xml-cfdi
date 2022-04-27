@@ -10,11 +10,21 @@ import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
 import { ObjetoImpEnum } from '../catalog/enums';
 import {
     AttributesComprobanteConceptoElement,
+    ComprobanteConceptoACuentaTercerosElement,
+    ComprobanteConceptoCuentaPredialElement,
+    ComprobanteConceptoImpuestosElement,
+    ComprobanteConceptoImpuestosRetencionesElement,
+    ComprobanteConceptoImpuestosRetencionesRetencionElement,
+    ComprobanteConceptoImpuestosTrasladosElement,
+    ComprobanteConceptoImpuestosTrasladosTrasladoElement,
+    ComprobanteConceptoInformacionAduaneraElement,
+    ComprobanteConceptoParteElement,
 } from '../types';
 import { sanitizeValues } from '../../utils';
+import { Element } from 'xml-js';
 
 export class ComprobanteConcepto extends XmlTags {
-    private _Impuestos: ComprobanteConceptoImpuestos;
+    private _Impuestos?: ComprobanteConceptoImpuestos;
     private _ACuentaTerceros?: ComprobanteConceptoACuentaTerceros;
     private _InformacionAduanera: ComprobanteConceptoInformacionAduanera[];
     private _CuentaPredial: ComprobanteConceptoCuentaPredial[];
@@ -67,6 +77,53 @@ export class ComprobanteConcepto extends XmlTags {
         this.Importe = params.Importe;
         this.Descuento = params.Descuento;
         this.ObjetoImp = params.ObjetoImp;
+    }
+
+    get Elements(): Element[] {
+        const elements: Element[] = [];
+
+        if (this?.Impuestos) {
+            elements.push({
+                type: 'element',
+                name: 'cfdi:Impuestos',
+                elements: this.Impuestos.Elements
+            } as ComprobanteConceptoImpuestosElement);
+        }
+
+        if (this?.ACuentaTerceros) {
+            elements?.push({
+                type: 'element',
+                name: 'cfdi:ACuentaTerceros',
+                attributes: this.ACuentaTerceros.Attributes
+            } as ComprobanteConceptoACuentaTercerosElement)
+        }
+
+        for (const informacionAduaneraValue of this.InformacionAduanera) {
+            elements?.push({
+                type: 'element',
+                name: 'cfdi:InformacionAduanera',
+                attributes: informacionAduaneraValue.Attributes
+            } as ComprobanteConceptoInformacionAduaneraElement)
+        }
+
+        for (const cuentaPredialValue of this.CuentaPredial) {
+            elements?.push({
+                type: 'element',
+                name: 'cfdi:CuentaPredial',
+                attributes: cuentaPredialValue.Attributes
+            } as ComprobanteConceptoCuentaPredialElement)
+        }
+
+        for (const parteValue of this.Parte) {
+            elements.push({
+                type: 'element',
+                name: 'cfdi:Parte',
+                attributes: parteValue.Attributes,
+                elements: parteValue.Elements
+            } as ComprobanteConceptoParteElement)
+        }
+
+        return elements;
     }
 
     get ObjetoImp(): ObjetoImpEnum {
@@ -181,11 +238,11 @@ export class ComprobanteConcepto extends XmlTags {
         this._ACuentaTerceros = value;
     }
 
-    get Impuestos(): ComprobanteConceptoImpuestos {
+    get Impuestos(): ComprobanteConceptoImpuestos | undefined {
         return this._Impuestos;
     }
 
-    set Impuestos(value: ComprobanteConceptoImpuestos) {
+    set Impuestos(value: ComprobanteConceptoImpuestos | undefined) {
         this._Impuestos = value;
     }
 }
