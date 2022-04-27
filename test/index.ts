@@ -1,36 +1,29 @@
 import {
     CFDIService,
     Comprobante,
-    ComprobanteCfdiRelacionados, ComprobanteCfdiRelacionadosCfdiRelacionado,
     ComprobanteConcepto,
-    ComprobanteConceptoACuentaTerceros,
-    ComprobanteConceptoCuentaPredial,
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoImpuestosRetencion,
     ComprobanteConceptoImpuestosTraslado,
-    ComprobanteConceptoInformacionAduanera,
-    ComprobanteConceptoParte,
-    ComprobanteConceptoParteInformacionAduanera,
     ComprobanteEmisor,
     ComprobanteImpuestos,
     ComprobanteImpuestosRetencion,
     ComprobanteImpuestosTraslado,
-    ComprobanteInformacionGlobal,
     ComprobanteReceptor,
     ExportacionEnum,
     FormaPagoEnum,
     ImpuestoEnum,
-    MesesEnum,
     MetodoPagoEnum,
     MonedaEnum,
     ObjetoImpEnum,
-    PeriodicidadEnum,
     RegimenFiscalEnum,
     TipoComprobanteEnum,
     TipoFactorEnum,
-    TipoRelacionEnum,
     UsoCfdiEnum
 } from '../src/cfdi/4.0';
+import * as os from 'os';
+
+os.tmpdir();
 
 const test = async () => {
     const cfdi = new CFDIService({
@@ -204,9 +197,13 @@ const test = async () => {
 
     console.log(xml)
 
-    const validateResult = await cfdi.validateXML(xml);
+    const xmlSellado = await cfdi.getXMLSellado(comprobante);
 
-    console.log(validateResult)
+    console.log(xmlSellado)
+
+    // const validateResult = await cfdi.validateXML(xml);
+    //
+    // console.log(validateResult);
 }
 
 test()

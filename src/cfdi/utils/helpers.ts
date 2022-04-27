@@ -13,3 +13,5 @@ export const sanitizeValues = (value: string): string => {
 
     return text;
 }
+
+export const temporalName = (ext: string = 'xml'): string => `${new Date().getTime()}.${ext}`

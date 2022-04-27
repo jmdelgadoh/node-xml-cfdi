@@ -2,6 +2,10 @@ import { Element, js2xml } from 'xml-js';
 import { ComprobanteElement } from './types';
 import { Comprobante } from './classes';
 import { validateXML } from 'xsd-schema-validator';
+import { tmpdir } from 'os';
+import { join } from 'path';
+import { writeFileSync } from 'fs';
+import { temporalName } from '../utils/helpers';
 
 type CFDIServiceParams = {
     pathXsdCfdi40?: string;
@@ -22,10 +26,33 @@ export class CFDIService {
         });
     }
 
+    public async getXMLSellado(comprobante: Comprobante): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const xmlSinSellar = await this.getXML(comprobante);
+
+                const pathTemp = tmpdir();
+
+                const nameTemp = temporalName();
+
+                const pathFile = join(pathTemp, nameTemp);
+
+                await writeFileSync(pathFile, xmlSinSellar, 'utf8')
+
+                console.log(pathFile)
+
+
+                resolve(xmlSinSellar)
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
+
     public async getXML(comprobante: Comprobante): Promise<string> {
         return new Promise((resolve, reject) => {
             try {
-                const xml = js2xml(CFDIService.getJsonCFDI(comprobante), {spaces: 4});
+                const xml = js2xml(CFDIService.getJsCFDI(comprobante), {spaces: 4});
                 resolve(xml)
             } catch (err) {
                 reject(err);
@@ -33,7 +60,7 @@ export class CFDIService {
         });
     }
 
-    private static getJsonCFDI(comprobante: Comprobante): Element {
+    private static getJsCFDI(comprobante: Comprobante): Element {
         const jsonComprobante = {
             type: 'element',
             name: "cfdi:Comprobante",
