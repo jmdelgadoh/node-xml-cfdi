@@ -56,23 +56,23 @@ const test = async () => {
         NoCertificado: '',
     });
 
-    comprobante.InformacionGlobal = new ComprobanteInformacionGlobal({
-        Periodicidad: PeriodicidadEnum.Semanal,
-        Meses: MesesEnum.Abril,
-        Año: '2022',
-    });
+    // comprobante.InformacionGlobal = new ComprobanteInformacionGlobal({
+    //     Periodicidad: PeriodicidadEnum.Semanal,
+    //     Meses: MesesEnum.Abril,
+    //     Año: '2022',
+    // });
 
-    const cfdiRelacionados = new ComprobanteCfdiRelacionados({
-        TipoRelacion: TipoRelacionEnum.TR01
-    });
-
-    const cfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado({
-        UUID: 'UUID_____________1'
-    })
-
-    cfdiRelacionados.CfdiRelacionado.push(cfdiRelacionado)
-
-    comprobante.CfdiRelacionados.push(cfdiRelacionados);
+    // const cfdiRelacionados = new ComprobanteCfdiRelacionados({
+    //     TipoRelacion: TipoRelacionEnum.TR01
+    // });
+    //
+    // const cfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado({
+    //     UUID: 'UUID_____________1'
+    // })
+    //
+    // cfdiRelacionados.CfdiRelacionado.push(cfdiRelacionado)
+    //
+    // comprobante.CfdiRelacionados.push(cfdiRelacionados);
 
     comprobante.Emisor = new ComprobanteEmisor({
         Rfc: 'EKU9003173C9',
@@ -88,6 +88,7 @@ const test = async () => {
         UsoCFDI: UsoCfdiEnum.G01
     });
 
+
     const concepto = new ComprobanteConcepto({
         ClaveProdServ: '50211503',
         Cantidad: '1.00',
@@ -102,7 +103,7 @@ const test = async () => {
 
     const conceptoImpuestos = new ComprobanteConceptoImpuestos();
 
-    const traslados = new ComprobanteConceptoImpuestosTraslado({
+    const conceptoTraslados = new ComprobanteConceptoImpuestosTraslado({
         Base: '1.00',
         Importe: '0.16',
         Impuesto: ImpuestoEnum.I002,
@@ -110,85 +111,86 @@ const test = async () => {
         TipoFactor: TipoFactorEnum.Tasa
     })
 
-    const retencion1 = new ComprobanteConceptoImpuestosRetencion({
+
+    const conceptoRetencion1 = new ComprobanteConceptoImpuestosRetencion({
         Base: '1.00',
-        Importe: '0.00',
         Impuesto: ImpuestoEnum.I001,
+        TipoFactor: TipoFactorEnum.Tasa,
         TasaOCuota: '0.100000',
-        TipoFactor: TipoFactorEnum.Tasa
-    });
-
-    const retencion2 = new ComprobanteConceptoImpuestosRetencion({
-        Base: '1.00',
         Importe: '0.00',
-        Impuesto: ImpuestoEnum.I001,
-        TasaOCuota: '0.106666',
-        TipoFactor: TipoFactorEnum.Tasa
     });
 
-    conceptoImpuestos.Traslados.push(traslados);
+    const conceptoRetencion2 = new ComprobanteConceptoImpuestosRetencion({
+        Base: '1.00',
+        Impuesto: ImpuestoEnum.I002,
+        TipoFactor: TipoFactorEnum.Tasa,
+        TasaOCuota: '0.106666',
+        Importe: '0.00',
+    });
 
-    conceptoImpuestos.Retenciones.push(retencion1);
+    conceptoImpuestos.Traslados.push(conceptoTraslados);
 
-    conceptoImpuestos.Retenciones.push(retencion2);
+    conceptoImpuestos.Retenciones.push(conceptoRetencion1);
+
+    conceptoImpuestos.Retenciones.push(conceptoRetencion2);
 
     concepto.Impuestos = conceptoImpuestos;
 
-    concepto.ACuentaTerceros = new ComprobanteConceptoACuentaTerceros({
-        RfcACuentaTerceros: 'JUFA7608212V6',
-        NombreACuentaTerceros: 'ADRIANA JUAREZ FERNANDEZ',
-        RegimenFiscalACuentaTerceros: RegimenFiscalEnum.RF601,
-        DomicilioFiscalACuentaTerceros: '29133'
-    });
-
-    const informacionAduanera = new ComprobanteConceptoInformacionAduanera({
-        NumeroPedimento: '104738078003832'
-    })
-
-    concepto.InformacionAduanera.push(informacionAduanera)
-
-    const cuentaPredial = new ComprobanteConceptoCuentaPredial({
-        Numero: '15956011002'
-    })
-
-    concepto.CuentaPredial.push(cuentaPredial)
-
-    const parte = new ComprobanteConceptoParte({
-        ClaveProdServ: '50211503',
-        Cantidad: '2.00',
-        ValorUnitario: '100.00',
-        Importe: '200.00',
-        Descripcion: 'Cigarros',
-        Unidad: 'Pieza'
-    });
-
-    const parteInformacionAduanera = new ComprobanteConceptoParteInformacionAduanera({
-        NumeroPedimento: '104738078003832'
-    })
-
-    parte.InformacionAduanera.push(parteInformacionAduanera)
-
-    concepto.Parte.push(parte);
+    // concepto.ACuentaTerceros = new ComprobanteConceptoACuentaTerceros({
+    //     RfcACuentaTerceros: 'JUFA7608212V6',
+    //     NombreACuentaTerceros: 'ADRIANA JUAREZ FERNANDEZ',
+    //     RegimenFiscalACuentaTerceros: RegimenFiscalEnum.RF601,
+    //     DomicilioFiscalACuentaTerceros: '29133'
+    // });
+    //
+    // const informacionAduanera = new ComprobanteConceptoInformacionAduanera({
+    //     NumeroPedimento: '104738078003832'
+    // })
+    //
+    // concepto.InformacionAduanera.push(informacionAduanera)
+    //
+    // const cuentaPredial = new ComprobanteConceptoCuentaPredial({
+    //     Numero: '15956011002'
+    // })
+    //
+    // concepto.CuentaPredial.push(cuentaPredial)
+    //
+    // const parte = new ComprobanteConceptoParte({
+    //     ClaveProdServ: '50211503',
+    //     Cantidad: '2.00',
+    //     ValorUnitario: '100.00',
+    //     Importe: '200.00',
+    //     Descripcion: 'Cigarros',
+    //     Unidad: 'Pieza'
+    // });
+    //
+    // const parteInformacionAduanera = new ComprobanteConceptoParteInformacionAduanera({
+    //     NumeroPedimento: '104738078003832'
+    // })
+    //
+    // parte.InformacionAduanera.push(parteInformacionAduanera)
+    //
+    // concepto.Parte.push(parte);
 
     comprobante.Conceptos.push(concepto);
 
     const impuestos = new ComprobanteImpuestos({
-        TotalImpuestosTrasladados: '32.00',
-        TotalImpuestosRetenidos: '32.00'
+        TotalImpuestosTrasladados: '0.16',
+        TotalImpuestosRetenidos: '0.00'
     });
 
     const retencion = new ComprobanteImpuestosRetencion({
         Impuesto: ImpuestoEnum.I001,
-        Importe: '32.00'
+        Importe: '0.00'
     })
 
     impuestos.Retenciones.push(retencion);
 
     const traslado = new ComprobanteImpuestosTraslado({
-        Base: '168.00',
-        Impuesto: ImpuestoEnum.I001,
+        Base: '1.00',
+        Impuesto: ImpuestoEnum.I002,
         TasaOCuota: '0.160000',
-        Importe: '32.00',
+        Importe: '0.16',
         TipoFactor: TipoFactorEnum.Tasa
     })
 
