@@ -1,6 +1,5 @@
 import { Element, json2xml } from 'xml-js';
 import {
-    AttributesComprobanteElement,
     ComprobanteCfdiRelacionadosCfdiRelacionadoElement,
     ComprobanteCfdiRelacionadosElement,
     ComprobanteConceptoACuentaTercerosElement,
@@ -20,31 +19,12 @@ import {
     ComprobanteConceptoParteElement,
     ComprobanteImpuestosRetencionesRetencionElement,
     ComprobanteImpuestosTrasladosTrasladoElement,
-    AttributesComprobanteConceptoElement,
-    AttributesComprobanteImpuestosElement, AttributesComprobanteConceptoParteElement
 } from './types';
-import { Comprobante, ComprobanteConcepto, ComprobanteConceptoParte, ComprobanteImpuestos } from './classes';
+import { Comprobante } from './classes';
 
 export class CFDIService {
     constructor() {
     }
-
-    public crearComprobante(params: AttributesComprobanteElement): Comprobante {
-        return new Comprobante(params)
-    }
-
-    public crearConcepto(params: AttributesComprobanteConceptoElement): ComprobanteConcepto {
-        return new ComprobanteConcepto(params);
-    }
-
-    public crearImpuestos(params: AttributesComprobanteImpuestosElement) {
-        return new ComprobanteImpuestos(params)
-    }
-
-    public crearParte(params: AttributesComprobanteConceptoParteElement): ComprobanteConceptoParte {
-        return new ComprobanteConceptoParte(params)
-    }
-
 
     public async getXML(comprobante: Comprobante): Promise<string> {
         return new Promise((resolve, reject) => {
@@ -64,7 +44,7 @@ export class CFDIService {
             elements: []
         } as ComprobanteElement;
 
-        jsonComprobante.attributes = comprobante.AttributesComprobante;
+        jsonComprobante.attributes = comprobante.Attributes;
 
         /*
         * Se agrega la informacion fiscal, solo si cuenta con el atributo
@@ -73,7 +53,7 @@ export class CFDIService {
             jsonComprobante.elements?.push({
                 type: 'element',
                 name: 'cfdi:InformacionGlobal',
-                attributes: comprobante.InformacionGlobal.AttributesInformacionGlobal
+                attributes: comprobante.InformacionGlobal.Attributes
             } as ComprobanteInformacionGlobalElement)
         }
 
@@ -85,7 +65,7 @@ export class CFDIService {
                 const cfdiRelacionados = {
                     type: 'element',
                     name: 'cfdi:CfdiRelacionados',
-                    attributes: cfdiRelacionadosValue.AttributesCfdiRelacionados,
+                    attributes: cfdiRelacionadosValue.Attributes,
                     elements: []
                 } as ComprobanteCfdiRelacionadosElement;
 
@@ -93,7 +73,7 @@ export class CFDIService {
                     const cfdiRelacionado = {
                         type: 'element',
                         name: 'cfdi:CfdiRelacionado',
-                        attributes: cfdiRelacionadoValue.AttributesCfdiRelacionadosCfdiRelacionado,
+                        attributes: cfdiRelacionadoValue.Attributes,
                     } as ComprobanteCfdiRelacionadosCfdiRelacionadoElement;
 
                     cfdiRelacionados.elements?.push(cfdiRelacionado);
@@ -110,7 +90,7 @@ export class CFDIService {
             jsonComprobante.elements?.push({
                 type: 'element',
                 name: 'cfdi:Emisor',
-                attributes: comprobante.Emisor.AttributesEmisor
+                attributes: comprobante.Emisor.Attributes
             } as ComprobanteEmisorElement)
         }
 
@@ -121,7 +101,7 @@ export class CFDIService {
             jsonComprobante.elements?.push({
                 type: 'element',
                 name: 'cfdi:Receptor',
-                attributes: comprobante.Receptor.AttributesReceptor
+                attributes: comprobante.Receptor.Attributes
             } as ComprobanteReceptorElement)
         }
 
@@ -135,7 +115,7 @@ export class CFDIService {
                 const conceptoElement: ComprobanteConceptoElement = {
                     type: 'element',
                     name: 'cfdi:Concepto',
-                    attributes: conceptoValue.AttributesConcepto,
+                    attributes: conceptoValue.Attributes,
                     elements: []
                 }
 
@@ -152,7 +132,7 @@ export class CFDIService {
                         const element: ComprobanteConceptoImpuestosRetencionesRetencionElement = {
                             type: 'element',
                             name: 'cfdi:Retencion',
-                            attributes: retencionValue.AttributesConceptoImpuestosRetencion
+                            attributes: retencionValue.Attributes
                         }
 
                         retencionElements.push(element)
@@ -164,7 +144,7 @@ export class CFDIService {
                         const element: ComprobanteConceptoImpuestosTrasladosTrasladoElement = {
                             type: 'element',
                             name: 'cfdi:Traslado',
-                            attributes: trasladosValue.AttributesConceptoImpuestosTraslado
+                            attributes: trasladosValue.Attributes
                         }
 
                         trasladoElements.push(element)
@@ -205,7 +185,7 @@ export class CFDIService {
                     conceptoElement.elements?.push({
                         type: 'element',
                         name: 'cfdi:ACuentaTerceros',
-                        attributes: conceptoValue?.ACuentaTerceros.AttributesACuentaTerceros
+                        attributes: conceptoValue?.ACuentaTerceros.Attributes
                     } as ComprobanteConceptoACuentaTercerosElement)
                 }
                 /*
@@ -216,7 +196,7 @@ export class CFDIService {
                         conceptoElement.elements?.push({
                             type: 'element',
                             name: 'cfdi:InformacionAduanera',
-                            attributes: informacionAduaneraValue.AttributesInformacionAduanera
+                            attributes: informacionAduaneraValue.Attributes
                         } as ComprobanteConceptoInformacionAduaneraElement)
                     }
                 }
@@ -226,7 +206,7 @@ export class CFDIService {
                         conceptoElement.elements?.push({
                             type: 'element',
                             name: 'cfdi:CuentaPredial',
-                            attributes: cuentaPredialValue.AttributesCuentaPredial
+                            attributes: cuentaPredialValue.Attributes
                         } as ComprobanteConceptoCuentaPredialElement)
                     }
                 }
@@ -236,7 +216,7 @@ export class CFDIService {
                         const parteElement = {
                             type: 'element',
                             name: 'cfdi:Parte',
-                            attributes: parteValue.AttributesParte,
+                            attributes: parteValue.Attributes,
                             elements: []
                         } as ComprobanteConceptoParteElement;
 
@@ -244,7 +224,7 @@ export class CFDIService {
                             parteElement.elements?.push({
                                 type: 'element',
                                 name: 'cfdi:InformacionAduanera',
-                                attributes: informacionAduaneraValue.AttributesInformacionAduanera
+                                attributes: informacionAduaneraValue.Attributes
                             } as ComprobanteConceptoInformacionAduaneraElement)
                         }
 
@@ -277,7 +257,7 @@ export class CFDIService {
                 const element: ComprobanteImpuestosRetencionesRetencionElement = {
                     type: 'element',
                     name: 'cfdi:Retencion',
-                    attributes: retencionValue.AttributesImpuestosRetencion
+                    attributes: retencionValue.Attributes
                 }
 
                 retencionElements.push(element)
@@ -289,7 +269,7 @@ export class CFDIService {
                 const element: ComprobanteImpuestosTrasladosTrasladoElement = {
                     type: 'element',
                     name: 'cfdi:Traslado',
-                    attributes: trasladosValue.AttributesImpuestosRetencion
+                    attributes: trasladosValue.Attributes
                 }
 
                 trasladoElements.push(element)
@@ -304,7 +284,7 @@ export class CFDIService {
             }
 
             if (comprobante?.Impuestos) {
-                impuestosElement.attributes = comprobante.Impuestos.AttributesImpuestos;
+                impuestosElement.attributes = comprobante.Impuestos.Attributes;
             }
 
             if (retencionElements.length || trasladoElements.length) {

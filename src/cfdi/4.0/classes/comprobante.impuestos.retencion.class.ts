@@ -8,18 +8,18 @@ export class ComprobanteImpuestosRetencion {
     private _Importe: string;
 
     constructor(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
-        this.AttributesImpuestosRetencion = params;
+        this.Attributes = params;
     }
 
-    set AttributesImpuestosRetencion(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
+    set Attributes(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
         this.Importe = params.Importe;
         this.Impuesto = params.Impuesto;
     }
 
-    get AttributesImpuestosRetencion(): AttributesComprobanteImpuestosRetencionesRetencionElement {
+    get Attributes(): AttributesComprobanteImpuestosRetencionesRetencionElement {
         return {
-            Importe: this.Importe,
             Impuesto: this.Impuesto,
+            Importe: this.Importe,
         }
     }
 

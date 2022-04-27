@@ -1,5 +1,22 @@
 import {
     CFDIService,
+    Comprobante,
+    ComprobanteCfdiRelacionados, ComprobanteCfdiRelacionadosCfdiRelacionado,
+    ComprobanteConcepto,
+    ComprobanteConceptoACuentaTerceros,
+    ComprobanteConceptoCuentaPredial,
+    ComprobanteConceptoImpuestos,
+    ComprobanteConceptoImpuestosRetencion,
+    ComprobanteConceptoImpuestosTraslado,
+    ComprobanteConceptoInformacionAduanera,
+    ComprobanteConceptoParte,
+    ComprobanteConceptoParteInformacionAduanera,
+    ComprobanteEmisor,
+    ComprobanteImpuestos,
+    ComprobanteImpuestosRetencion,
+    ComprobanteImpuestosTraslado,
+    ComprobanteInformacionGlobal,
+    ComprobanteReceptor,
     ExportacionEnum,
     FormaPagoEnum,
     ImpuestoEnum,
@@ -18,7 +35,7 @@ import {
 const test = async () => {
     const cfdi = new CFDIService();
 
-    const comprobante = cfdi.crearComprobante({
+    const comprobante = new Comprobante({
         Version: '4.0',
         Serie: 'Serie',
         Folio: 'Folio',
@@ -39,24 +56,31 @@ const test = async () => {
         NoCertificado: '',
     });
 
-    comprobante.informacionGlobal({
-        Año: '2022',
+    comprobante.InformacionGlobal = new ComprobanteInformacionGlobal({
+        Periodicidad: PeriodicidadEnum.Semanal,
         Meses: MesesEnum.Abril,
-        Periodicidad: PeriodicidadEnum.Semanal
+        Año: '2022',
     });
 
-    comprobante.cfdiRelacionados({
-        TipoRelacion: TipoRelacionEnum.TR01,
-        CfdiRelacionado: ['UUID_____________1'],
+    const cfdiRelacionados = new ComprobanteCfdiRelacionados({
+        TipoRelacion: TipoRelacionEnum.TR01
+    });
+
+    const cfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado({
+        UUID: 'UUID_____________1'
     })
 
-    comprobante.emisor({
+    cfdiRelacionados.CfdiRelacionado.push(cfdiRelacionado)
+
+    comprobante.CfdiRelacionados.push(cfdiRelacionados);
+
+    comprobante.Emisor = new ComprobanteEmisor({
         Rfc: 'EKU9003173C9',
         Nombre: 'ESCUELA KEMPER URGATE',
         RegimenFiscal: RegimenFiscalEnum.RF601
     });
 
-    comprobante.receptor({
+    comprobante.Receptor = new ComprobanteReceptor({
         Rfc: 'URE180429TM6',
         Nombre: 'UNIVERSIDAD ROBOTICA ESPAÑOLA',
         DomicilioFiscalReceptor: '65000',
@@ -64,7 +88,7 @@ const test = async () => {
         UsoCFDI: UsoCfdiEnum.G01
     });
 
-    const concepto = cfdi.crearConcepto({
+    const concepto = new ComprobanteConcepto({
         ClaveProdServ: '50211503',
         Cantidad: '1.00',
         ClaveUnidad: 'H87',
@@ -76,15 +100,17 @@ const test = async () => {
         ObjetoImp: ObjetoImpEnum.OI02
     });
 
-    concepto.Impuestos.traslado({
+    const conceptoImpuestos = new ComprobanteConceptoImpuestos();
+
+    const traslados = new ComprobanteConceptoImpuestosTraslado({
         Base: '1.00',
         Importe: '0.16',
         Impuesto: ImpuestoEnum.I002,
         TasaOCuota: '0.160000',
         TipoFactor: TipoFactorEnum.Tasa
-    });
+    })
 
-    concepto.Impuestos.retencion({
+    const retencion1 = new ComprobanteConceptoImpuestosRetencion({
         Base: '1.00',
         Importe: '0.00',
         Impuesto: ImpuestoEnum.I001,
@@ -92,7 +118,7 @@ const test = async () => {
         TipoFactor: TipoFactorEnum.Tasa
     });
 
-    concepto.Impuestos.retencion({
+    const retencion2 = new ComprobanteConceptoImpuestosRetencion({
         Base: '1.00',
         Importe: '0.00',
         Impuesto: ImpuestoEnum.I001,
@@ -100,22 +126,34 @@ const test = async () => {
         TipoFactor: TipoFactorEnum.Tasa
     });
 
-    concepto.aCuentaTerceros({
+    conceptoImpuestos.Traslados.push(traslados);
+
+    conceptoImpuestos.Retenciones.push(retencion1);
+
+    conceptoImpuestos.Retenciones.push(retencion2);
+
+    concepto.Impuestos = conceptoImpuestos;
+
+    concepto.ACuentaTerceros = new ComprobanteConceptoACuentaTerceros({
         RfcACuentaTerceros: 'JUFA7608212V6',
         NombreACuentaTerceros: 'ADRIANA JUAREZ FERNANDEZ',
         RegimenFiscalACuentaTerceros: RegimenFiscalEnum.RF601,
         DomicilioFiscalACuentaTerceros: '29133'
     });
 
-    concepto.informacionAduanera({
+    const informacionAduanera = new ComprobanteConceptoInformacionAduanera({
         NumeroPedimento: '104738078003832'
     })
 
-    concepto.cuentaPredial({
-        Numero: '15956011002'
-    });
+    concepto.InformacionAduanera.push(informacionAduanera)
 
-    const parte = cfdi.crearParte({
+    const cuentaPredial = new ComprobanteConceptoCuentaPredial({
+        Numero: '15956011002'
+    })
+
+    concepto.CuentaPredial.push(cuentaPredial)
+
+    const parte = new ComprobanteConceptoParte({
         ClaveProdServ: '50211503',
         Cantidad: '2.00',
         ValorUnitario: '100.00',
@@ -124,33 +162,39 @@ const test = async () => {
         Unidad: 'Pieza'
     });
 
-    parte.informacionAduanera({
+    const parteInformacionAduanera = new ComprobanteConceptoParteInformacionAduanera({
         NumeroPedimento: '104738078003832'
-    });
+    })
 
-    concepto.parte(parte);
+    parte.InformacionAduanera.push(parteInformacionAduanera)
 
-    comprobante.concepto(concepto);
+    concepto.Parte.push(parte);
 
-    const impuestos = cfdi.crearImpuestos({
+    comprobante.Conceptos.push(concepto);
+
+    const impuestos = new ComprobanteImpuestos({
         TotalImpuestosTrasladados: '32.00',
         TotalImpuestosRetenidos: '32.00'
     });
 
-    impuestos.traslado({
+    const retencion = new ComprobanteImpuestosRetencion({
+        Impuesto: ImpuestoEnum.I001,
+        Importe: '32.00'
+    })
+
+    impuestos.Retenciones.push(retencion);
+
+    const traslado = new ComprobanteImpuestosTraslado({
         Base: '168.00',
         Impuesto: ImpuestoEnum.I001,
         TasaOCuota: '0.160000',
         Importe: '32.00',
         TipoFactor: TipoFactorEnum.Tasa
-    });
+    })
 
-    impuestos.retencion({
-        Impuesto: ImpuestoEnum.I001,
-        Importe: '32.00'
-    });
+    impuestos.Traslados.push(traslado);
 
-    comprobante.impuestos(impuestos)
+    comprobante.Impuestos = impuestos;
 
     const xml = await cfdi.getXML(comprobante);
 

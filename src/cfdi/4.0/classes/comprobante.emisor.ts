@@ -1,5 +1,6 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteEmisorElement } from '../types';
+import { sanitizeValues } from '../../utils';
 
 export class ComprobanteEmisor {
     private _Rfc: string;
@@ -8,20 +9,20 @@ export class ComprobanteEmisor {
     private _FacAtrAdquirente?: string;
 
     constructor(params: AttributesComprobanteEmisorElement) {
-        this.AttributesEmisor = params;
+        this.Attributes = params;
     }
 
-    set AttributesEmisor(params: AttributesComprobanteEmisorElement) {
+    set Attributes(params: AttributesComprobanteEmisorElement) {
         this.Rfc = params.Rfc;
         this.Nombre = params.Nombre;
         this.RegimenFiscal = params.RegimenFiscal;
         this.FacAtrAdquirente = params.FacAtrAdquirente;
     }
 
-    get AttributesEmisor(): AttributesComprobanteEmisorElement {
+    get Attributes(): AttributesComprobanteEmisorElement {
         return {
-            Rfc: this.Rfc,
-            Nombre: this.Nombre,
+            Rfc: sanitizeValues(this.Rfc).toUpperCase(),
+            Nombre: sanitizeValues(this.Nombre),
             RegimenFiscal: this.RegimenFiscal,
             FacAtrAdquirente: this.FacAtrAdquirente
         }

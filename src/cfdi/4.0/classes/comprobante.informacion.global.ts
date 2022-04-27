@@ -7,16 +7,16 @@ export class ComprobanteInformacionGlobal {
     private _Año: string;
 
     constructor(params: AttributesComprobanteInformacionGlobalElement) {
-        this.AttributesInformacionGlobal = params;
+        this.Attributes = params;
     }
 
-    set AttributesInformacionGlobal(params: AttributesComprobanteInformacionGlobalElement) {
+    set Attributes(params: AttributesComprobanteInformacionGlobalElement) {
         this.Periodicidad = params.Periodicidad;
         this.Meses = params.Meses;
         this.Año = params.Año;
     }
 
-    get AttributesInformacionGlobal(): AttributesComprobanteInformacionGlobalElement {
+    get Attributes(): AttributesComprobanteInformacionGlobalElement {
         return {
             Periodicidad: this.Periodicidad,
             Meses: this.Meses,

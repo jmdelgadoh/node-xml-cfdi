@@ -9,11 +9,9 @@ import {
 import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
 import { ObjetoImpEnum } from '../catalog/enums';
 import {
-    AttributesComprobanteConceptoACuentaTercerosElement,
-    AttributesComprobanteConceptoCuentaPredialElement,
     AttributesComprobanteConceptoElement,
-    AttributesComprobanteConceptoInformacionAduaneraElement,
 } from '../types';
+import { sanitizeValues } from '../../utils';
 
 export class ComprobanteConcepto extends XmlTags {
     private _Impuestos: ComprobanteConceptoImpuestos;
@@ -35,30 +33,14 @@ export class ComprobanteConcepto extends XmlTags {
 
     constructor(params: AttributesComprobanteConceptoElement) {
         super();
-        this.AttributesConcepto = params;
-        this.Impuestos = new ComprobanteConceptoImpuestos();
-        this.InformacionAduanera = [];
-        this.CuentaPredial = [];
+        this.Attributes = params;
         this.Parte = [];
+        this.CuentaPredial = [];
+        this.InformacionAduanera = [];
+        this.Impuestos = new ComprobanteConceptoImpuestos();
     }
 
-    public parte(parte: ComprobanteConceptoParte) {
-        this.Parte.push(parte)
-    }
-
-    public cuentaPredial(params: AttributesComprobanteConceptoCuentaPredialElement) {
-        this.CuentaPredial.push(new ComprobanteConceptoCuentaPredial(params))
-    }
-
-    public informacionAduanera(params: AttributesComprobanteConceptoInformacionAduaneraElement) {
-        this.InformacionAduanera.push(new ComprobanteConceptoInformacionAduanera(params))
-    }
-
-    public aCuentaTerceros(params: AttributesComprobanteConceptoACuentaTercerosElement) {
-        this.ACuentaTerceros = new ComprobanteConceptoACuentaTerceros(params);
-    }
-
-    get AttributesConcepto(): AttributesComprobanteConceptoElement {
+    get Attributes(): AttributesComprobanteConceptoElement {
         return {
             ...this.getAttributes(),
             ClaveProdServ: this.ClaveProdServ,
@@ -74,13 +56,13 @@ export class ComprobanteConcepto extends XmlTags {
         }
     }
 
-    set AttributesConcepto(params: AttributesComprobanteConceptoElement) {
+    set Attributes(params: AttributesComprobanteConceptoElement) {
         this.ClaveProdServ = params.ClaveProdServ;
         this.NoIdentificacion = params.NoIdentificacion;
         this.Cantidad = params.Cantidad;
         this.ClaveUnidad = params.ClaveUnidad;
         this.Unidad = params.Unidad;
-        this.Descripcion = params.Descripcion;
+        this.Descripcion = sanitizeValues(params.Descripcion);
         this.ValorUnitario = params.ValorUnitario;
         this.Importe = params.Importe;
         this.Descuento = params.Descuento;

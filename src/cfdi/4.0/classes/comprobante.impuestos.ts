@@ -4,8 +4,6 @@ import {
 } from './';
 import {
     AttributesComprobanteImpuestosElement,
-    AttributesComprobanteImpuestosRetencionesRetencionElement,
-    AttributesComprobanteImpuestosTrasladosTrasladoElement
 } from '../types';
 
 export class ComprobanteImpuestos {
@@ -15,28 +13,19 @@ export class ComprobanteImpuestos {
     private _TotalImpuestosTrasladados?: string;
 
     constructor(params: AttributesComprobanteImpuestosElement = {}) {
-        this.AttributesImpuestos = params;
+        this.Attributes = params;
         this.Retenciones = [];
         this.Traslados = [];
     }
-
-    public retencion(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
-        this.Retenciones.push(new ComprobanteImpuestosRetencion(params))
-    }
-
-    public traslado(params: AttributesComprobanteImpuestosTrasladosTrasladoElement) {
-        this.Traslados.push(new ComprobanteImpuestosTraslado(params))
-    }
-
-    set AttributesImpuestos(params: AttributesComprobanteImpuestosElement) {
+    set Attributes(params: AttributesComprobanteImpuestosElement) {
         this.TotalImpuestosTrasladados = params.TotalImpuestosTrasladados;
         this.TotalImpuestosRetenidos = params.TotalImpuestosRetenidos;
     }
 
-    get AttributesImpuestos(): AttributesComprobanteImpuestosElement {
+    get Attributes(): AttributesComprobanteImpuestosElement {
         return {
-            TotalImpuestosTrasladados: this.TotalImpuestosTrasladados,
             TotalImpuestosRetenidos: this.TotalImpuestosRetenidos,
+            TotalImpuestosTrasladados: this.TotalImpuestosTrasladados,
         }
     }
 

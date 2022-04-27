@@ -4,14 +4,14 @@ export class ComprobanteConceptoInformacionAduanera {
     private _NumeroPedimento: string;
 
     constructor(params: AttributesComprobanteConceptoInformacionAduaneraElement) {
-        this.AttributesInformacionAduanera = params
+        this.Attributes = params
     }
 
-    set AttributesInformacionAduanera(params: AttributesComprobanteConceptoInformacionAduaneraElement) {
+    set Attributes(params: AttributesComprobanteConceptoInformacionAduaneraElement) {
         this.NumeroPedimento = params.NumeroPedimento;
     }
 
-    get AttributesInformacionAduanera(): AttributesComprobanteConceptoInformacionAduaneraElement {
+    get Attributes(): AttributesComprobanteConceptoInformacionAduaneraElement {
         return {
             NumeroPedimento: this.NumeroPedimento,
         }

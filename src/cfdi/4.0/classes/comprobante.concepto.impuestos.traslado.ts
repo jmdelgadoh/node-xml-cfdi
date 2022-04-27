@@ -9,10 +9,10 @@ export class ComprobanteConceptoImpuestosTraslado {
     private _Importe?: string;
 
     constructor(params: AttributesComprobanteConceptoImpuestosTrasladosTrasladoElement) {
-        this.AttributesConceptoImpuestosTraslado = params
+        this.Attributes = params
     }
 
-    set AttributesConceptoImpuestosTraslado(params: AttributesComprobanteConceptoImpuestosTrasladosTrasladoElement) {
+    set Attributes(params: AttributesComprobanteConceptoImpuestosTrasladosTrasladoElement) {
         this.Base = params.Base;
         this.Impuesto = params.Impuesto;
         this.TipoFactor = params.TipoFactor;
@@ -20,7 +20,7 @@ export class ComprobanteConceptoImpuestosTraslado {
         this.Importe = params.Importe;
     }
 
-    get AttributesConceptoImpuestosTraslado(): AttributesComprobanteConceptoImpuestosTrasladosTrasladoElement {
+    get Attributes(): AttributesComprobanteConceptoImpuestosTrasladosTrasladoElement {
         return {
             Base: this.Base,
             Impuesto: this.Impuesto,

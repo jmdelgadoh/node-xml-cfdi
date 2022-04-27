@@ -8,14 +8,15 @@ export class ComprobanteCfdiRelacionados {
     private _TipoRelacion: TipoRelacionEnum;
 
     constructor(params: AttributesComprobanteCfdiRelacionadosElement) {
-        this.AttributesCfdiRelacionados = params
+        this.Attributes = params
+        this.CfdiRelacionado = [];
     }
 
-    set AttributesCfdiRelacionados(params: AttributesComprobanteCfdiRelacionadosElement) {
+    set Attributes(params: AttributesComprobanteCfdiRelacionadosElement) {
         this.TipoRelacion = params.TipoRelacion;
     }
 
-    get AttributesCfdiRelacionados(): AttributesComprobanteCfdiRelacionadosElement {
+    get Attributes(): AttributesComprobanteCfdiRelacionadosElement {
         return {
             TipoRelacion: this.TipoRelacion,
         }

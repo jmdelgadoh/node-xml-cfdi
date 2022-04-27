@@ -4,14 +4,14 @@ export class ComprobanteCfdiRelacionadosCfdiRelacionado {
     private _UUID: string;
 
     constructor(params: AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement) {
-        this.AttributesCfdiRelacionadosCfdiRelacionado = params;
+        this.Attributes = params;
     }
 
-    set AttributesCfdiRelacionadosCfdiRelacionado(params: AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement) {
+    set Attributes(params: AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement) {
         this.UUID = params.UUID;
     }
 
-    get AttributesCfdiRelacionadosCfdiRelacionado(): AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement {
+    get Attributes(): AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement {
         return {
             UUID: this.UUID,
         }

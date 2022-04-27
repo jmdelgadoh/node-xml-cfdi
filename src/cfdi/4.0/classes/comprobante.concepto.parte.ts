@@ -4,6 +4,7 @@ import {
     AttributesComprobanteConceptoInformacionAduaneraElement,
     AttributesComprobanteConceptoParteElement
 } from '../types';
+import { sanitizeValues } from '../../utils';
 
 export class ComprobanteConceptoParte {
     private _InformacionAduanera: ComprobanteConceptoParteInformacionAduanera[];
@@ -16,25 +17,21 @@ export class ComprobanteConceptoParte {
     private _Importe?: string;
 
     constructor(params: AttributesComprobanteConceptoParteElement) {
-        this.AttributesParte = params;
+        this.Attributes = params;
         this.InformacionAduanera = [];
     }
 
-    public informacionAduanera(params: AttributesComprobanteConceptoInformacionAduaneraElement) {
-        this.InformacionAduanera.push(new ComprobanteConceptoParteInformacionAduanera(params))
-    }
-
-    set AttributesParte(params: AttributesComprobanteConceptoParteElement) {
+    set Attributes(params: AttributesComprobanteConceptoParteElement) {
         this.ClaveProdServ = params.ClaveProdServ;
         this.NoIdentificacion = params.NoIdentificacion;
         this.Cantidad = params.Cantidad;
         this.Unidad = params.Unidad;
-        this.Descripcion = params.Descripcion;
+        this.Descripcion = sanitizeValues(params.Descripcion);
         this.ValorUnitario = params.ValorUnitario;
         this.Importe = params.Importe;
     }
 
-    get AttributesParte(): AttributesComprobanteConceptoParteElement {
+    get Attributes(): AttributesComprobanteConceptoParteElement {
         return {
             ClaveProdServ: this.ClaveProdServ,
             NoIdentificacion: this.NoIdentificacion,

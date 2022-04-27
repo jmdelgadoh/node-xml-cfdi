@@ -1,6 +1,7 @@
 import { PaisEnum, RegimenFiscalEnum, UsoCfdiEnum } from '../catalog/enums';
 import { CodigoPostalType } from '../catalog/types';
 import { AttributesComprobanteReceptorElement } from '../types';
+import { sanitizeValues } from '../../utils';
 
 export class ComprobanteReceptor {
     private _Rfc: string;
@@ -12,12 +13,12 @@ export class ComprobanteReceptor {
     private _UsoCFDI: UsoCfdiEnum;
 
     constructor(params: AttributesComprobanteReceptorElement) {
-        this.AttributesReceptor = params;
+        this.Attributes = params;
     }
 
-    set AttributesReceptor(params: AttributesComprobanteReceptorElement) {
-        this.Rfc = params.Rfc;
-        this.Nombre = params.Nombre;
+    set Attributes(params: AttributesComprobanteReceptorElement) {
+        this.Rfc = sanitizeValues(params.Rfc).toUpperCase();
+        this.Nombre = sanitizeValues(params.Nombre);
         this.DomicilioFiscalReceptor = params.DomicilioFiscalReceptor;
         this.ResidenciaFiscal = params.ResidenciaFiscal;
         this.NumRegIdTrib = params.NumRegIdTrib;
@@ -25,7 +26,7 @@ export class ComprobanteReceptor {
         this.UsoCFDI = params.UsoCFDI;
     }
 
-    get AttributesReceptor(): AttributesComprobanteReceptorElement {
+    get Attributes(): AttributesComprobanteReceptorElement {
         return {
             Rfc: this.Rfc,
             Nombre: this.Nombre,

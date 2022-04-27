@@ -4,14 +4,14 @@ export class ComprobanteConceptoCuentaPredial {
     private _Numero: string;
 
     constructor(params: AttributesComprobanteConceptoCuentaPredialElement) {
-        this.AttributesCuentaPredial = params
+        this.Attributes = params
     }
 
-    set AttributesCuentaPredial(params: AttributesComprobanteConceptoCuentaPredialElement) {
+    set Attributes(params: AttributesComprobanteConceptoCuentaPredialElement) {
         this.Numero = params.Numero;
     }
 
-    get AttributesCuentaPredial(): AttributesComprobanteConceptoCuentaPredialElement {
+    get Attributes(): AttributesComprobanteConceptoCuentaPredialElement {
         return {
             Numero: this.Numero,
         }

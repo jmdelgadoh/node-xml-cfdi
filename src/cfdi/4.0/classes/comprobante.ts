@@ -13,9 +13,6 @@ import {
 import {
     AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
     AttributesComprobanteElement,
-    AttributesComprobanteEmisorElement,
-    AttributesComprobanteInformacionGlobalElement,
-    AttributesComprobanteReceptorElement
 } from '../types';
 
 export class Comprobante extends XmlTags {
@@ -51,55 +48,21 @@ export class Comprobante extends XmlTags {
         super();
         this.Conceptos = [];
         this.CfdiRelacionados = [];
-        this.AttributesComprobante = params;
+        this.Attributes = params;
         this.addAttributes('xmlns:cfdi', 'http://www.sat.gob.mx/cfd/4');
         this.addAttributes('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
         this.addAttributes('xsi:schemaLocation', 'http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd');
     }
 
-    public informacionGlobal(params: AttributesComprobanteInformacionGlobalElement) {
-        this.InformacionGlobal = new ComprobanteInformacionGlobal(params);
-    }
-
-    public cfdiRelacionados(params: AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement) {
-        if (params.CfdiRelacionado.length) {
-            const index = this.CfdiRelacionados.findIndex((value) => value.TipoRelacion === params.TipoRelacion);
-
-            if (index >= 0) {
-                this.CfdiRelacionados[index].CfdiRelacionado = this.generarCfdiRelacionado(params.CfdiRelacionado);
-            } else {
-                this.CfdiRelacionados.push(this.generarCfdiRelacionados(params))
-            }
-        }
-    }
-
-    public emisor(params: AttributesComprobanteEmisorElement) {
-        this.Emisor = new ComprobanteEmisor(params);
-    }
-
-    public receptor(params: AttributesComprobanteReceptorElement) {
-        this.Receptor = new ComprobanteReceptor(params);
-    }
-
-    public concepto(concepto: ComprobanteConcepto) {
-        this.Conceptos.push(concepto);
-    }
-
-    public impuestos(impuestos: ComprobanteImpuestos) {
-        this.Impuestos = impuestos;
-    }
-
-    get AttributesComprobante(): AttributesComprobanteElement {
+    get Attributes(): AttributesComprobanteElement {
         return {
             ...this.getAttributes(),
             Version: this.Version,
             Serie: this.Serie,
             Folio: this.Folio,
             Fecha: this.Fecha,
-            Sello: this.Sello,
             FormaPago: this.FormaPago,
             NoCertificado: this.NoCertificado,
-            Certificado: this.Certificado,
             CondicionesDePago: this.CondicionesDePago,
             SubTotal: this.SubTotal,
             Descuento: this.Descuento,
@@ -111,10 +74,12 @@ export class Comprobante extends XmlTags {
             MetodoPago: this.MetodoPago,
             LugarExpedicion: this.LugarExpedicion,
             Confirmacion: this.Confirmacion,
+            Sello: this.Sello,
+            Certificado: this.Certificado,
         }
     }
 
-    set AttributesComprobante(params: AttributesComprobanteElement) {
+    set Attributes(params: AttributesComprobanteElement) {
         this.Version = params.Version;
         this.Serie = params.Serie;
         this.Folio = params.Folio;

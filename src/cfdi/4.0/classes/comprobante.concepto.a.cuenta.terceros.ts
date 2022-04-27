@@ -1,5 +1,6 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoACuentaTercerosElement } from '../types';
+import { sanitizeValues } from '../../utils';
 
 export class ComprobanteConceptoACuentaTerceros {
     private _RfcACuentaTerceros: string;
@@ -8,17 +9,17 @@ export class ComprobanteConceptoACuentaTerceros {
     private _DomicilioFiscalACuentaTerceros: string;
 
     constructor(params: AttributesComprobanteConceptoACuentaTercerosElement) {
-        this.AttributesACuentaTerceros = params
+        this.Attributes = params
     }
 
-    set AttributesACuentaTerceros(params: AttributesComprobanteConceptoACuentaTercerosElement) {
-        this.RfcACuentaTerceros = params.RfcACuentaTerceros;
-        this.NombreACuentaTerceros = params.NombreACuentaTerceros;
+    set Attributes(params: AttributesComprobanteConceptoACuentaTercerosElement) {
+        this.RfcACuentaTerceros = sanitizeValues(params.RfcACuentaTerceros).toUpperCase();
+        this.NombreACuentaTerceros = sanitizeValues(params.NombreACuentaTerceros);
         this.RegimenFiscalACuentaTerceros = params.RegimenFiscalACuentaTerceros;
         this.DomicilioFiscalACuentaTerceros = params.DomicilioFiscalACuentaTerceros;
     }
 
-    get AttributesACuentaTerceros(): AttributesComprobanteConceptoACuentaTercerosElement {
+    get Attributes(): AttributesComprobanteConceptoACuentaTercerosElement {
         return {
             RfcACuentaTerceros: this.RfcACuentaTerceros,
             NombreACuentaTerceros: this.NombreACuentaTerceros,
