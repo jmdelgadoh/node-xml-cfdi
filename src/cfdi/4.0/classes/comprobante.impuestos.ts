@@ -38,25 +38,6 @@ export class ComprobanteImpuestos {
     get Elements(): Element[] {
         const elements: Element[] = [];
 
-        if (this.Traslados.length) {
-            const trasladosElement = {
-                type: 'element',
-                name: 'cfdi:Traslados',
-                elements: []
-            } as ComprobanteImpuestosTrasladosElement;
-
-            for (const trasladosValue of this.Traslados) {
-                const element: ComprobanteImpuestosTrasladosTrasladoElement = {
-                    type: 'element',
-                    name: 'cfdi:Traslado',
-                    attributes: trasladosValue.Attributes
-                }
-                trasladosElement.elements?.push(element)
-            }
-
-            elements?.push(trasladosElement);
-        }
-
         if (this.Retenciones.length) {
             const retencioElement = {
                 type: 'element',
@@ -74,6 +55,25 @@ export class ComprobanteImpuestos {
             }
 
             elements.push(retencioElement)
+        }
+
+        if (this.Traslados.length) {
+            const trasladosElement = {
+                type: 'element',
+                name: 'cfdi:Traslados',
+                elements: []
+            } as ComprobanteImpuestosTrasladosElement;
+
+            for (const trasladosValue of this.Traslados) {
+                const element: ComprobanteImpuestosTrasladosTrasladoElement = {
+                    type: 'element',
+                    name: 'cfdi:Traslado',
+                    attributes: trasladosValue.Attributes
+                }
+                trasladosElement.elements?.push(element)
+            }
+
+            elements?.push(trasladosElement);
         }
 
         return elements;

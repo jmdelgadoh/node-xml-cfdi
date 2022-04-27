@@ -33,7 +33,9 @@ import {
 } from '../src/cfdi/4.0';
 
 const test = async () => {
-    const cfdi = new CFDIService();
+    const cfdi = new CFDIService({
+        pathXsdCfdi40: 'C:\\Users\\Desarrollo\\Documents\\CFDI40\\xsd\\cfdv40.xsd'
+    });
 
     const comprobante = new Comprobante({
         Version: '4.0',
@@ -53,7 +55,7 @@ const test = async () => {
         FormaPago: FormaPagoEnum.FP99,
         LugarExpedicion: '20000',
         Certificado: '',
-        NoCertificado: '',
+        NoCertificado: '12345678912345678912',
     });
 
     // comprobante.InformacionGlobal = new ComprobanteInformacionGlobal({
@@ -176,7 +178,7 @@ const test = async () => {
 
     const impuestos = new ComprobanteImpuestos({
         TotalImpuestosTrasladados: '0.16',
-        TotalImpuestosRetenidos: '0.00'
+        TotalImpuestosRetenidos: '0.16'
     });
 
     const retencion = new ComprobanteImpuestosRetencion({
@@ -201,6 +203,10 @@ const test = async () => {
     const xml = await cfdi.getXML(comprobante);
 
     console.log(xml)
+
+    const validateResult = await cfdi.validateXML(xml);
+
+    console.log(validateResult)
 }
 
 test()

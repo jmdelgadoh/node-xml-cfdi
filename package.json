@@ -12,10 +12,12 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.21",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "xsd-schema-validator": "^0.7.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
+    "@types/xsd-schema-validator": "^0.5.4",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "eslint": "^8.13.0",
