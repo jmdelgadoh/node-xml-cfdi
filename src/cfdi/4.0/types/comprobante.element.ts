@@ -28,7 +28,7 @@ export type AttributesComprobanteElement = {
     * Atributo requerido para contener el sello digital del comprobante fiscal, al que hacen referencia las reglas de
     * resolución miscelánea vigente. El sello debe ser expresado como una cadena de texto en formato Base 64.
     * */
-    Sello: string;
+    Sello?: string;
     /*
     * Atributo condicional para expresar la clave de la forma de pago de los bienes o servicios amparados por el
     * comprobante.

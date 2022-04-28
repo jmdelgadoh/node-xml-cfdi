@@ -13,10 +13,6 @@ import {
     ComprobanteConceptoACuentaTercerosElement,
     ComprobanteConceptoCuentaPredialElement,
     ComprobanteConceptoImpuestosElement,
-    ComprobanteConceptoImpuestosRetencionesElement,
-    ComprobanteConceptoImpuestosRetencionesRetencionElement,
-    ComprobanteConceptoImpuestosTrasladosElement,
-    ComprobanteConceptoImpuestosTrasladosTrasladoElement,
     ComprobanteConceptoInformacionAduaneraElement,
     ComprobanteConceptoParteElement,
 } from '../types';

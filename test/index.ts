@@ -20,10 +20,7 @@ import {
     TipoComprobanteEnum,
     TipoFactorEnum,
     UsoCfdiEnum
-} from '../src/cfdi/4.0';
-import * as os from 'os';
-
-os.tmpdir();
+} from '../src';
 
 const test = async () => {
     const cfdi = new CFDIService({
@@ -32,26 +29,24 @@ const test = async () => {
 
     cfdi.setCetificatePath({
         pathCertificate: 'C:\\Users\\Desarrollo\\Documents\\system\\CSD\\CSD_ORGANICOS_+æAVEZ_OSORIO_S.A_DE_C.V_O+æO120726RX3_20190620_155105s.cer',
-        pathKey: 'C:\\Users\\Desarrollo\\Documents\\system\\CSD\\CSD_ORGANICOS_ÑAVEZ_OSORIO_S.A_DE_C.V_OÑO120726RX3_20190620_155105.key'
+        pathKey: 'C:\\Users\\Desarrollo\\Documents\\system\\CSD\\CSD_ORGANICOS_ÑAVEZ_OSORIO_S.A_DE_C.V_OÑO120726RX3_20190620_155105.key',
+        password: '12345678a'
     })
 
     const comprobante = new Comprobante({
         Version: '4.0',
-        Serie: 'Serie',
-        Folio: 'Folio',
-        Fecha: '2021-12-14T00:18:10',
-        Sello: 'e',
-        CondicionesDePago: 'CondicionesDePago',
-        SubTotal: '200.00',
-        Descuento: '1.00',
-        Moneda: MonedaEnum.AMD,
-        TipoCambio: '1.00',
-        Total: '199.16',
+        Serie: 'A',
+        Folio: 'MYLF-54',
+        Fecha: '2022-03-15T07:33:48',
+        FormaPago: FormaPagoEnum.FP01,
+        Moneda: MonedaEnum.MXN,
+        SubTotal: '737.07',
+        Descuento: '0.00',
+        Total: '855.01',
         TipoDeComprobante: TipoComprobanteEnum.I,
         Exportacion: ExportacionEnum.E01,
         MetodoPago: MetodoPagoEnum.PUE,
-        FormaPago: FormaPagoEnum.FP99,
-        LugarExpedicion: '20000',
+        LugarExpedicion: '77725',
     });
 
     // comprobante.InformacionGlobal = new ComprobanteInformacionGlobal({
@@ -73,66 +68,91 @@ const test = async () => {
     // comprobante.CfdiRelacionados.push(cfdiRelacionados);
 
     comprobante.Emisor = new ComprobanteEmisor({
-        Rfc: 'EKU9003173C9',
-        Nombre: 'ESCUELA KEMPER URGATE',
+        Rfc: 'OÑO120726RX3',
+        Nombre: 'ORGANICOS ÑAVEZ OSORIO',
         RegimenFiscal: RegimenFiscalEnum.RF601
     });
 
     comprobante.Receptor = new ComprobanteReceptor({
-        Rfc: 'URE180429TM6',
-        Nombre: 'UNIVERSIDAD ROBOTICA ESPAÑOLA',
-        DomicilioFiscalReceptor: '65000',
-        RegimenFiscalReceptor: RegimenFiscalEnum.RF601,
-        UsoCFDI: UsoCfdiEnum.G01
+        Rfc: 'MODC980924HK1',
+        Nombre: 'CALEB ISAAC MORA DIAZ',
+        DomicilioFiscalReceptor: '77725',
+        RegimenFiscalReceptor: RegimenFiscalEnum.RF612,
+        UsoCFDI: UsoCfdiEnum.G03
     });
 
 
-    const concepto = new ComprobanteConcepto({
-        ClaveProdServ: '50211503',
-        Cantidad: '1.00',
-        ClaveUnidad: 'H87',
-        Unidad: 'Pieza',
-        Descripcion: 'Cigarros',
-        ValorUnitario: '200.00',
-        Descuento: '1.00',
-        Importe: '200.00',
+    const concepto1 = new ComprobanteConcepto({
+        ClaveProdServ: '73152105',
+        Cantidad: '1.000000',
+        ClaveUnidad: 'DPC',
+        Descripcion: '4 Bujias Platino Chevrolet',
+        ValorUnitario: '172.41',
+        Descuento: '0.00',
+        Importe: '172.41',
         ObjetoImp: ObjetoImpEnum.OI02
     });
 
-    const conceptoImpuestos = new ComprobanteConceptoImpuestos();
+    const concepto1Impuestos = new ComprobanteConceptoImpuestos();
 
-    const conceptoTraslados = new ComprobanteConceptoImpuestosTraslado({
-        Base: '1.00',
-        Importe: '0.16',
+    const concepto1Traslados = new ComprobanteConceptoImpuestosTraslado({
+        Base: '172.41',
+        Importe: '27.59',
         Impuesto: ImpuestoEnum.I002,
         TasaOCuota: '0.160000',
         TipoFactor: TipoFactorEnum.Tasa
     })
 
 
-    const conceptoRetencion1 = new ComprobanteConceptoImpuestosRetencion({
-        Base: '1.00',
-        Impuesto: ImpuestoEnum.I001,
-        TipoFactor: TipoFactorEnum.Tasa,
-        TasaOCuota: '0.100000',
-        Importe: '0.00',
+    // const conceptoRetencion1 = new ComprobanteConceptoImpuestosRetencion({
+    //     Base: '1.00',
+    //     Impuesto: ImpuestoEnum.I001,
+    //     TipoFactor: TipoFactorEnum.Tasa,
+    //     TasaOCuota: '0.100000',
+    //     Importe: '0.00',
+    // });
+
+    // const conceptoRetencion2 = new ComprobanteConceptoImpuestosRetencion({
+    //     Base: '1.00',
+    //     Impuesto: ImpuestoEnum.I002,
+    //     TipoFactor: TipoFactorEnum.Tasa,
+    //     TasaOCuota: '0.106666',
+    //     Importe: '0.00',
+    // });
+
+    concepto1Impuestos.Traslados.push(concepto1Traslados);
+
+    // conceptoImpuestos.Retenciones.push(conceptoRetencion1);
+    //
+    // conceptoImpuestos.Retenciones.push(conceptoRetencion2);
+
+    concepto1.Impuestos = concepto1Impuestos;
+
+    const concepto2 = new ComprobanteConcepto({
+        ClaveProdServ: '01010101',
+        Cantidad: '1.000000',
+        ClaveUnidad: 'H87',
+        Descripcion: 'BRAZO AUXILIAR SYD NISSAN. D21 PATHFINDER 4X2-4X4 87-96',
+        ValorUnitario: '564.66',
+        Descuento: '0.00',
+        Importe: '564.66',
+        ObjetoImp: ObjetoImpEnum.OI02
     });
 
-    const conceptoRetencion2 = new ComprobanteConceptoImpuestosRetencion({
-        Base: '1.00',
+    const concepto2Impuestos = new ComprobanteConceptoImpuestos();
+
+    const concepto2Traslados = new ComprobanteConceptoImpuestosTraslado({
+        Base: '564.66',
+        Importe: '90.35',
         Impuesto: ImpuestoEnum.I002,
-        TipoFactor: TipoFactorEnum.Tasa,
-        TasaOCuota: '0.106666',
-        Importe: '0.00',
+        TasaOCuota: '0.160000',
+        TipoFactor: TipoFactorEnum.Tasa
     });
 
-    conceptoImpuestos.Traslados.push(conceptoTraslados);
+    concepto2Impuestos.Traslados.push(concepto2Traslados);
 
-    conceptoImpuestos.Retenciones.push(conceptoRetencion1);
+    concepto2.Impuestos = concepto2Impuestos;
 
-    conceptoImpuestos.Retenciones.push(conceptoRetencion2);
-
-    concepto.Impuestos = conceptoImpuestos;
 
     // concepto.ACuentaTerceros = new ComprobanteConceptoACuentaTerceros({
     //     RfcACuentaTerceros: 'JUFA7608212V6',
@@ -170,27 +190,27 @@ const test = async () => {
     //
     // concepto.Parte.push(parte);
 
-    comprobante.Conceptos.push(concepto);
+    comprobante.Conceptos.push(concepto1);
+    comprobante.Conceptos.push(concepto2);
 
     const impuestos = new ComprobanteImpuestos({
-        TotalImpuestosTrasladados: '0.16',
-        TotalImpuestosRetenidos: '0.16'
+        TotalImpuestosTrasladados: '117.94',
     });
 
-    const retencion = new ComprobanteImpuestosRetencion({
-        Impuesto: ImpuestoEnum.I001,
-        Importe: '0.00'
-    })
-
-    impuestos.Retenciones.push(retencion);
-
     const traslado = new ComprobanteImpuestosTraslado({
-        Base: '1.00',
+        Base: '737.07',
         Impuesto: ImpuestoEnum.I002,
         TasaOCuota: '0.160000',
-        Importe: '0.16',
+        Importe: '117.94',
         TipoFactor: TipoFactorEnum.Tasa
     })
+
+    // const retencion = new ComprobanteImpuestosRetencion({
+    //     Impuesto: ImpuestoEnum.I001,
+    //     Importe: '0.00'
+    // })
+
+    // impuestos.Retenciones.push(retencion);
 
     impuestos.Traslados.push(traslado);
 
@@ -200,13 +220,14 @@ const test = async () => {
     //
     // console.log(xml)
 
+
     const xmlSellado = await cfdi.getXMLSellado(comprobante);
 
-    console.log(xmlSellado)
+    // console.log(xmlSellado)
 
     const validateResult = await cfdi.validateXML(xmlSellado);
 
-    console.log(validateResult);
+    // console.log(validateResult);
 }
 
 test()

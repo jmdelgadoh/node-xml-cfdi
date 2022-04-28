@@ -44,7 +44,7 @@ export class Comprobante extends XmlTags {
     private _Serie?: string;
     private _Folio?: string;
     private _Fecha: string;
-    private _Sello: string;
+    private _Sello?: string;
     private _FormaPago?: FormaPagoEnum;
     private _NoCertificado?: string;
     private _Certificado?: string;
@@ -296,11 +296,11 @@ export class Comprobante extends XmlTags {
         this._FormaPago = value;
     }
 
-    get Sello(): string {
+    get Sello(): string | undefined {
         return this._Sello;
     }
 
-    set Sello(value: string) {
+    set Sello(value: string | undefined) {
         this._Sello = value;
     }
 
