@@ -1,7 +1,7 @@
 import { PaisEnum, RegimenFiscalEnum, UsoCfdiEnum } from '../catalog/enums';
 import { CodigoPostalType } from '../catalog/types';
 import { AttributesComprobanteReceptorElement } from '../types';
-import { sanitizeValues } from '../../utils';
+import { sanitizeValues } from '../../../utils';
 
 export class ComprobanteReceptor {
     private _Rfc: string;

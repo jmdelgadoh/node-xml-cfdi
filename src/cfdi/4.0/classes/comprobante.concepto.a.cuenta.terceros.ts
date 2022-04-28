@@ -1,6 +1,6 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoACuentaTercerosElement } from '../types';
-import { sanitizeValues } from '../../utils';
+import { sanitizeValues } from '../../../utils';
 
 export class ComprobanteConceptoACuentaTerceros {
     private _RfcACuentaTerceros: string;

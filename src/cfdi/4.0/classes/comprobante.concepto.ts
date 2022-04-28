@@ -20,7 +20,7 @@ import {
     ComprobanteConceptoInformacionAduaneraElement,
     ComprobanteConceptoParteElement,
 } from '../types';
-import { sanitizeValues } from '../../utils';
+import { sanitizeValues } from '../../../utils';
 import { Element } from 'xml-js';
 
 export class ComprobanteConcepto extends XmlTags {

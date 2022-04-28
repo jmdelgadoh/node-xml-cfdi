@@ -4,19 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf ./dist && tsc --build",
+    "build": "rimraf ./lib && tsc --build",
     "pretest": "npm run build",
-    "test": "node ./dist/test/index.js"
+    "test": "node ./lib/test/index.js"
   },
   "author": "Caleb Isaac Mora Diaz",
   "license": "MIT",
   "dependencies": {
+    "execa": "^5.1.1",
     "lodash": "^4.17.21",
+    "node-forge": "^1.3.1",
     "xml-js": "^1.6.11",
     "xsd-schema-validator": "^0.7.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
+    "@types/node-forge": "^1.0.2",
     "@types/xsd-schema-validator": "^0.5.4",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",

@@ -5,18 +5,40 @@ import { validateXML } from 'xsd-schema-validator';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { writeFileSync } from 'fs';
-import { temporalName } from '../utils/helpers';
+import { temporalName } from '../../utils/helpers';
+import { getCertificate } from '../../command';
 
 type CFDIServiceParams = {
     pathXsdCfdi40?: string;
 }
 
+type CertificateParams = {
+    pathCertificate?: string;
+    pathKey?: string;
+}
+
 export class CFDIService {
     private _pathXsdCfdi40: string = '';
+    private _pathCertificate: string = '';
+    private _pathKey: string = '';
 
-    constructor({pathXsdCfdi40 = 'assets/xsd/cfdv40.xsd'}: CFDIServiceParams = {}) {
-        this._pathXsdCfdi40 = pathXsdCfdi40
+    constructor(params: CFDIServiceParams = {}) {
+        this.initService(params);
     }
+
+    private initService({pathXsdCfdi40 = `${process.cwd()}/assets/xsd/cfdv40.xsd`}: CFDIServiceParams = {}) {
+        this._pathXsdCfdi40 = pathXsdCfdi40;
+        this.setCetificatePath();
+    }
+
+    public setCetificatePath({
+                                 pathCertificate = `${process.cwd()}/assets/certificados/CSD/30001000000400002332.cer`,
+                                 pathKey = `${process.cwd()}/assets/certificados/CSD/30001000000400002332.key`,
+                             }: CertificateParams = {}) {
+        this._pathCertificate = pathCertificate;
+        this._pathKey = pathKey;
+    }
+
 
     public async validateXML(xml: string) {
         return new Promise((resolve) => {
@@ -29,20 +51,29 @@ export class CFDIService {
     public async getXMLSellado(comprobante: Comprobante): Promise<string> {
         return new Promise(async (resolve, reject) => {
             try {
-                const xmlSinSellar = await this.getXML(comprobante);
+                const cer = getCertificate(this._pathCertificate);
 
-                const pathTemp = tmpdir();
+                if (cer) {
+                    comprobante.Certificado = `${cer.certificate}`;
 
-                const nameTemp = temporalName();
+                    comprobante.NoCertificado = `${cer.noCertificate}`;
 
-                const pathFile = join(pathTemp, nameTemp);
+                    const xmlSinSellar = await this.getXML(comprobante);
 
-                await writeFileSync(pathFile, xmlSinSellar, 'utf8')
+                    const pathTemp = tmpdir();
 
-                console.log(pathFile)
+                    const nameTemp = temporalName();
 
+                    const pathFile = join(pathTemp, nameTemp);
 
-                resolve(xmlSinSellar)
+                    await writeFileSync(pathFile, xmlSinSellar, 'utf8')
+
+                    console.log(pathFile)
+
+                    resolve(xmlSinSellar)
+                } else {
+                    reject('No se pudo procesar el certificado')
+                }
             } catch (err) {
                 reject(err);
             }

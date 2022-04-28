@@ -38,12 +38,12 @@ export type AttributesComprobanteElement = {
     * Atributo requerido para expresar el número de serie del certificado de sello digital que ampara al comprobante,
     * de acuerdo con el acuse correspondiente a 20 posiciones otorgado por el sistema del SAT.
     * */
-    NoCertificado: string;
+    NoCertificado?: string;
     /*
     * Atributo requerido que sirve para incorporar el certificado de sello digital que ampara al comprobante, como
     * texto en formato base 64.
     * */
-    Certificado: string;
+    Certificado?: string;
     /*
     * Atributo condicional para expresar las condiciones comerciales aplicables para el pago del comprobante fiscal
     * digital por Internet. Este atributo puede ser condicionado mediante atributos o complementos.

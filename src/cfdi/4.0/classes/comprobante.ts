@@ -46,8 +46,8 @@ export class Comprobante extends XmlTags {
     private _Fecha: string;
     private _Sello: string;
     private _FormaPago?: FormaPagoEnum;
-    private _NoCertificado: string;
-    private _Certificado: string;
+    private _NoCertificado?: string;
+    private _Certificado?: string;
     private _CondicionesDePago?: string;
     private _SubTotal: string;
     private _Descuento?: string;
@@ -272,19 +272,19 @@ export class Comprobante extends XmlTags {
         this._CondicionesDePago = value;
     }
 
-    get Certificado(): string {
+    get Certificado(): string | undefined {
         return this._Certificado;
     }
 
-    set Certificado(value: string) {
+    set Certificado(value: string | undefined) {
         this._Certificado = value;
     }
 
-    get NoCertificado(): string {
+    get NoCertificado(): string | undefined {
         return this._NoCertificado;
     }
 
-    set NoCertificado(value: string) {
+    set NoCertificado(value: string | undefined) {
         this._NoCertificado = value;
     }
 

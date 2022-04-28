@@ -1,0 +1,1 @@
+export { getCertificate } from './helpers'

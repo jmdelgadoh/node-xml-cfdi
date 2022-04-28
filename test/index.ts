@@ -30,6 +30,11 @@ const test = async () => {
         pathXsdCfdi40: 'C:\\Users\\Desarrollo\\Documents\\CFDI40\\xsd\\cfdv40.xsd'
     });
 
+    cfdi.setCetificatePath({
+        pathCertificate: 'C:\\Users\\Desarrollo\\Documents\\system\\CSD\\CSD_ORGANICOS_+æAVEZ_OSORIO_S.A_DE_C.V_O+æO120726RX3_20190620_155105s.cer',
+        pathKey: 'C:\\Users\\Desarrollo\\Documents\\system\\CSD\\CSD_ORGANICOS_ÑAVEZ_OSORIO_S.A_DE_C.V_OÑO120726RX3_20190620_155105.key'
+    })
+
     const comprobante = new Comprobante({
         Version: '4.0',
         Serie: 'Serie',
@@ -47,8 +52,6 @@ const test = async () => {
         MetodoPago: MetodoPagoEnum.PUE,
         FormaPago: FormaPagoEnum.FP99,
         LugarExpedicion: '20000',
-        Certificado: '',
-        NoCertificado: '12345678912345678912',
     });
 
     // comprobante.InformacionGlobal = new ComprobanteInformacionGlobal({
@@ -193,17 +196,17 @@ const test = async () => {
 
     comprobante.Impuestos = impuestos;
 
-    const xml = await cfdi.getXML(comprobante);
-
-    console.log(xml)
+    // const xml = await cfdi.getXML(comprobante);
+    //
+    // console.log(xml)
 
     const xmlSellado = await cfdi.getXMLSellado(comprobante);
 
     console.log(xmlSellado)
 
-    // const validateResult = await cfdi.validateXML(xml);
-    //
-    // console.log(validateResult);
+    const validateResult = await cfdi.validateXML(xmlSellado);
+
+    console.log(validateResult);
 }
 
 test()
