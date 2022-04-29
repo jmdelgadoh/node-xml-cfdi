@@ -1,5 +1,6 @@
 import { commandSync, SyncOptions } from 'execa';
 import { pki } from 'node-forge';
+import { unlinkSync } from 'fs';
 
 export const getCertificate = (path: string, options?: SyncOptions) => {
     const command = `openssl x509 -inform DER -in ${path} -outform PEM`;
@@ -35,7 +36,9 @@ export const getCadenaOriginal = (pathXmlFile: string, pathXlstFile: string, opt
     const command = `xslt3 -s:${pathXmlFile} -xsl:${pathXlstFile}`;
 
     try {
-        return commandSync(command, options).stdout;
+        const data = commandSync(command, options).stdout;
+        unlinkSync(pathXmlFile);
+        return data
     } catch (e) {
         console.error({
             status: 'ERROR: 002',

@@ -24,7 +24,9 @@ import {
 
 const test = async () => {
     const cfdi = new CFDIService({
-        pathXsdCfdi40: 'C:\\Users\\Desarrollo\\Documents\\CFDI40\\xsd\\cfdv40.xsd'
+        pathXsdCfdi40: 'C:\\Users\\Desarrollo\\Documents\\CFDI40\\xsd\\cfdv40.xsd',
+        pathXsltCfdi40: 'C:\\Users\\Desarrollo\\Documents\\CFDI40\\xslt\\cadenaoriginal_4_0.xslt',
+        pathXmlFolder: 'C:\\Users\\Desarrollo\\Desktop\\xml'
     });
 
     cfdi.setCetificatePath({
@@ -216,18 +218,15 @@ const test = async () => {
 
     comprobante.Impuestos = impuestos;
 
-    // const xml = await cfdi.getXML(comprobante);
-    //
-    // console.log(xml)
-
-
     const xmlSellado = await cfdi.getXMLSellado(comprobante);
-
-    // console.log(xmlSellado)
 
     const validateResult = await cfdi.validateXML(xmlSellado);
 
-    // console.log(validateResult);
+    console.log(validateResult)
+
+    const path = await cfdi.saveXml(xmlSellado);
+
+    console.log(path);
 }
 
 test()

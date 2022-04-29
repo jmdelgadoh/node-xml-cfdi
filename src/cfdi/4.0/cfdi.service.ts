@@ -8,11 +8,12 @@ import { writeFileSync } from 'fs';
 import { temporalName } from '../../utils/helpers';
 import { getCertificate, getCadenaOriginal } from '../../command';
 import { getKey } from '../../command/helpers';
-import { createSign, getHashes } from 'crypto';
+import { createSign } from 'crypto';
 
 type CFDIServiceParams = {
     pathXsdCfdi40?: string;
     pathXsltCfdi40?: string;
+    pathXmlFolder?: string;
 }
 
 type CertificateParams = {
@@ -22,6 +23,7 @@ type CertificateParams = {
 }
 
 export class CFDIService {
+    private _pathXmlFolder: string = '';
     private _pathXsdCfdi40: string = '';
     private _pathXsltCfdi40: string = '';
     private _pathCertificate: string = '';
@@ -30,15 +32,6 @@ export class CFDIService {
 
     constructor(params: CFDIServiceParams = {}) {
         this.initService(params);
-    }
-
-    private initService({
-                            pathXsdCfdi40 = `${process.cwd()}/assets/xsd/cfdv40.xsd`,
-                            pathXsltCfdi40 = `${process.cwd()}/assets/xslt/cadenaoriginal_4_0.xslt`
-                        }: CFDIServiceParams = {}) {
-        this._pathXsdCfdi40 = pathXsdCfdi40;
-        this._pathXsltCfdi40 = pathXsltCfdi40;
-        this.setCetificatePath();
     }
 
     public setCetificatePath({
@@ -51,6 +44,48 @@ export class CFDIService {
         this._password = password
     }
 
+    public async saveXml(xml: string): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const nameTemp = temporalName();
+                const pathFile = join(this._pathXmlFolder, nameTemp);
+
+                await writeFileSync(pathFile, xml, 'utf8');
+
+                resolve(pathFile);
+            } catch (e) {
+                reject(e)
+            }
+        })
+    }
+
+
+    public async getXMLSellado(comprobante: Comprobante): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                comprobante = await this.certificarComprobante(comprobante)
+
+                comprobante = await this.sellarComprobante(comprobante);
+
+                const xml = await this.getXML(comprobante);
+
+                resolve(xml)
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
+
+    public async getXML(comprobante: Comprobante): Promise<string> {
+        return new Promise((resolve, reject) => {
+            try {
+                const xml = js2xml(this.getJsCFDI(comprobante), {spaces: 4});
+                resolve(xml)
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
 
     public async validateXML(xml: string) {
         return new Promise((resolve) => {
@@ -58,6 +93,23 @@ export class CFDIService {
                 resolve(result)
             });
         });
+    }
+
+    public async generateCadenaOriginal(comprobante: Comprobante): Promise<string> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const xmlSinSellar = await this.getXML(comprobante);
+
+                const tempXmlFile = await this.generateTempFile(xmlSinSellar);
+
+                const cadena = getCadenaOriginal(tempXmlFile, this._pathXsltCfdi40);
+
+                resolve(cadena);
+            } catch (e) {
+                reject(e);
+            }
+
+        })
     }
 
     private certificarComprobante(comprobante: Comprobante): Promise<Comprobante> {
@@ -88,7 +140,6 @@ export class CFDIService {
 
                 resolve(sello);
             } catch (e) {
-                console.log(JSON.stringify(e, null, 3))
                 reject({
                     name: 'ERROR: AL SELLAR',
                     error: e
@@ -100,21 +151,11 @@ export class CFDIService {
     private sellarComprobante(comprobante: Comprobante): Promise<Comprobante> {
         return new Promise<Comprobante>(async (resolve, reject) => {
             try {
-                const xmlSinSellar = await this.getXML(comprobante);
-
-                const tempXmlFile = await this.generateTempFile(xmlSinSellar);
-
-                console.log(tempXmlFile)
-
-                const cadenaOriginal = getCadenaOriginal(tempXmlFile, this._pathXsltCfdi40);
-
-                // console.log(cadenaOriginal)
+                const cadenaOriginal = await this.generateCadenaOriginal(comprobante);
 
                 const key = getKey(this._pathKey, this._password);
 
                 comprobante.Sello = await this.getSello(cadenaOriginal, key);
-
-                console.log(comprobante.Sello)
 
                 resolve(comprobante)
             } catch (e) {
@@ -132,6 +173,7 @@ export class CFDIService {
                 const pathTemp = tmpdir();
                 const nameTemp = temporalName();
                 const pathFile = join(pathTemp, nameTemp);
+
                 await writeFileSync(pathFile, xml, 'utf8')
                 resolve(pathFile);
             } catch (e) {
@@ -140,34 +182,7 @@ export class CFDIService {
         })
     }
 
-    public async getXMLSellado(comprobante: Comprobante): Promise<string> {
-        return new Promise(async (resolve, reject) => {
-            try {
-                comprobante = await this.certificarComprobante(comprobante)
-
-                comprobante = await this.sellarComprobante(comprobante);
-
-                const xml = await this.getXML(comprobante);
-
-                resolve(xml)
-            } catch (err) {
-                reject(err);
-            }
-        })
-    }
-
-    public async getXML(comprobante: Comprobante): Promise<string> {
-        return new Promise((resolve, reject) => {
-            try {
-                const xml = js2xml(CFDIService.getJsCFDI(comprobante), {spaces: 4});
-                resolve(xml)
-            } catch (err) {
-                reject(err);
-            }
-        });
-    }
-
-    private static getJsCFDI(comprobante: Comprobante): Element {
+    private getJsCFDI(comprobante: Comprobante): Element {
         const jsonComprobante = {
             type: 'element',
             name: "cfdi:Comprobante",
@@ -186,5 +201,16 @@ export class CFDIService {
                 jsonComprobante
             ]
         }
+    }
+
+    private initService({
+                            pathXsdCfdi40 = `${process.cwd()}/assets/xsd/cfdv40.xsd`,
+                            pathXsltCfdi40 = `${process.cwd()}/assets/xslt/cadenaoriginal_4_0.xslt`,
+                            pathXmlFolder = `${tmpdir()}`
+                        }: CFDIServiceParams = {}) {
+        this._pathXsdCfdi40 = pathXsdCfdi40;
+        this._pathXsltCfdi40 = pathXsltCfdi40;
+        this._pathXmlFolder = pathXmlFolder;
+        this.setCetificatePath();
     }
 }
