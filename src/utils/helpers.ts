@@ -1,6 +1,8 @@
 export const sanitizeValues = (value: string): string => {
     let text: string = value;
 
+    text = text.trim();
+
     text = text.split('&').join('&amp;');
 
     text = text.split('"').join('&quot;');

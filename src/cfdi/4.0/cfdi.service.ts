@@ -10,13 +10,13 @@ import { getCertificate, getCadenaOriginal } from '../../command';
 import { getKey } from '../../command/helpers';
 import { createSign } from 'crypto';
 
-type CFDIServiceParams = {
+export type CFDIServiceParams = {
     pathXsdCfdi40?: string;
     pathXsltCfdi40?: string;
     pathXmlFolder?: string;
 }
 
-type CertificateParams = {
+export type CertificateParams = {
     pathCertificate?: string;
     pathKey?: string;
     password?: string;
@@ -87,7 +87,7 @@ export class CFDIService {
         });
     }
 
-    public async validateXML(xml: string) {
+    public async validateXML(xml: string): Promise<{ valid: boolean, result: string, messages: string[] }> {
         return new Promise((resolve) => {
             validateXML(xml, this._pathXsdCfdi40, (_, result) => {
                 resolve(result)
