@@ -5,9 +5,9 @@ import { validateXML } from 'xsd-schema-validator';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { writeFileSync } from 'fs';
-import { temporalName } from '../../utils/helpers';
-import { getCertificate, getCadenaOriginal } from '../../command';
-import { getKey } from '../../command/helpers';
+import { temporalName } from '../utils/helpers';
+import { getCertificate, getCadenaOriginal } from '../command';
+import { getKey } from '../command/helpers';
 import { createSign } from 'crypto';
 
 export type CFDIServiceParams = {

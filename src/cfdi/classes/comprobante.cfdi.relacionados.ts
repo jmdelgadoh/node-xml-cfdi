@@ -1,5 +1,5 @@
 import { TipoRelacionEnum } from '../catalog/enums';
-import { ComprobanteCfdiRelacionadosCfdiRelacionado } from './';
+import { ComprobanteCfdiRelacionadosCfdiRelacionado } from './index';
 import {
     AttributesComprobanteCfdiRelacionadosElement,
     ComprobanteCfdiRelacionadosCfdiRelacionadoElement

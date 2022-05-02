@@ -1,1 +1,1 @@
-export * from './cfdi/4.0';
+export * from './cfdi';

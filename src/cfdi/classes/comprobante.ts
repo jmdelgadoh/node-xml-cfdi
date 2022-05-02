@@ -10,7 +10,7 @@ import {
     ComprobanteInformacionGlobal,
     ComprobanteReceptor,
     XmlTags
-} from './';
+} from './index';
 import {
     AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
     AttributesComprobanteElement,

@@ -1,10 +1,10 @@
-import { ComprobanteConceptoParteInformacionAduanera } from './';
+import { ComprobanteConceptoParteInformacionAduanera } from './index';
 import { ClaveProdServType } from '../catalog/types';
 import {
     AttributesComprobanteConceptoInformacionAduaneraElement,
     AttributesComprobanteConceptoParteElement, ComprobanteConceptoInformacionAduaneraElement
 } from '../types';
-import { sanitizeValues } from '../../../utils';
+import { sanitizeValues } from '../../utils';
 import { Element } from 'xml-js';
 
 export class ComprobanteConceptoParte {

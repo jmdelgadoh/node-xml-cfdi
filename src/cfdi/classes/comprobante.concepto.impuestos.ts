@@ -1,4 +1,4 @@
-import { ComprobanteConceptoImpuestosRetencion, ComprobanteConceptoImpuestosTraslado } from ".";
+import { ComprobanteConceptoImpuestosRetencion, ComprobanteConceptoImpuestosTraslado } from "./index";
 import { Element } from 'xml-js';
 import {
     ComprobanteConceptoImpuestosRetencionesElement,

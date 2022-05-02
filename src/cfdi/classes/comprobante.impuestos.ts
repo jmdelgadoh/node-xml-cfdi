@@ -1,7 +1,7 @@
 import {
     ComprobanteImpuestosRetencion,
     ComprobanteImpuestosTraslado
-} from './';
+} from './index';
 import {
     AttributesComprobanteImpuestosElement,
     ComprobanteImpuestosRetencionesElement,

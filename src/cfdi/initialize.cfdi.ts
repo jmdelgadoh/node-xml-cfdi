@@ -1,4 +1,4 @@
-import { CertificateParams, CFDIService, CFDIServiceParams } from '.';
+import { CertificateParams, CFDIService, CFDIServiceParams } from './index';
 
 type InitializeCfdiParams = {} & CFDIServiceParams & CertificateParams;
 

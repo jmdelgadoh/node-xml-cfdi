@@ -4,8 +4,9 @@ import {
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoInformacionAduanera,
     ComprobanteConceptoParte,
+    ComprobanteConceptoComplementoConcepto,
     XmlTags
-} from './';
+} from './index';
 import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
 import { ObjetoImpEnum } from '../catalog/enums';
 import {
@@ -16,7 +17,7 @@ import {
     ComprobanteConceptoInformacionAduaneraElement,
     ComprobanteConceptoParteElement,
 } from '../types';
-import { sanitizeValues } from '../../../utils';
+import { sanitizeValues } from '../../utils';
 import { Element } from 'xml-js';
 
 export class ComprobanteConcepto extends XmlTags {
@@ -24,7 +25,7 @@ export class ComprobanteConcepto extends XmlTags {
     private _ACuentaTerceros?: ComprobanteConceptoACuentaTerceros;
     private _InformacionAduanera: ComprobanteConceptoInformacionAduanera[];
     private _CuentaPredial: ComprobanteConceptoCuentaPredial[];
-    // private _ComplementoConcepto: ComprobanteConceptoComplementoConcepto;
+    private _ComplementoConcepto?: ComprobanteConceptoComplementoConcepto;
     private _Parte: ComprobanteConceptoParte[];
     private _ClaveProdServ: ClaveProdServType;
     private _NoIdentificacion?: string;
@@ -240,5 +241,13 @@ export class ComprobanteConcepto extends XmlTags {
 
     set Impuestos(value: ComprobanteConceptoImpuestos | undefined) {
         this._Impuestos = value;
+    }
+
+    get ComplementoConcepto(): ComprobanteConceptoComplementoConcepto | undefined {
+        return this._ComplementoConcepto;
+    }
+
+    set ComplementoConcepto(value: ComprobanteConceptoComplementoConcepto | undefined) {
+        this._ComplementoConcepto = value;
     }
 }
