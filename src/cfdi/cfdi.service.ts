@@ -1,7 +1,6 @@
 import { Element, js2xml } from 'xml-js';
 import { ComprobanteElement } from './types';
 import { Comprobante } from './classes';
-import { validateXML } from 'xsd-schema-validator';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { writeFileSync } from 'fs';
@@ -11,7 +10,6 @@ import { getKey } from '../command/helpers';
 import { createSign } from 'crypto';
 
 export type CFDIServiceParams = {
-    pathXsdCfdi40?: string;
     pathXsltCfdi40?: string;
     pathXmlFolder?: string;
 }
@@ -24,7 +22,6 @@ export type CertificateParams = {
 
 export class CFDIService {
     private _pathXmlFolder: string = '';
-    private _pathXsdCfdi40: string = '';
     private _pathXsltCfdi40: string = '';
     private _pathCertificate: string = '';
     private _pathKey: string = '';
@@ -84,14 +81,6 @@ export class CFDIService {
             } catch (err) {
                 reject(err);
             }
-        });
-    }
-
-    public async validateXML(xml: string): Promise<{ valid: boolean, result: string, messages: string[] }> {
-        return new Promise((resolve) => {
-            validateXML(xml, this._pathXsdCfdi40, (_, result) => {
-                resolve(result)
-            });
         });
     }
 
@@ -204,11 +193,9 @@ export class CFDIService {
     }
 
     private initService({
-                            pathXsdCfdi40 = `${process.cwd()}/assets/xsd/cfdv40.xsd`,
                             pathXsltCfdi40 = `${process.cwd()}/assets/xslt/cadenaoriginal_4_0.xslt`,
                             pathXmlFolder = `${tmpdir()}`
                         }: CFDIServiceParams = {}) {
-        this._pathXsdCfdi40 = pathXsdCfdi40;
         this._pathXsltCfdi40 = pathXsltCfdi40;
         this._pathXmlFolder = pathXmlFolder;
         this.setCetificatePath();
