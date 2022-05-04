@@ -1,12 +1,24 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteEmisorElement } from '../types';
 import { sanitizeValues } from '../../utils';
+import { XMLAttribute, XMLElement } from '../../annotations';
 
+@XMLElement({
+    namespace: 'cfdi',
+    name: 'Emisor'
+})
 export class ComprobanteEmisor {
-    private _Rfc: string;
-    private _Nombre: string;
-    private _RegimenFiscal: RegimenFiscalEnum;
-    private _FacAtrAdquirente?: string;
+    @XMLAttribute()
+    public Rfc: string;
+
+    @XMLAttribute()
+    public Nombre: string;
+
+    @XMLAttribute()
+    public RegimenFiscal: RegimenFiscalEnum;
+
+    @XMLAttribute()
+    public FacAtrAdquirente?: string;
 
     constructor(params: AttributesComprobanteEmisorElement) {
         this.Attributes = params;
@@ -26,37 +38,5 @@ export class ComprobanteEmisor {
             RegimenFiscal: this.RegimenFiscal,
             FacAtrAdquirente: this.FacAtrAdquirente
         }
-    }
-
-    get FacAtrAdquirente(): string | undefined {
-        return this._FacAtrAdquirente;
-    }
-
-    set FacAtrAdquirente(value: string | undefined) {
-        this._FacAtrAdquirente = value;
-    }
-
-    get RegimenFiscal(): RegimenFiscalEnum {
-        return this._RegimenFiscal;
-    }
-
-    set RegimenFiscal(value: RegimenFiscalEnum) {
-        this._RegimenFiscal = value;
-    }
-
-    get Nombre(): string {
-        return this._Nombre;
-    }
-
-    set Nombre(value: string) {
-        this._Nombre = value;
-    }
-
-    get Rfc(): string {
-        return this._Rfc;
-    }
-
-    set Rfc(value: string) {
-        this._Rfc = value;
     }
 }

@@ -20,6 +20,7 @@ import { emisor } from '../utils/emisor';
 import { service } from '../utils/service';
 import { receptor } from '../utils/receptor';
 import { printResult } from '../utils/print.result';
+import { XmlElement } from '../../src/annotations/classes/xml.element';
 
 export const testComprobanteEgresos = async () => {
     console.info(`=== === === === === Comprobante de tipo egreso === === === === ===
@@ -110,5 +111,7 @@ export const testComprobanteEgresos = async () => {
 
     const xmlSellado = await service.getXMLSellado(comprobante);
 
-    await printResult(xmlSellado);
+    console.log(XmlElement.serialize(comprobante))
+
+    // await printResult(xmlSellado);
 }

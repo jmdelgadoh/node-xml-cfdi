@@ -15,50 +15,84 @@ import {
     AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
     AttributesComprobanteElement,
     ComprobanteCfdiRelacionadosElement,
-    ComprobanteConceptoACuentaTercerosElement,
-    ComprobanteConceptoCuentaPredialElement,
     ComprobanteConceptoElement,
     ComprobanteConceptoImpuestosElement,
-    ComprobanteConceptoImpuestosRetencionesElement,
-    ComprobanteConceptoImpuestosRetencionesRetencionElement,
-    ComprobanteConceptoImpuestosTrasladosElement,
-    ComprobanteConceptoImpuestosTrasladosTrasladoElement,
-    ComprobanteConceptoInformacionAduaneraElement,
-    ComprobanteConceptoParteElement,
     ComprobanteConceptosElement,
     ComprobanteEmisorElement,
     ComprobanteInformacionGlobalElement,
     ComprobanteReceptorElement,
 } from '../types';
+import { XMLAttribute, XMLElement } from '../../annotations';
 
+@XMLElement({
+    namespace: 'cfdi',
+    name: 'Comprobante'
+})
 export class Comprobante extends XmlTags {
-    private _InformacionGlobal?: ComprobanteInformacionGlobal;
-    private _CfdiRelacionados: ComprobanteCfdiRelacionados[];
-    private _Emisor: ComprobanteEmisor;
-    private _Receptor: ComprobanteReceptor;
-    private _Conceptos: ComprobanteConcepto[];
-    private _Impuestos?: ComprobanteImpuestos;
-    // private _Complemento: ComprobanteComplemento;
-    // private _Addenda: ComprobanteAddenda;
-    private _Version: string;
-    private _Serie?: string;
-    private _Folio?: string;
-    private _Fecha: string;
-    private _Sello?: string;
-    private _FormaPago?: FormaPagoEnum;
-    private _NoCertificado?: string;
-    private _Certificado?: string;
-    private _CondicionesDePago?: string;
-    private _SubTotal: string;
-    private _Descuento?: string;
-    private _Moneda: MonedaEnum;
-    private _TipoCambio?: string;
-    private _Total: string;
-    private _TipoDeComprobante: TipoComprobanteEnum;
-    private _Exportacion: ExportacionEnum;
-    private _MetodoPago?: MetodoPagoEnum;
-    private _LugarExpedicion: CodigoPostalType;
-    private _Confirmacion?: string;
+    public InformacionGlobal?: ComprobanteInformacionGlobal;
+    public CfdiRelacionados: ComprobanteCfdiRelacionados[];
+    public Emisor: ComprobanteEmisor;
+    public Receptor: ComprobanteReceptor;
+    public Conceptos: ComprobanteConcepto[];
+    public Impuestos?: ComprobanteImpuestos;
+    // public Complemento: ComprobanteComplemento;
+    // public Addenda: ComprobanteAddenda;
+    @XMLAttribute()
+    public Version: string;
+
+    @XMLAttribute()
+    public Serie?: string;
+
+    @XMLAttribute()
+    public Folio?: string;
+
+    @XMLAttribute()
+    public Fecha: string;
+
+    @XMLAttribute()
+    public Sello?: string;
+
+    @XMLAttribute()
+    public FormaPago?: FormaPagoEnum;
+
+    @XMLAttribute()
+    public NoCertificado?: string;
+
+    @XMLAttribute()
+    public Certificado?: string;
+
+    @XMLAttribute()
+    public CondicionesDePago?: string;
+
+    @XMLAttribute()
+    public SubTotal: string;
+
+    @XMLAttribute()
+    public Descuento?: string;
+
+    @XMLAttribute()
+    public Moneda: MonedaEnum;
+
+    @XMLAttribute()
+    public TipoCambio?: string;
+
+    @XMLAttribute()
+    public Total: string;
+
+    @XMLAttribute()
+    public TipoDeComprobante: TipoComprobanteEnum;
+
+    @XMLAttribute()
+    public Exportacion: ExportacionEnum;
+
+    @XMLAttribute()
+    public MetodoPago?: MetodoPagoEnum;
+
+    @XMLAttribute()
+    public LugarExpedicion: CodigoPostalType;
+
+    @XMLAttribute()
+    public Confirmacion?: string;
 
     public constructor(params: AttributesComprobanteElement) {
         super();
@@ -67,7 +101,7 @@ export class Comprobante extends XmlTags {
         this.Attributes = params;
         this.addAttributes('xmlns:cfdi', 'http://www.sat.gob.mx/cfd/4');
         this.addAttributes('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-        this.addAttributes('xsi:schemaLocation', 'http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd');
+        this.addAttributes('xsi:schemaLocation', 'http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/public internet/cfd/4/cfdv40.xsd');
     }
 
     get Elements(): Element[] {
@@ -182,206 +216,6 @@ export class Comprobante extends XmlTags {
         this.MetodoPago = params.MetodoPago;
         this.LugarExpedicion = params.LugarExpedicion;
         this.Confirmacion = params.Confirmacion;
-    }
-
-    get Confirmacion(): string | undefined {
-        return this._Confirmacion;
-    }
-
-    set Confirmacion(value: string | undefined) {
-        this._Confirmacion = value;
-    }
-
-    get LugarExpedicion(): CodigoPostalType {
-        return this._LugarExpedicion;
-    }
-
-    set LugarExpedicion(value: CodigoPostalType) {
-        this._LugarExpedicion = value;
-    }
-
-    get MetodoPago(): MetodoPagoEnum | undefined {
-        return this._MetodoPago;
-    }
-
-    set MetodoPago(value: MetodoPagoEnum | undefined) {
-        this._MetodoPago = value;
-    }
-
-    get Exportacion(): ExportacionEnum {
-        return this._Exportacion;
-    }
-
-    set Exportacion(value: ExportacionEnum) {
-        this._Exportacion = value;
-    }
-
-    get TipoDeComprobante(): TipoComprobanteEnum {
-        return this._TipoDeComprobante;
-    }
-
-    set TipoDeComprobante(value: TipoComprobanteEnum) {
-        this._TipoDeComprobante = value;
-    }
-
-    get Total(): string {
-        return this._Total;
-    }
-
-    set Total(value: string) {
-        this._Total = value;
-    }
-
-    get TipoCambio(): string | undefined {
-        return this._TipoCambio;
-    }
-
-    set TipoCambio(value: string | undefined) {
-        this._TipoCambio = value;
-    }
-
-    get Moneda(): MonedaEnum {
-        return this._Moneda;
-    }
-
-    set Moneda(value: MonedaEnum) {
-        this._Moneda = value;
-    }
-
-    get Descuento(): string | undefined {
-        return this._Descuento;
-    }
-
-    set Descuento(value: string | undefined) {
-        this._Descuento = value;
-    }
-
-    get SubTotal(): string {
-        return this._SubTotal;
-    }
-
-    set SubTotal(value: string) {
-        this._SubTotal = value;
-    }
-
-    get CondicionesDePago(): string | undefined {
-        return this._CondicionesDePago;
-    }
-
-    set CondicionesDePago(value: string | undefined) {
-        this._CondicionesDePago = value;
-    }
-
-    get Certificado(): string | undefined {
-        return this._Certificado;
-    }
-
-    set Certificado(value: string | undefined) {
-        this._Certificado = value;
-    }
-
-    get NoCertificado(): string | undefined {
-        return this._NoCertificado;
-    }
-
-    set NoCertificado(value: string | undefined) {
-        this._NoCertificado = value;
-    }
-
-    get FormaPago(): FormaPagoEnum | undefined {
-        return this._FormaPago;
-    }
-
-    set FormaPago(value: FormaPagoEnum | undefined) {
-        this._FormaPago = value;
-    }
-
-    get Sello(): string | undefined {
-        return this._Sello;
-    }
-
-    set Sello(value: string | undefined) {
-        this._Sello = value;
-    }
-
-    get Fecha(): string {
-        return this._Fecha;
-    }
-
-    set Fecha(value: string) {
-        this._Fecha = value;
-    }
-
-    get Folio(): string | undefined {
-        return this._Folio;
-    }
-
-    set Folio(value: string | undefined) {
-        this._Folio = value;
-    }
-
-    get Serie(): string | undefined {
-        return this._Serie;
-    }
-
-    set Serie(value: string | undefined) {
-        this._Serie = value;
-    }
-
-    get Version(): string {
-        return this._Version;
-    }
-
-    set Version(value: string) {
-        this._Version = value;
-    }
-
-    get Impuestos(): ComprobanteImpuestos | undefined {
-        return this._Impuestos;
-    }
-
-    set Impuestos(value: ComprobanteImpuestos | undefined) {
-        this._Impuestos = value;
-    }
-
-    get Conceptos(): ComprobanteConcepto[] {
-        return this._Conceptos;
-    }
-
-    set Conceptos(value: ComprobanteConcepto[]) {
-        this._Conceptos = value;
-    }
-
-    get Receptor(): ComprobanteReceptor {
-        return this._Receptor;
-    }
-
-    set Receptor(value: ComprobanteReceptor) {
-        this._Receptor = value;
-    }
-
-    get Emisor(): ComprobanteEmisor {
-        return this._Emisor;
-    }
-
-    set Emisor(value: ComprobanteEmisor) {
-        this._Emisor = value;
-    }
-
-    get CfdiRelacionados(): ComprobanteCfdiRelacionados[] {
-        return this._CfdiRelacionados;
-    }
-
-    set CfdiRelacionados(value: ComprobanteCfdiRelacionados[]) {
-        this._CfdiRelacionados = value;
-    }
-
-    get InformacionGlobal(): ComprobanteInformacionGlobal | undefined {
-        return this._InformacionGlobal;
-    }
-
-    set InformacionGlobal(value: ComprobanteInformacionGlobal | undefined) {
-        this._InformacionGlobal = value;
     }
 
     private generarCfdiRelacionados(params: AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement): ComprobanteCfdiRelacionados {
