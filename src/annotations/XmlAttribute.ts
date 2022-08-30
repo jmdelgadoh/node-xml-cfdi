@@ -5,12 +5,16 @@ export const XmlAttribute = (options: XMLAttributeParams = DEFAULT_ATTRIBUTE_PAR
     return (target: any, key: string) => {
         const {required, name} = options;
 
-        const attrName = name || key;
+        const metadataValue = name || key;
 
+        Reflect.defineMetadata(METADATA_KEY_NAME, metadataValue, target, key)
 
-        let t = Reflect.getMetadata('design:type', target, key);
-        console.log(`${key} type: ${t.name}`)
+        Reflect.defineMetadata(METADATA_KEY_REQUIRED, required, target, key)
     }
 }
 
-const DEFAULT_ATTRIBUTE_PARAMS: XMLAttributeParams = {required: false}
+export const DEFAULT_ATTRIBUTE_PARAMS: XMLAttributeParams = {required: false};
+
+export const METADATA_KEY_NAME = 'design:name';
+
+export const METADATA_KEY_REQUIRED = 'design:required';
