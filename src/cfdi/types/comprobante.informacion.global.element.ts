@@ -13,7 +13,7 @@ export type AttributesComprobanteInformacionGlobalElement = {
     /*
     * Atributo requerido para expresar el año al que corresponde la información del comprobante global.
     * */
-    Año: string;
+    Anio: string;
 }
 
 export type ComprobanteInformacionGlobalElement = {

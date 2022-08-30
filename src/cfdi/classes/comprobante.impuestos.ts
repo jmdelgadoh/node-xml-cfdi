@@ -12,10 +12,10 @@ import {
 import { Element } from 'xml-js';
 
 export class ComprobanteImpuestos {
-    private _Traslados: ComprobanteImpuestosTraslado[];
-    private _Retenciones: ComprobanteImpuestosRetencion[];
-    private _TotalImpuestosRetenidos?: string;
-    private _TotalImpuestosTrasladados?: string;
+    public Traslados: ComprobanteImpuestosTraslado[];
+    public Retenciones: ComprobanteImpuestosRetencion[];
+    public TotalImpuestosRetenidos?: string;
+    public TotalImpuestosTrasladados?: string;
 
     constructor(params: AttributesComprobanteImpuestosElement = {}) {
         this.Attributes = params;
@@ -77,37 +77,5 @@ export class ComprobanteImpuestos {
         }
 
         return elements;
-    }
-
-    get TotalImpuestosTrasladados(): string | undefined {
-        return this._TotalImpuestosTrasladados;
-    }
-
-    set TotalImpuestosTrasladados(value: string | undefined) {
-        this._TotalImpuestosTrasladados = value;
-    }
-
-    get TotalImpuestosRetenidos(): string | undefined {
-        return this._TotalImpuestosRetenidos;
-    }
-
-    set TotalImpuestosRetenidos(value: string | undefined) {
-        this._TotalImpuestosRetenidos = value;
-    }
-
-    get Traslados(): ComprobanteImpuestosTraslado[] {
-        return this._Traslados;
-    }
-
-    set Traslados(value: ComprobanteImpuestosTraslado[]) {
-        this._Traslados = value;
-    }
-
-    get Retenciones(): ComprobanteImpuestosRetencion[] {
-        return this._Retenciones;
-    }
-
-    set Retenciones(value: ComprobanteImpuestosRetencion[]) {
-        this._Retenciones = value;
     }
 }

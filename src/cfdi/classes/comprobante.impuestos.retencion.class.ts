@@ -2,10 +2,14 @@ import { ImpuestoEnum } from '../catalog/enums';
 import {
     AttributesComprobanteImpuestosRetencionesRetencionElement
 } from '../types';
+import { XmlAttribute } from '../../annotations';
 
 export class ComprobanteImpuestosRetencion {
-    private _Impuesto: ImpuestoEnum;
-    private _Importe: string;
+    @XmlAttribute({required: true})
+    public Impuesto: ImpuestoEnum;
+
+    @XmlAttribute({required: true})
+    public Importe: string;
 
     constructor(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
         this.Attributes = params;
@@ -21,21 +25,5 @@ export class ComprobanteImpuestosRetencion {
             Impuesto: this.Impuesto,
             Importe: this.Importe,
         }
-    }
-
-    get Importe(): string {
-        return this._Importe;
-    }
-
-    set Importe(value: string) {
-        this._Importe = value;
-    }
-
-    get Impuesto(): ImpuestoEnum {
-        return this._Impuesto;
-    }
-
-    set Impuesto(value: ImpuestoEnum) {
-        this._Impuesto = value;
     }
 }

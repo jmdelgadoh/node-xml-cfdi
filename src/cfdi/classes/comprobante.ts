@@ -22,12 +22,8 @@ import {
     ComprobanteInformacionGlobalElement,
     ComprobanteReceptorElement,
 } from '../types';
-import { XMLAttribute, XMLElement } from '../../annotations';
+import { XmlAttribute } from '../../annotations';
 
-@XMLElement({
-    namespace: 'cfdi',
-    name: 'Comprobante'
-})
 export class Comprobante extends XmlTags {
     public InformacionGlobal?: ComprobanteInformacionGlobal;
     public CfdiRelacionados: ComprobanteCfdiRelacionados[];
@@ -36,62 +32,63 @@ export class Comprobante extends XmlTags {
     public Conceptos: ComprobanteConcepto[];
     public Impuestos?: ComprobanteImpuestos;
     // public Complemento: ComprobanteComplemento;
-    // public Addenda: ComprobanteAddenda;
-    @XMLAttribute()
+    // public Addenda: ComprobanteAddenda{
+
+    @XmlAttribute({required: true})
     public Version: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public Serie?: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public Folio?: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public Fecha: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public Sello?: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public FormaPago?: FormaPagoEnum;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public NoCertificado?: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public Certificado?: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public CondicionesDePago?: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public SubTotal: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public Descuento?: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public Moneda: MonedaEnum;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public TipoCambio?: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public Total: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public TipoDeComprobante: TipoComprobanteEnum;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public Exportacion: ExportacionEnum;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public MetodoPago?: MetodoPagoEnum;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public LugarExpedicion: CodigoPostalType;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public Confirmacion?: string;
 
     public constructor(params: AttributesComprobanteElement) {
@@ -219,11 +216,11 @@ export class Comprobante extends XmlTags {
     }
 
     private generarCfdiRelacionados(params: AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement): ComprobanteCfdiRelacionados {
-        const cfdiRelacionados = new ComprobanteCfdiRelacionados(params);
         if (params.CfdiRelacionado?.length) {
-            cfdiRelacionados.CfdiRelacionado = this.generarCfdiRelacionado(params.CfdiRelacionado);
+            const cfdiRelacionados = this.generarCfdiRelacionado(params.CfdiRelacionado);
+            return new ComprobanteCfdiRelacionados(params, cfdiRelacionados);
         }
-        return cfdiRelacionados;
+        return new ComprobanteCfdiRelacionados(params);
     }
 
     private generarCfdiRelacionado(params: string[]): ComprobanteCfdiRelacionadosCfdiRelacionado[] {

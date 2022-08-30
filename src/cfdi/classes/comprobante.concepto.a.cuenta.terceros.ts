@@ -1,12 +1,20 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoACuentaTercerosElement } from '../types';
 import { sanitizeValues } from '../../utils';
+import { XmlAttribute } from '../../annotations';
 
 export class ComprobanteConceptoACuentaTerceros {
-    private _RfcACuentaTerceros: string;
-    private _NombreACuentaTerceros: string;
-    private _RegimenFiscalACuentaTerceros: RegimenFiscalEnum;
-    private _DomicilioFiscalACuentaTerceros: string;
+    @XmlAttribute({required: true})
+    public RfcACuentaTerceros: string;
+
+    @XmlAttribute({required: true})
+    public NombreACuentaTerceros: string;
+
+    @XmlAttribute({required: true})
+    public RegimenFiscalACuentaTerceros: RegimenFiscalEnum;
+
+    @XmlAttribute({required: true})
+    public DomicilioFiscalACuentaTerceros: string;
 
     constructor(params: AttributesComprobanteConceptoACuentaTercerosElement) {
         this.Attributes = params
@@ -26,38 +34,5 @@ export class ComprobanteConceptoACuentaTerceros {
             RegimenFiscalACuentaTerceros: this.RegimenFiscalACuentaTerceros,
             DomicilioFiscalACuentaTerceros: this.DomicilioFiscalACuentaTerceros,
         }
-    }
-
-
-    get DomicilioFiscalACuentaTerceros(): string {
-        return this._DomicilioFiscalACuentaTerceros;
-    }
-
-    set DomicilioFiscalACuentaTerceros(value: string) {
-        this._DomicilioFiscalACuentaTerceros = value;
-    }
-
-    get RegimenFiscalACuentaTerceros(): RegimenFiscalEnum {
-        return this._RegimenFiscalACuentaTerceros;
-    }
-
-    set RegimenFiscalACuentaTerceros(value: RegimenFiscalEnum) {
-        this._RegimenFiscalACuentaTerceros = value;
-    }
-
-    get NombreACuentaTerceros(): string {
-        return this._NombreACuentaTerceros;
-    }
-
-    set NombreACuentaTerceros(value: string) {
-        this._NombreACuentaTerceros = value;
-    }
-
-    get RfcACuentaTerceros(): string {
-        return this._RfcACuentaTerceros;
-    }
-
-    set RfcACuentaTerceros(value: string) {
-        this._RfcACuentaTerceros = value;
     }
 }

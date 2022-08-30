@@ -1,7 +1,9 @@
 import { AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement } from '../types';
+import { XmlAttribute } from '../../annotations';
 
 export class ComprobanteCfdiRelacionadosCfdiRelacionado {
-    private _UUID: string;
+    @XmlAttribute({required: true})
+    public UUID: string;
 
     constructor(params: AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement) {
         this.Attributes = params;
@@ -17,11 +19,4 @@ export class ComprobanteCfdiRelacionadosCfdiRelacionado {
         }
     }
 
-    get UUID(): string {
-        return this._UUID;
-    }
-
-    set UUID(value: string) {
-        this._UUID = value;
-    }
 }

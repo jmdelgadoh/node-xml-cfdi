@@ -1,9 +1,41 @@
 import 'reflect-metadata';
 import { DEFAULT_ATTRIBUTE_PARAMS, META_KEY } from '../utils';
 import { XmlAttribute } from './xml.attribute';
+import { Element, Attributes } from 'xml-js';
+import { XMLElementParams } from '../types';
 
-export class XmlElement {
-    private attributes: XmlAttribute[];
+export class XmlElement implements Element {
+    public type: string = 'element';
+    public name: string = '';
+    public attributes: Attributes = {};
+    public elements: Element[] = [];
+
+    constructor(private options: XMLElementParams) {
+    }
+
+    static getOrCreateIfNotExists(target: Function, options: XMLElementParams): XmlElement {
+        let element = this.getXMLElement(target);
+
+        if (!element) {
+
+            element = new XmlElement(options);
+            this.setXMLElement(target, element);
+        }
+
+        return element;
+    }
+
+    static annotate(target: Function, options: XMLElementParams): void {
+        const {namespace, name} = options;
+
+        const element = this.getOrCreateIfNotExists(target, options);
+
+        element.name = `${namespace}${namespace != '' ? ':' : ''}${name || target.name}`;
+
+        console.log(element)
+    }
+
+
     private children: any[]; // XMLChild
     private root?: string;
 
@@ -61,7 +93,7 @@ export class XmlElement {
         return processAsync(arg);
     }
 
-    static getXMLElement(target: any): XmlElement|undefined {
+    static getXMLElement(target: any): XmlElement | undefined {
 
         return Reflect.getMetadata(META_KEY, target);
     }
@@ -69,25 +101,6 @@ export class XmlElement {
     static setXMLElement(target: any, element: XmlElement): void {
 
         return Reflect.defineMetadata(META_KEY, element, target);
-    }
-
-    static getOrCreateIfNotExists(target: any): XmlElement {
-        let element = this.getXMLElement(target);
-
-        if (!element) {
-
-            element = new XmlElement();
-            this.setXMLElement(target, element);
-        }
-
-        return element;
-    }
-
-    static annotate(target: any, options: any): void {
-
-        let element = this.getOrCreateIfNotExists(target);
-
-        element.root = options.root;
     }
 
     private static processSchema(entity: any,
@@ -104,7 +117,7 @@ export class XmlElement {
         return entity;
     }
 
-    private static getRootAndEntity(args: any[]): {root: string, entity: any} {
+    private static getRootAndEntity(args: any[]): { root: string, entity: any } {
 
         let entity;
         let root;
@@ -129,10 +142,10 @@ export class XmlElement {
     }
 
     addAttribute(attribute: XmlAttribute): void {
-
-        if (!this.attributes) this.attributes = [];
-
-        this.attributes.push(attribute);
+        //
+        // if (!this.attributes) this.attributes = [];
+        //
+        // this.attributes.push(attribute);
     }
 
     addChild(child: any): void {
@@ -143,14 +156,8 @@ export class XmlElement {
     }
 
     private getSchema(entity: any, isAsync: boolean, schemaOptions: any): void {
-
         const object: any = {};
         const attrProperty = schemaOptions.attrContainerName || DEFAULT_ATTRIBUTE_PARAMS;
-
-        if (this.attributes) {
-            object[attrProperty] = {};
-            this.attributes.forEach(attr => attr.setSchema(object[attrProperty], entity));
-        }
 
         if (this.children) {
             this.children.forEach(child => child.setSchema(object, entity, isAsync, schemaOptions));

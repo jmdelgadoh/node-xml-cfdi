@@ -1,7 +1,9 @@
 import { AttributesComprobanteConceptoInformacionAduaneraElement } from '../types';
+import { XmlAttribute } from '../../annotations';
 
 export class ComprobanteConceptoInformacionAduanera {
-    private _NumeroPedimento: string;
+    @XmlAttribute({required: true})
+    public NumeroPedimento: string;
 
     constructor(params: AttributesComprobanteConceptoInformacionAduaneraElement) {
         this.Attributes = params
@@ -15,13 +17,5 @@ export class ComprobanteConceptoInformacionAduanera {
         return {
             NumeroPedimento: this.NumeroPedimento,
         }
-    }
-
-    get NumeroPedimento(): string {
-        return this._NumeroPedimento;
-    }
-
-    set NumeroPedimento(value: string) {
-        this._NumeroPedimento = value;
     }
 }

@@ -1,10 +1,16 @@
 import { MesesEnum, PeriodicidadEnum } from '../catalog/enums';
 import { AttributesComprobanteInformacionGlobalElement } from '../types';
+import { XmlAttribute } from '../../annotations';
 
 export class ComprobanteInformacionGlobal {
-    private _Periodicidad: PeriodicidadEnum;
-    private _Meses: MesesEnum;
-    private _Año: string;
+    @XmlAttribute({required: true})
+    public Periodicidad: PeriodicidadEnum;
+
+    @XmlAttribute({required: true})
+    public Meses: MesesEnum;
+
+    @XmlAttribute({required: true, name: 'Año'})
+    public Anio: string;
 
     constructor(params: AttributesComprobanteInformacionGlobalElement) {
         this.Attributes = params;
@@ -13,38 +19,14 @@ export class ComprobanteInformacionGlobal {
     set Attributes(params: AttributesComprobanteInformacionGlobalElement) {
         this.Periodicidad = params.Periodicidad;
         this.Meses = params.Meses;
-        this.Año = params.Año;
+        this.Anio = params.Anio;
     }
 
     get Attributes(): AttributesComprobanteInformacionGlobalElement {
         return {
             Periodicidad: this.Periodicidad,
             Meses: this.Meses,
-            Año: this.Año
+            Anio: this.Anio
         }
-    }
-
-    get Año(): string {
-        return this._Año;
-    }
-
-    set Año(value: string) {
-        this._Año = value;
-    }
-
-    get Meses(): MesesEnum {
-        return this._Meses;
-    }
-
-    set Meses(value: MesesEnum) {
-        this._Meses = value;
-    }
-
-    get Periodicidad(): PeriodicidadEnum {
-        return this._Periodicidad;
-    }
-
-    set Periodicidad(value: PeriodicidadEnum) {
-        this._Periodicidad = value;
     }
 }

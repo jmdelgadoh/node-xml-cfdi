@@ -5,15 +5,19 @@ import {
     ComprobanteCfdiRelacionadosCfdiRelacionadoElement
 } from '../types';
 import { Element } from 'xml-js';
+import { XmlAttribute } from '../../annotations';
 
 
 export class ComprobanteCfdiRelacionados {
-    private _CfdiRelacionado: ComprobanteCfdiRelacionadosCfdiRelacionado[]
-    private _TipoRelacion: TipoRelacionEnum;
+    @XmlAttribute({required: true})
+    public TipoRelacion: TipoRelacionEnum;
 
-    constructor(params: AttributesComprobanteCfdiRelacionadosElement) {
+    public CfdiRelacionado: ComprobanteCfdiRelacionadosCfdiRelacionado[];
+
+
+    constructor(params: AttributesComprobanteCfdiRelacionadosElement, relacionado: ComprobanteCfdiRelacionadosCfdiRelacionado[] = []) {
         this.Attributes = params
-        this.CfdiRelacionado = [];
+        this.CfdiRelacionado = relacionado;
     }
 
     set Attributes(params: AttributesComprobanteCfdiRelacionadosElement) {
@@ -38,21 +42,5 @@ export class ComprobanteCfdiRelacionados {
         }
 
         return elements;
-    }
-
-    get TipoRelacion(): TipoRelacionEnum {
-        return this._TipoRelacion;
-    }
-
-    set TipoRelacion(value: TipoRelacionEnum) {
-        this._TipoRelacion = value;
-    }
-
-    get CfdiRelacionado(): ComprobanteCfdiRelacionadosCfdiRelacionado[] {
-        return this._CfdiRelacionado;
-    }
-
-    set CfdiRelacionado(value: ComprobanteCfdiRelacionadosCfdiRelacionado[]) {
-        this._CfdiRelacionado = value;
     }
 }

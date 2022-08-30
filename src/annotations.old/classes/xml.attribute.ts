@@ -9,7 +9,7 @@ export class XmlAttribute {
                     options: any = {},
                     descriptor?: TypedPropertyDescriptor<any>): void {
 
-        const element = XmlElement.getOrCreateIfNotExists(target);
+        // const element = XmlElement.getOrCreateIfNotExists(target);
         const fullOptions = Object.assign({
             getter(entity: any): any {
                 if (descriptor && descriptor.get) {
@@ -21,7 +21,7 @@ export class XmlAttribute {
 
         fullOptions.name = options.name || key;
 
-        element.addAttribute(new XmlAttribute(fullOptions as any));
+        // element.addAttribute(new XmlAttribute(fullOptions as any));
     }
 
     static createAttribute(options: any): XmlAttribute {

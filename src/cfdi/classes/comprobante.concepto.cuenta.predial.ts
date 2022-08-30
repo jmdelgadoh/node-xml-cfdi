@@ -1,7 +1,9 @@
 import { AttributesComprobanteConceptoCuentaPredialElement } from '../types';
+import { XmlAttribute } from '../../annotations';
 
 export class ComprobanteConceptoCuentaPredial {
-    private _Numero: string;
+    @XmlAttribute({required: true})
+    public Numero: string;
 
     constructor(params: AttributesComprobanteConceptoCuentaPredialElement) {
         this.Attributes = params
@@ -15,13 +17,5 @@ export class ComprobanteConceptoCuentaPredial {
         return {
             Numero: this.Numero,
         }
-    }
-
-    get Numero(): string {
-        return this._Numero;
-    }
-
-    set Numero(value: string) {
-        this._Numero = value;
     }
 }

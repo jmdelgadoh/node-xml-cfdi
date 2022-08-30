@@ -1,23 +1,19 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteEmisorElement } from '../types';
 import { sanitizeValues } from '../../utils';
-import { XMLAttribute, XMLElement } from '../../annotations';
+import { XmlAttribute } from '../../annotations';
 
-@XMLElement({
-    namespace: 'cfdi',
-    name: 'Emisor'
-})
 export class ComprobanteEmisor {
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public Rfc: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public Nombre: string;
 
-    @XMLAttribute()
+    @XmlAttribute({required: true})
     public RegimenFiscal: RegimenFiscalEnum;
 
-    @XMLAttribute()
+    @XmlAttribute({required: false})
     public FacAtrAdquirente?: string;
 
     constructor(params: AttributesComprobanteEmisorElement) {
