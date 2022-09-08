@@ -1,6 +1,6 @@
-import { Element } from 'xml-js';
-import { CodigoPostalType } from '../catalog/types';
-import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../catalog/enums';
+import {Element} from 'xml-js';
+import {CodigoPostalType} from '../catalog/types';
+import {ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum} from '../catalog/enums';
 import {
     ComprobanteCfdiRelacionados,
     ComprobanteCfdiRelacionadosCfdiRelacionado,
@@ -22,8 +22,13 @@ import {
     ComprobanteInformacionGlobalElement,
     ComprobanteReceptorElement,
 } from '../types';
-import { XmlAttribute } from '../../annotations';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "..";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Comprobante'
+})
 export class Comprobante extends XmlTags {
     public InformacionGlobal?: ComprobanteInformacionGlobal;
     public CfdiRelacionados: ComprobanteCfdiRelacionados[];
@@ -34,61 +39,61 @@ export class Comprobante extends XmlTags {
     // public Complemento: ComprobanteComplemento;
     // public Addenda: ComprobanteAddenda{
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Version: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Serie?: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Folio?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Fecha: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Sello?: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public FormaPago?: FormaPagoEnum;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public NoCertificado?: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Certificado?: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public CondicionesDePago?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public SubTotal: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Descuento?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Moneda: MonedaEnum;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public TipoCambio?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Total: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public TipoDeComprobante: TipoComprobanteEnum;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Exportacion: ExportacionEnum;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public MetodoPago?: MetodoPagoEnum;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public LugarExpedicion: CodigoPostalType;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Confirmacion?: string;
 
     public constructor(params: AttributesComprobanteElement) {

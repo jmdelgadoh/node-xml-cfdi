@@ -1,23 +1,26 @@
-import { ImpuestoEnum, TipoFactorEnum } from '../catalog/enums';
-import {
-    AttributesComprobanteImpuestosTrasladosTrasladoElement
-} from '../types';
-import { XmlAttribute } from '../../annotations';
+import {ImpuestoEnum, TipoFactorEnum} from '../catalog/enums';
+import {AttributesComprobanteImpuestosTrasladosTrasladoElement} from '../types';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Traslado'
+})
 export class ComprobanteImpuestosTraslado {
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Base: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Impuesto: ImpuestoEnum;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public TipoFactor: TipoFactorEnum;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public TasaOCuota?: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Importe?: string;
 
     constructor(params: AttributesComprobanteImpuestosTrasladosTrasladoElement) {

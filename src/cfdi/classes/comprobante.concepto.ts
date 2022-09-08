@@ -1,14 +1,14 @@
 import {
     ComprobanteConceptoACuentaTerceros,
+    ComprobanteConceptoComplementoConcepto,
     ComprobanteConceptoCuentaPredial,
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoInformacionAduanera,
     ComprobanteConceptoParte,
-    ComprobanteConceptoComplementoConcepto,
     XmlTags
 } from './index';
-import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
-import { ObjetoImpEnum } from '../catalog/enums';
+import {ClaveProdServType, ClaveUnidadType} from '../catalog/types';
+import {ObjetoImpEnum} from '../catalog/enums';
 import {
     AttributesComprobanteConceptoElement,
     ComprobanteConceptoACuentaTercerosElement,
@@ -17,46 +17,51 @@ import {
     ComprobanteConceptoInformacionAduaneraElement,
     ComprobanteConceptoParteElement,
 } from '../types';
-import { sanitizeValues } from '../../utils';
-import { Element } from 'xml-js';
-import { XmlAttribute } from '../../annotations';
+import {sanitizeValues} from '../../utils';
+import {Element} from 'xml-js';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Concepto'
+})
 export class ComprobanteConcepto extends XmlTags {
     public Impuestos?: ComprobanteConceptoImpuestos;
     public ACuentaTerceros?: ComprobanteConceptoACuentaTerceros;
     public InformacionAduanera: ComprobanteConceptoInformacionAduanera[];
     public CuentaPredial: ComprobanteConceptoCuentaPredial[];
-    public ComplementoConcepto?: ComprobanteConceptoComplementoConcepto;
+    // public ComplementoConcepto?: ComprobanteConceptoComplementoConcepto;
     public Parte: ComprobanteConceptoParte[];
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public ClaveProdServ: ClaveProdServType;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public NoIdentificacion?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Cantidad: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public ClaveUnidad: ClaveUnidadType;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Unidad?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Descripcion: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public ValorUnitario: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Importe: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Descuento?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public ObjetoImp: ObjetoImpEnum;
 
     constructor(params: AttributesComprobanteConceptoElement) {

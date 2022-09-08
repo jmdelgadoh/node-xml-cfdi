@@ -1,8 +1,5 @@
-import { XmlElement } from './xml.element';
-
 export class XmlAttribute {
-
-    private name: string;
+    public name: string;
 
     static annotate(target: any,
                     key: string,

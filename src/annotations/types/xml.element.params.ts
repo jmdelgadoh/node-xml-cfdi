@@ -1,4 +1,3 @@
-export type XMLElementParams = {
-    namespace?: string,
-    name?: string
-}
+import {XmlParams} from "./xml.params";
+
+export type XMLElementParams = {} & XmlParams

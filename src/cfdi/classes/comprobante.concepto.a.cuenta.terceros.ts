@@ -1,19 +1,24 @@
-import { RegimenFiscalEnum } from '../catalog/enums';
-import { AttributesComprobanteConceptoACuentaTercerosElement } from '../types';
-import { sanitizeValues } from '../../utils';
-import { XmlAttribute } from '../../annotations';
+import {RegimenFiscalEnum} from '../catalog/enums';
+import {AttributesComprobanteConceptoACuentaTercerosElement} from '../types';
+import {sanitizeValues} from '../../utils';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'ACuentaTerceros'
+})
 export class ComprobanteConceptoACuentaTerceros {
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public RfcACuentaTerceros: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public NombreACuentaTerceros: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public RegimenFiscalACuentaTerceros: RegimenFiscalEnum;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public DomicilioFiscalACuentaTerceros: string;
 
     constructor(params: AttributesComprobanteConceptoACuentaTercerosElement) {

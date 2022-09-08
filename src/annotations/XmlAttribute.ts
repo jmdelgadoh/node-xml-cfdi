@@ -1,20 +1,16 @@
 import 'reflect-metadata';
-import { XMLAttributeParams } from './types';
+import {XMLAttributeParams} from './types';
+import {XmlAttributeBase} from "./classes";
 
 export const XmlAttribute = (options: XMLAttributeParams = DEFAULT_ATTRIBUTE_PARAMS) => {
     return (target: any, key: string) => {
-        const {required, name} = options;
-
-        const metadataValue = name || key;
-
-        Reflect.defineMetadata(METADATA_KEY_NAME, metadataValue, target, key)
-
-        Reflect.defineMetadata(METADATA_KEY_REQUIRED, required, target, key)
+        return XmlAttributeBase.annotate(target, key, options)
     }
 }
 
-export const DEFAULT_ATTRIBUTE_PARAMS: XMLAttributeParams = {required: false};
+const DEFAULT_ATTRIBUTE_PARAMS: XMLAttributeParams = {
+    name: '',
+    namespace: ''
+};
 
-export const METADATA_KEY_NAME = 'design:name';
 
-export const METADATA_KEY_REQUIRED = 'design:required';

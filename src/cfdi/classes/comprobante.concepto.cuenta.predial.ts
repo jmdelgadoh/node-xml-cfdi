@@ -1,8 +1,13 @@
-import { AttributesComprobanteConceptoCuentaPredialElement } from '../types';
-import { XmlAttribute } from '../../annotations';
+import {AttributesComprobanteConceptoCuentaPredialElement} from '../types';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'CuentaPredial'
+})
 export class ComprobanteConceptoCuentaPredial {
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Numero: string;
 
     constructor(params: AttributesComprobanteConceptoCuentaPredialElement) {

@@ -1,15 +1,20 @@
-import { MesesEnum, PeriodicidadEnum } from '../catalog/enums';
-import { AttributesComprobanteInformacionGlobalElement } from '../types';
-import { XmlAttribute } from '../../annotations';
+import {MesesEnum, PeriodicidadEnum} from '../catalog/enums';
+import {AttributesComprobanteInformacionGlobalElement} from '../types';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'InformacionGlobal'
+})
 export class ComprobanteInformacionGlobal {
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Periodicidad: PeriodicidadEnum;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Meses: MesesEnum;
 
-    @XmlAttribute({required: true, name: 'Año'})
+    @XmlAttribute({name: 'Año'})
     public Anio: string;
 
     constructor(params: AttributesComprobanteInformacionGlobalElement) {

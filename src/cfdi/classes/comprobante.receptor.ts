@@ -1,29 +1,34 @@
-import { PaisEnum, RegimenFiscalEnum, UsoCfdiEnum } from '../catalog/enums';
-import { CodigoPostalType } from '../catalog/types';
-import { AttributesComprobanteReceptorElement } from '../types';
-import { sanitizeValues } from '../../utils';
-import { XmlAttribute } from '../../annotations';
+import {PaisEnum, RegimenFiscalEnum, UsoCfdiEnum} from '../catalog/enums';
+import {CodigoPostalType} from '../catalog/types';
+import {AttributesComprobanteReceptorElement} from '../types';
+import {sanitizeValues} from '../../utils';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Receptor'
+})
 export class ComprobanteReceptor {
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Rfc: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Nombre: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public DomicilioFiscalReceptor: CodigoPostalType;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public ResidenciaFiscal?: PaisEnum;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public NumRegIdTrib?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public RegimenFiscalReceptor: RegimenFiscalEnum;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public UsoCFDI: UsoCfdiEnum;
 
     constructor(params: AttributesComprobanteReceptorElement) {

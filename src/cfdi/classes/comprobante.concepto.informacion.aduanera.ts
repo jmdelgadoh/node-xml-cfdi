@@ -1,8 +1,13 @@
-import { AttributesComprobanteConceptoInformacionAduaneraElement } from '../types';
-import { XmlAttribute } from '../../annotations';
+import {AttributesComprobanteConceptoInformacionAduaneraElement} from '../types';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'InformacionAduanera'
+})
 export class ComprobanteConceptoInformacionAduanera {
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public NumeroPedimento: string;
 
     constructor(params: AttributesComprobanteConceptoInformacionAduaneraElement) {

@@ -1,4 +1,3 @@
-export type XMLAttributeParams = {
-    name?: string,
-    required?: boolean;
-}
+import {XmlParams} from "./xml.params";
+
+export type XMLAttributeParams = {} & XmlParams

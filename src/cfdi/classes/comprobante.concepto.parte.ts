@@ -1,35 +1,37 @@
-import { ComprobanteConceptoParteInformacionAduanera } from './index';
-import { ClaveProdServType } from '../catalog/types';
-import {
-    AttributesComprobanteConceptoParteElement,
-    ComprobanteConceptoInformacionAduaneraElement
-} from '../types';
-import { sanitizeValues } from '../../utils';
-import { Element } from 'xml-js';
-import { XmlAttribute } from '../../annotations';
+import {ComprobanteConceptoParteInformacionAduanera} from './index';
+import {ClaveProdServType} from '../catalog/types';
+import {AttributesComprobanteConceptoParteElement, ComprobanteConceptoInformacionAduaneraElement} from '../types';
+import {sanitizeValues} from '../../utils';
+import {Element} from 'xml-js';
+import {XmlAttribute, XmlElement} from '../../annotations';
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Parte'
+})
 export class ComprobanteConceptoParte {
     public InformacionAduanera: ComprobanteConceptoParteInformacionAduanera[];
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public ClaveProdServ: ClaveProdServType;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public NoIdentificacion?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Cantidad: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Unidad?: string;
 
-    @XmlAttribute({required: true})
+    @XmlAttribute()
     public Descripcion: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public ValorUnitario?: string;
 
-    @XmlAttribute({required: false})
+    @XmlAttribute()
     public Importe?: string;
 
     constructor(params: AttributesComprobanteConceptoParteElement) {

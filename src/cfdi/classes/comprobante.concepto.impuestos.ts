@@ -6,7 +6,13 @@ import {
     ComprobanteConceptoImpuestosTrasladosElement,
     ComprobanteImpuestosTrasladosTrasladoElement
 } from '../types';
+import {XmlElement} from "../../annotations";
+import {CFDI_NAME_SPACE} from "../index";
 
+@XmlElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Impuestos'
+})
 export class ComprobanteConceptoImpuestos {
     public Traslados: ComprobanteConceptoImpuestosTraslado[];
     public Retenciones: ComprobanteConceptoImpuestosRetencion[];

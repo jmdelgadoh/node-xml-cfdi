@@ -1,6 +1,7 @@
 import {
     Comprobante,
-    ComprobanteCfdiRelacionados, ComprobanteCfdiRelacionadosCfdiRelacionado,
+    ComprobanteCfdiRelacionados,
+    ComprobanteCfdiRelacionadosCfdiRelacionado,
     ComprobanteConcepto,
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoImpuestosTraslado,
@@ -16,11 +17,9 @@ import {
     TipoFactorEnum,
     TipoRelacionEnum,
 } from '../../src';
-import { emisor } from '../utils/emisor';
-import { service } from '../utils/service';
-import { receptor } from '../utils/receptor';
-import { printResult } from '../utils/print.result';
-import { XmlElement } from '../../src/annotations.old/classes/xml.element';
+import {emisor} from '../utils/emisor';
+import {service} from '../utils/service';
+import {receptor} from '../utils/receptor';
 
 export const testComprobanteEgresos = async () => {
     console.info(`=== === === === === Comprobante de tipo egreso === === === === ===
@@ -111,7 +110,7 @@ export const testComprobanteEgresos = async () => {
 
     const xmlSellado = await service.getXMLSellado(comprobante);
 
-    console.log(XmlElement.serialize(comprobante))
+    console.log(JSON.stringify(comprobante, null, 3))
 
     // await printResult(xmlSellado);
 }
