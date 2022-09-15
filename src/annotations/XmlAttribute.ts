@@ -1,16 +1,10 @@
 import 'reflect-metadata';
-import {XMLAttributeParams} from './types';
-import {XmlAttributeBase} from "./classes";
+import {XmlAttributeOptions} from './types';
+import {XmlAttributeModel} from "./classes";
 
-export const XmlAttribute = (options: XMLAttributeParams = DEFAULT_ATTRIBUTE_PARAMS) => {
-    return (target: any, key: string) => {
-        return XmlAttributeBase.annotate(target, key, options)
+export const XmlAttribute = (options: XmlAttributeOptions = {}) => {
+    return (target: any, key: string, descriptor?: TypedPropertyDescriptor<any>) => {
+        return XmlAttributeModel.annotate(target, key, options)
     }
 }
-
-const DEFAULT_ATTRIBUTE_PARAMS: XMLAttributeParams = {
-    name: '',
-    namespace: ''
-};
-
 

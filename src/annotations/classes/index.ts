@@ -1,2 +1,2 @@
-export * from './XmlElementBase'
-export * from './XmlAttributeBase'
+export * from './XmlElementModel'
+export * from './XmlAttributeModel'

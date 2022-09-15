@@ -1,3 +1,4 @@
-export * from './xml.params';
-export * from './xml.attribute.params';
-export * from './xml.element.params';
+export * from './xml.base.options';
+export * from './xml.attribute.options';
+export * from './xml.element.options';
+export * from './xml.child.options';

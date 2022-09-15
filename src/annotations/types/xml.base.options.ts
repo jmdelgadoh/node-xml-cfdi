@@ -1,4 +1,4 @@
-export type XmlParams = {
+export type XmlBaseOptions = {
     namespace?: string,
     name?: string,
 }

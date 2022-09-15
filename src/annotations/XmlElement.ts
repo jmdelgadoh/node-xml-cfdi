@@ -1,14 +1,9 @@
 import 'reflect-metadata';
-import {XMLElementParams} from './types';
-import {XmlElementBase} from "./classes";
+import {XmlElementOptions} from './types';
+import {XmlElementModel} from "./classes";
 
-export const XmlElement = (options: XMLElementParams = DEFAULT_ATTRIBUTE_PARAMS) => {
-    return (target: any) => XmlElementBase.annotate(target, options)
+export const XmlElement = (options: XmlElementOptions = {}) => {
+    return (target: any) => XmlElementModel.annotate(target, options)
 }
-
-const DEFAULT_ATTRIBUTE_PARAMS: XMLElementParams = {
-    name: '',
-    namespace: ''
-};
 
 
