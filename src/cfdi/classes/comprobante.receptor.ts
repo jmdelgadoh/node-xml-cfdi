@@ -2,35 +2,31 @@ import {PaisEnum, RegimenFiscalEnum, UsoCfdiEnum} from '../catalog/enums';
 import {CodigoPostalType} from '../catalog/types';
 import {AttributesComprobanteReceptorElement} from '../types';
 import {sanitizeValues} from '../../utils';
-import {XmlAttribute} from '../../annotations';
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
 
 export class ComprobanteReceptor {
-    @XmlAttribute()
+    @XMLAttribute({ name: 'Rfc' })
     public Rfc: string;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'Nombre' })
     public Nombre: string;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'DomicilioFiscalReceptor' })
     public DomicilioFiscalReceptor: CodigoPostalType;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'ResidenciaFiscal' })
     public ResidenciaFiscal?: PaisEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'NumRegIdTrib' })
     public NumRegIdTrib?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'RegimenFiscalReceptor' })
     public RegimenFiscalReceptor: RegimenFiscalEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'UsoCFDI' })
     public UsoCFDI: UsoCfdiEnum;
 
     constructor(params: AttributesComprobanteReceptorElement) {
-        this.Attributes = params;
-    }
-
-    set Attributes(params: AttributesComprobanteReceptorElement) {
         this.Rfc = sanitizeValues(params.Rfc).toUpperCase();
         this.Nombre = sanitizeValues(params.Nombre);
         this.DomicilioFiscalReceptor = params.DomicilioFiscalReceptor;
@@ -38,17 +34,5 @@ export class ComprobanteReceptor {
         this.NumRegIdTrib = params.NumRegIdTrib;
         this.RegimenFiscalReceptor = params.RegimenFiscalReceptor;
         this.UsoCFDI = params.UsoCFDI;
-    }
-
-    get Attributes(): AttributesComprobanteReceptorElement {
-        return {
-            Rfc: this.Rfc,
-            Nombre: this.Nombre,
-            DomicilioFiscalReceptor: this.DomicilioFiscalReceptor,
-            ResidenciaFiscal: this.ResidenciaFiscal,
-            NumRegIdTrib: this.NumRegIdTrib,
-            RegimenFiscalReceptor: this.RegimenFiscalReceptor,
-            UsoCFDI: this.UsoCFDI,
-        }
     }
 }

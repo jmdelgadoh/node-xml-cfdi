@@ -1,90 +1,81 @@
 import {
     ComprobanteConceptoACuentaTerceros,
-    ComprobanteConceptoComplementoConcepto,
     ComprobanteConceptoCuentaPredial,
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoInformacionAduanera,
-    ComprobanteConceptoParte,
-    XmlTags
+    ComprobanteConceptoParte
 } from './index';
-import {ClaveProdServType, ClaveUnidadType} from '../catalog/types';
-import {ObjetoImpEnum} from '../catalog/enums';
-import {
-    AttributesComprobanteConceptoElement,
-    ComprobanteConceptoACuentaTercerosElement,
-    ComprobanteConceptoCuentaPredialElement,
-    ComprobanteConceptoImpuestosElement,
-    ComprobanteConceptoInformacionAduaneraElement,
-    ComprobanteConceptoParteElement,
-} from '../types';
-import {sanitizeValues} from '../../utils';
-import {Element} from 'xml-js';
-import {XmlAttribute} from '../../annotations';
+import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
+import { ObjetoImpEnum } from '../catalog/enums';
+import { AttributesComprobanteConceptoElement, } from '../types';
+import { sanitizeValues } from '../../utils';
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLChild } from "../../xml-decorator/annotations/XMLChild";
+import { CFDI_NAME_SPACE } from "../index";
 
-export class ComprobanteConcepto extends XmlTags {
+export class ComprobanteConcepto {
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'Impuestos'
+    })
     public Impuestos?: ComprobanteConceptoImpuestos;
+
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'ACuentaTerceros'
+    })
     public ACuentaTerceros?: ComprobanteConceptoACuentaTerceros;
+
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'InformacionAduanera'
+    })
     public InformacionAduanera: ComprobanteConceptoInformacionAduanera[];
+
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'CuentaPredial'
+    })
     public CuentaPredial: ComprobanteConceptoCuentaPredial[];
+
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'Parte'
+    })
     // public ComplementoConcepto?: ComprobanteConceptoComplementoConcepto;
     public Parte: ComprobanteConceptoParte[];
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'ClaveProdServ'})
     public ClaveProdServ: ClaveProdServType;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'NoIdentificacion'})
     public NoIdentificacion?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Cantidad'})
     public Cantidad: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'ClaveUnidad'})
     public ClaveUnidad: ClaveUnidadType;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Unidad'})
     public Unidad?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Descripcion'})
     public Descripcion: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'ValorUnitario'})
     public ValorUnitario: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Importe'})
     public Importe: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Descuento'})
     public Descuento?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'ObjetoImp'})
     public ObjetoImp: ObjetoImpEnum;
 
     constructor(params: AttributesComprobanteConceptoElement) {
-        super();
-        this.Attributes = params;
-        this.Parte = [];
-        this.CuentaPredial = [];
-        this.InformacionAduanera = [];
-        this.Impuestos = new ComprobanteConceptoImpuestos();
-    }
-
-    get Attributes(): AttributesComprobanteConceptoElement {
-        return {
-            ...this.getAttributes(),
-            ClaveProdServ: this.ClaveProdServ,
-            NoIdentificacion: this.NoIdentificacion,
-            Cantidad: this.Cantidad,
-            ClaveUnidad: this.ClaveUnidad,
-            Unidad: this.Unidad,
-            Descripcion: this.Descripcion,
-            ValorUnitario: this.ValorUnitario,
-            Importe: this.Importe,
-            Descuento: this.Descuento,
-            ObjetoImp: this.ObjetoImp,
-        }
-    }
-
-    set Attributes(params: AttributesComprobanteConceptoElement) {
         this.ClaveProdServ = params.ClaveProdServ;
         this.NoIdentificacion = params.NoIdentificacion;
         this.Cantidad = params.Cantidad;
@@ -95,52 +86,9 @@ export class ComprobanteConcepto extends XmlTags {
         this.Importe = params.Importe;
         this.Descuento = params.Descuento;
         this.ObjetoImp = params.ObjetoImp;
-    }
-
-    get Elements(): Element[] {
-        const elements: Element[] = [];
-
-        if (this?.Impuestos) {
-            elements.push({
-                type: 'element',
-                name: 'cfdi:Impuestos',
-                elements: this.Impuestos.Elements
-            } as ComprobanteConceptoImpuestosElement);
-        }
-
-        if (this?.ACuentaTerceros) {
-            elements?.push({
-                type: 'element',
-                name: 'cfdi:ACuentaTerceros',
-                attributes: this.ACuentaTerceros.Attributes
-            } as ComprobanteConceptoACuentaTercerosElement)
-        }
-
-        for (const informacionAduaneraValue of this.InformacionAduanera) {
-            elements?.push({
-                type: 'element',
-                name: 'cfdi:InformacionAduanera',
-                attributes: informacionAduaneraValue.Attributes
-            } as ComprobanteConceptoInformacionAduaneraElement)
-        }
-
-        for (const cuentaPredialValue of this.CuentaPredial) {
-            elements?.push({
-                type: 'element',
-                name: 'cfdi:CuentaPredial',
-                attributes: cuentaPredialValue.Attributes
-            } as ComprobanteConceptoCuentaPredialElement)
-        }
-
-        for (const parteValue of this.Parte) {
-            elements.push({
-                type: 'element',
-                name: 'cfdi:Parte',
-                attributes: parteValue.Attributes,
-                elements: parteValue.Elements
-            } as ComprobanteConceptoParteElement)
-        }
-
-        return elements;
+        this.Parte = [];
+        this.CuentaPredial = [];
+        this.InformacionAduanera = [];
+        this.Impuestos = new ComprobanteConceptoImpuestos();
     }
 }

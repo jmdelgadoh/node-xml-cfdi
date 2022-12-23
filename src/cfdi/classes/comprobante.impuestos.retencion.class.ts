@@ -1,32 +1,16 @@
-import {ImpuestoEnum} from '../catalog/enums';
-import {AttributesComprobanteImpuestosRetencionesRetencionElement} from '../types';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import { ImpuestoEnum } from '../catalog/enums';
+import { AttributesComprobanteImpuestosRetencionesRetencionElement } from '../types';
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'Retencion'
-})
 export class ComprobanteImpuestosRetencion {
-    @XmlAttribute()
+    @XMLAttribute({name: 'Impuesto'})
     public Impuesto: ImpuestoEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Importe'})
     public Importe: string;
 
     constructor(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
-        this.Attributes = params;
-    }
-
-    set Attributes(params: AttributesComprobanteImpuestosRetencionesRetencionElement) {
         this.Importe = params.Importe;
         this.Impuesto = params.Impuesto;
-    }
-
-    get Attributes(): AttributesComprobanteImpuestosRetencionesRetencionElement {
-        return {
-            Impuesto: this.Impuesto,
-            Importe: this.Importe,
-        }
     }
 }

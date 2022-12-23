@@ -17,7 +17,7 @@ export class XmlElementModel {
         element.name = `${namespace}${namespace != '' ? ':' : ''}${name}`;
     }
 
-    static getXMLElement(target: any): XmlElementModel | undefined {
+    public static getXMLElement(target: any): XmlElementModel | undefined {
         return Reflect.getMetadata(META_KEY, target)
     }
 
@@ -53,7 +53,7 @@ export class XmlElementModel {
 
         const schema = this.getSchema(element);
 
-        console.log(JSON.stringify(schema, null, 3));
+       // console.log(JSON.stringify(schema, null, 3));
 
 
         // const {root, entity} = this.getRootAndEntity(args);
@@ -64,15 +64,15 @@ export class XmlElementModel {
         return ''; // js2xmlparser.parse(root, schema, PARSER_OPTIONS)
     }
 
-    private getSchema(entity: any): any {
+    private static getSchema(entity: any): any {
         const object: any = {};
 
         const attrProperty = '@';
 
-        if (this.attributes) {
-            object[attrProperty] = {};
-            this.attributes.forEach(attr => attr.setSchema(object[attrProperty], entity));
-        }
+        // if (this.attributes) {
+        //     object[attrProperty] = {};
+        //     this.attributes.forEach(attr => attr.setSchema(object[attrProperty], entity));
+        // }
 
         // if (this.children) {
         //     this.children.forEach(child => child.setSchema(object, entity, isAsync, schemaOptions));

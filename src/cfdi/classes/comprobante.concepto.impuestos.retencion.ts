@@ -1,42 +1,28 @@
 import {ImpuestoEnum, TipoFactorEnum} from '../catalog/enums';
 import {AttributesComprobanteConceptoImpuestosRetencionesRetencionElement} from '../types';
-import {XmlAttribute} from '../../annotations';
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
 
 export class ComprobanteConceptoImpuestosRetencion {
-    @XmlAttribute()
+    @XMLAttribute({ name: 'Base' })
     public Base: string;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'Impuesto' })
     public Impuesto: ImpuestoEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'TipoFactor' })
     public TipoFactor: TipoFactorEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'TasaOCuota' })
     public TasaOCuota: string;
 
-    @XmlAttribute()
+    @XMLAttribute({ name: 'Importe' })
     public Importe: string;
 
     constructor(params: AttributesComprobanteConceptoImpuestosRetencionesRetencionElement) {
-        this.Attributes = params
-    }
-
-    set Attributes(params: AttributesComprobanteConceptoImpuestosRetencionesRetencionElement) {
         this.Base = params.Base;
         this.Impuesto = params.Impuesto;
         this.TipoFactor = params.TipoFactor;
         this.TasaOCuota = params.TasaOCuota;
         this.Importe = params.Importe;
-    }
-
-    get Attributes(): AttributesComprobanteConceptoImpuestosRetencionesRetencionElement {
-        return {
-            Base: this.Base,
-            Impuesto: this.Impuesto,
-            TipoFactor: this.TipoFactor,
-            TasaOCuota: this.TasaOCuota,
-            Importe: this.Importe
-        }
     }
 }

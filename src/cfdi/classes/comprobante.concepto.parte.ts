@@ -1,40 +1,41 @@
-import {ComprobanteConceptoParteInformacionAduanera} from './index';
-import {ClaveProdServType} from '../catalog/types';
-import {AttributesComprobanteConceptoParteElement, ComprobanteConceptoInformacionAduaneraElement} from '../types';
-import {sanitizeValues} from '../../utils';
-import {Element} from 'xml-js';
-import {XmlAttribute} from '../../annotations';
+import { ComprobanteConceptoParteInformacionAduanera } from './index';
+import { ClaveProdServType } from '../catalog/types';
+import { AttributesComprobanteConceptoParteElement, ComprobanteConceptoInformacionAduaneraElement } from '../types';
+import { sanitizeValues } from '../../utils';
+import { Element } from 'xml-js';
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLChild } from "../../xml-decorator/annotations/XMLChild";
+import { CFDI_NAME_SPACE } from "../index";
 
 export class ComprobanteConceptoParte {
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'InformacionAduanera'
+    })
     public InformacionAduanera: ComprobanteConceptoParteInformacionAduanera[];
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'ClaveProdServ'})
     public ClaveProdServ: ClaveProdServType;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'NoIdentificacion'})
     public NoIdentificacion?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Cantidad'})
     public Cantidad: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Unidad'})
     public Unidad?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Descripcion'})
     public Descripcion: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'ValorUnitario'})
     public ValorUnitario?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Importe'})
     public Importe?: string;
 
     constructor(params: AttributesComprobanteConceptoParteElement) {
-        this.Attributes = params;
-        this.InformacionAduanera = [];
-    }
-
-    set Attributes(params: AttributesComprobanteConceptoParteElement) {
         this.ClaveProdServ = params.ClaveProdServ;
         this.NoIdentificacion = params.NoIdentificacion;
         this.Cantidad = params.Cantidad;
@@ -42,31 +43,6 @@ export class ComprobanteConceptoParte {
         this.Descripcion = sanitizeValues(params.Descripcion);
         this.ValorUnitario = params.ValorUnitario;
         this.Importe = params.Importe;
-    }
-
-    get Attributes(): AttributesComprobanteConceptoParteElement {
-        return {
-            ClaveProdServ: this.ClaveProdServ,
-            NoIdentificacion: this.NoIdentificacion,
-            Cantidad: this.Cantidad,
-            Unidad: this.Unidad,
-            Descripcion: this.Descripcion,
-            ValorUnitario: this.ValorUnitario,
-            Importe: this.Importe,
-        }
-    }
-
-    get Elements(): Element[] {
-        const elements: Element[] = [];
-
-        for (const informacionAduaneraValue of this.InformacionAduanera) {
-            elements?.push({
-                type: 'element',
-                name: 'cfdi:InformacionAduanera',
-                attributes: informacionAduaneraValue.Attributes
-            } as ComprobanteConceptoInformacionAduaneraElement)
-        }
-
-        return elements;
+        this.InformacionAduanera = [];
     }
 }

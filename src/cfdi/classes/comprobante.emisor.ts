@@ -1,38 +1,25 @@
-import {RegimenFiscalEnum} from '../catalog/enums';
-import {AttributesComprobanteEmisorElement} from '../types';
-import {sanitizeValues} from '../../utils';
-import {XmlAttribute} from '../../annotations';
+import { RegimenFiscalEnum } from '../catalog/enums';
+import { AttributesComprobanteEmisorElement } from '../types';
+import { sanitizeValues } from '../../utils';
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
 
 export class ComprobanteEmisor {
-    @XmlAttribute()
+    @XMLAttribute({name: 'Rfc'})
     public Rfc: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Nombre'})
     public Nombre: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'RegimenFiscal'})
     public RegimenFiscal: RegimenFiscalEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'FacAtrAdquirente'})
     public FacAtrAdquirente?: string;
 
     constructor(params: AttributesComprobanteEmisorElement) {
-        this.Attributes = params;
-    }
-
-    set Attributes(params: AttributesComprobanteEmisorElement) {
-        this.Rfc = params.Rfc;
-        this.Nombre = params.Nombre;
+        this.Rfc = sanitizeValues(params.Rfc).toUpperCase();
+        this.Nombre = sanitizeValues(params.Nombre);
         this.RegimenFiscal = params.RegimenFiscal;
         this.FacAtrAdquirente = params.FacAtrAdquirente;
-    }
-
-    get Attributes(): AttributesComprobanteEmisorElement {
-        return {
-            Rfc: sanitizeValues(this.Rfc).toUpperCase(),
-            Nombre: sanitizeValues(this.Nombre),
-            RegimenFiscal: this.RegimenFiscal,
-            FacAtrAdquirente: this.FacAtrAdquirente
-        }
     }
 }

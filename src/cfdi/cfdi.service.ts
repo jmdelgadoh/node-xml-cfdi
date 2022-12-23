@@ -175,8 +175,8 @@ export class CFDIService {
         const jsonComprobante = {
             type: 'element',
             name: "cfdi:Comprobante",
-            attributes: comprobante.Attributes,
-            elements: comprobante.Elements,
+            // attributes: comprobante.Attributes,
+            // elements: comprobante.Elements,
         } as ComprobanteElement;
 
         return {

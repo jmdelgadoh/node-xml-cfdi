@@ -1,45 +1,24 @@
-import {TipoRelacionEnum} from '../catalog/enums';
-import {ComprobanteCfdiRelacionadosCfdiRelacionado} from './index';
-import {
-    AttributesComprobanteCfdiRelacionadosElement,
-    ComprobanteCfdiRelacionadosCfdiRelacionadoElement
-} from '../types';
-import {Element} from 'xml-js';
-import {XmlAttribute} from '../../annotations';
+import { TipoRelacionEnum } from '../catalog/enums';
+import { ComprobanteCfdiRelacionadosCfdiRelacionado } from './index';
+import { AttributesComprobanteCfdiRelacionadosElement } from '../types';
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLChild } from "../../xml-decorator/annotations/XMLChild";
+import { CFDI_NAME_SPACE } from "../index";
+
 
 export class ComprobanteCfdiRelacionados {
-    @XmlAttribute()
+    @XMLAttribute({name: 'TipoRelacion'})
     public TipoRelacion: TipoRelacionEnum;
 
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'CfdiRelacionado',
+    })
     public CfdiRelacionado: ComprobanteCfdiRelacionadosCfdiRelacionado[];
 
 
     constructor(params: AttributesComprobanteCfdiRelacionadosElement, relacionado: ComprobanteCfdiRelacionadosCfdiRelacionado[] = []) {
-        this.Attributes = params
-        this.CfdiRelacionado = relacionado;
-    }
-
-    set Attributes(params: AttributesComprobanteCfdiRelacionadosElement) {
         this.TipoRelacion = params.TipoRelacion;
-    }
-
-    get Attributes(): AttributesComprobanteCfdiRelacionadosElement {
-        return {
-            TipoRelacion: this.TipoRelacion,
-        }
-    }
-
-    get Elements(): Element[] {
-        const elements: Element[] = []
-
-        for (const cfdiRelacionadoValue of this.CfdiRelacionado) {
-            elements.push({
-                type: 'element',
-                name: 'cfdi:CfdiRelacionado',
-                attributes: cfdiRelacionadoValue.Attributes,
-            } as ComprobanteCfdiRelacionadosCfdiRelacionadoElement);
-        }
-
-        return elements;
+        this.CfdiRelacionado = relacionado;
     }
 }

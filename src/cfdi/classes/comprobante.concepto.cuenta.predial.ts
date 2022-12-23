@@ -1,21 +1,11 @@
-import {AttributesComprobanteConceptoCuentaPredialElement} from '../types';
-import {XmlAttribute} from '../../annotations';
+import { AttributesComprobanteConceptoCuentaPredialElement } from '../types';
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
 
 export class ComprobanteConceptoCuentaPredial {
-    @XmlAttribute()
+    @XMLAttribute({name: 'Numero'})
     public Numero: string;
 
     constructor(params: AttributesComprobanteConceptoCuentaPredialElement) {
-        this.Attributes = params
-    }
-
-    set Attributes(params: AttributesComprobanteConceptoCuentaPredialElement) {
         this.Numero = params.Numero;
-    }
-
-    get Attributes(): AttributesComprobanteConceptoCuentaPredialElement {
-        return {
-            Numero: this.Numero,
-        }
     }
 }

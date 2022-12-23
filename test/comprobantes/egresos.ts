@@ -17,10 +17,9 @@ import {
     TipoFactorEnum,
     TipoRelacionEnum,
 } from '../../src';
-import {emisor} from '../utils/emisor';
-import {service} from '../utils/service';
-import {receptor} from '../utils/receptor';
-import {XmlElementModel} from "../../src/annotations/classes";
+import { emisor } from '../utils/emisor';
+import { receptor } from '../utils/receptor';
+import { XMLElement } from "../../src/xml-decorator/models/XMLElement";
 
 export const testComprobanteEgresos = async () => {
     console.info(`=== === === === === Comprobante de tipo egreso === === === === ===
@@ -109,9 +108,9 @@ export const testComprobanteEgresos = async () => {
 
     comprobante.Impuestos = impuestos;
 
-    const xmlSellado = await service.getXMLSellado(comprobante);
+    // const xmlSellado = await service.getXMLSellado(comprobante);
 
-    XmlElementModel.serialize(comprobante)
+    XMLElement.serialize(comprobante)
 
     // console.log(JSON.stringify(comprobante, null, 3))
 

@@ -1,1 +1,1 @@
-export { getCertificate, getCadenaOriginal } from './helpers'
+export * from './helpers'

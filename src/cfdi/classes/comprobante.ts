@@ -1,6 +1,5 @@
-import {Element} from 'xml-js';
-import {CodigoPostalType} from '../catalog/types';
-import {ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum} from '../catalog/enums';
+import { CodigoPostalType } from '../catalog/types';
+import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../catalog/enums';
 import {
     ComprobanteCfdiRelacionados,
     ComprobanteCfdiRelacionadosCfdiRelacionado,
@@ -8,59 +7,53 @@ import {
     ComprobanteEmisor,
     ComprobanteImpuestos,
     ComprobanteInformacionGlobal,
-    ComprobanteReceptor,
-    XmlTags
+    ComprobanteReceptor
 } from './index';
 import {
     AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
     AttributesComprobanteElement,
-    ComprobanteCfdiRelacionadosElement,
-    ComprobanteConceptoElement,
-    ComprobanteConceptoImpuestosElement,
-    ComprobanteConceptosElement,
-    ComprobanteEmisorElement,
-    ComprobanteInformacionGlobalElement,
-    ComprobanteReceptorElement,
 } from '../types';
-import { XmlAttribute, XmlChild, XmlElement } from '../../annotations';
-import {CFDI_NAME_SPACE} from "..";
+import { CFDI_NAME_SPACE } from "..";
+import { XMLElement } from "../../xml-decorator/annotations/XMLElement";
+import { XMLChild } from "../../xml-decorator/annotations/XMLChild";
+import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
 
-@XmlElement({
+@XMLElement({
     namespace: CFDI_NAME_SPACE,
-    name: 'Comprobante'
+    name: 'Comprobante',
 })
-export class Comprobante extends XmlTags {
-    @XmlChild({
+export class Comprobante {
+    @XMLChild({
         namespace: CFDI_NAME_SPACE,
         name: 'InformacionGlobal'
     })
     public InformacionGlobal?: ComprobanteInformacionGlobal;
 
-    @XmlChild({
+    @XMLChild({
         namespace: CFDI_NAME_SPACE,
         name: 'CfdiRelacionados'
     })
     public CfdiRelacionados: ComprobanteCfdiRelacionados[];
 
-    @XmlChild({
+    @XMLChild({
         namespace: CFDI_NAME_SPACE,
         name: 'Emisor'
     })
     public Emisor: ComprobanteEmisor;
 
-    @XmlChild({
+    @XMLChild({
         namespace: CFDI_NAME_SPACE,
         name: 'Receptor'
     })
     public Receptor: ComprobanteReceptor;
 
-    @XmlChild({
+    @XMLChild({
         namespace: CFDI_NAME_SPACE,
         name: 'Conceptos'
     })
     public Conceptos: ComprobanteConcepto[];
 
-    @XmlChild({
+    @XMLChild({
         namespace: CFDI_NAME_SPACE,
         name: 'Impuestos'
     })
@@ -68,166 +61,66 @@ export class Comprobante extends XmlTags {
     // public Complemento: ComprobanteComplemento;
     // public Addenda: ComprobanteAddenda{
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Version'})
     public Version: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Serie'})
     public Serie?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Folio'})
     public Folio?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Fecha'})
     public Fecha: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Sello'})
     public Sello?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'FormaPago'})
     public FormaPago?: FormaPagoEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'NoCertificado'})
     public NoCertificado?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Certificado'})
     public Certificado?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'CondicionesDePago'})
     public CondicionesDePago?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'SubTotal'})
     public SubTotal: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Descuento'})
     public Descuento?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Moneda'})
     public Moneda: MonedaEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'TipoCambio'})
     public TipoCambio?: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Total'})
     public Total: string;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'TipoDeComprobante'})
     public TipoDeComprobante: TipoComprobanteEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Exportacion'})
     public Exportacion: ExportacionEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'MetodoPago'})
     public MetodoPago?: MetodoPagoEnum;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'LugarExpedicion'})
     public LugarExpedicion: CodigoPostalType;
 
-    @XmlAttribute()
+    @XMLAttribute({name: 'Confirmacion'})
     public Confirmacion?: string;
 
     public constructor(params: AttributesComprobanteElement) {
-        super();
         this.Conceptos = [];
         this.CfdiRelacionados = [];
-        this.Attributes = params;
-        this.addAttributes('xmlns:cfdi', 'http://www.sat.gob.mx/cfd/4');
-        this.addAttributes('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-        this.addAttributes('xsi:schemaLocation', 'http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/public internet/cfd/4/cfdv40.xsd');
-    }
-
-    get Elements(): Element[] {
-        const elements: Element[] = [];
-
-        if (this.InformacionGlobal) {
-            elements?.push({
-                type: 'element',
-                name: 'cfdi:InformacionGlobal',
-                attributes: this.InformacionGlobal.Attributes
-            } as ComprobanteInformacionGlobalElement)
-        }
-
-        for (const cfdiRelacionadosValue of this.CfdiRelacionados) {
-            elements?.push({
-                type: 'element',
-                name: 'cfdi:CfdiRelacionados',
-                attributes: cfdiRelacionadosValue.Attributes,
-                elements: cfdiRelacionadosValue.Elements
-            } as ComprobanteCfdiRelacionadosElement)
-        }
-
-        if (this.Emisor) {
-            elements.push({
-                type: 'element',
-                name: 'cfdi:Emisor',
-                attributes: this.Emisor.Attributes
-            } as ComprobanteEmisorElement)
-        }
-
-        if (this.Receptor) {
-            elements.push({
-                type: 'element',
-                name: 'cfdi:Receptor',
-                attributes: this.Receptor.Attributes
-            } as ComprobanteReceptorElement)
-        }
-
-        if (this.Conceptos.length) {
-            const conceptElements: ComprobanteConceptoElement[] = [];
-
-            for (const conceptoValue of this.Conceptos) {
-                conceptElements.push({
-                    type: 'element',
-                    name: 'cfdi:Concepto',
-                    attributes: conceptoValue.Attributes,
-                    elements: conceptoValue.Elements
-                } as ComprobanteConceptoElement)
-            }
-
-            elements.push({
-                type: 'element',
-                name: 'cfdi:Conceptos',
-                elements: conceptElements
-            } as ComprobanteConceptosElement)
-        }
-
-        if (this.Impuestos) {
-            elements.push({
-                type: 'element',
-                name: 'cfdi:Impuestos',
-                attributes: this.Impuestos.Attributes,
-                elements: this.Impuestos.Elements
-            } as ComprobanteConceptoImpuestosElement);
-        }
-
-        return elements;
-    }
-
-    get Attributes(): AttributesComprobanteElement {
-        return {
-            ...this.getAttributes(),
-            Version: this.Version,
-            Serie: this.Serie,
-            Folio: this.Folio,
-            Fecha: this.Fecha,
-            FormaPago: this.FormaPago,
-            NoCertificado: this.NoCertificado,
-            CondicionesDePago: this.CondicionesDePago,
-            SubTotal: this.SubTotal,
-            Descuento: this.Descuento,
-            Moneda: this.Moneda,
-            TipoCambio: this.TipoCambio,
-            Total: this.Total,
-            TipoDeComprobante: this.TipoDeComprobante,
-            Exportacion: this.Exportacion,
-            MetodoPago: this.MetodoPago,
-            LugarExpedicion: this.LugarExpedicion,
-            Confirmacion: this.Confirmacion,
-            Sello: this.Sello,
-            Certificado: this.Certificado,
-        }
-    }
-
-    set Attributes(params: AttributesComprobanteElement) {
         this.Version = params.Version;
         this.Serie = params.Serie;
         this.Folio = params.Folio;
