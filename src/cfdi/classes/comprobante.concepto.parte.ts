@@ -3,13 +3,8 @@ import {ClaveProdServType} from '../catalog/types';
 import {AttributesComprobanteConceptoParteElement, ComprobanteConceptoInformacionAduaneraElement} from '../types';
 import {sanitizeValues} from '../../utils';
 import {Element} from 'xml-js';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import {XmlAttribute} from '../../annotations';
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'Parte'
-})
 export class ComprobanteConceptoParte {
     public InformacionAduanera: ComprobanteConceptoParteInformacionAduanera[];
 

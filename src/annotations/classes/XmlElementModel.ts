@@ -1,14 +1,13 @@
 import {XmlElementOptions} from "../types";
 import {XmlAttributeModel} from "./XmlAttributeModel";
+import { XmlChildModel } from './XmlChildModel';
 
 export class XmlElementModel {
     public name: string;
     public attributes: XmlAttributeModel[] = [];
-    private elements: XmlElementModel[] = [];
+    public children: XmlChildModel[] = [];
 
-    constructor() { // private options: XmlElementOptions
-
-    }
+    constructor() {}
 
     static annotate(target: any, options: XmlElementOptions): void {
         const {namespace = '', name = target.name} = options;
@@ -37,6 +36,12 @@ export class XmlElementModel {
         return element;
     }
 
+    addChild(child: XmlChildModel): void {
+        if (!this.children) this.children = [];
+
+        this.children.push(child);
+    }
+
     public addAttribute(attribute: XmlAttributeModel): void {
         if (!this.attributes) this.attributes = [];
 
@@ -46,7 +51,10 @@ export class XmlElementModel {
     static serialize(object: any): string {
         const element = this.getXMLElement(object);
 
-        // console.log(JSON.stringify(element, null, 3))
+        const schema = this.getSchema(element);
+
+        console.log(JSON.stringify(schema, null, 3));
+
 
         // const {root, entity} = this.getRootAndEntity(args);
         // const schema = this.getSchema(entity);
@@ -55,6 +63,26 @@ export class XmlElementModel {
 
         return ''; // js2xmlparser.parse(root, schema, PARSER_OPTIONS)
     }
+
+    private getSchema(entity: any): any {
+        const object: any = {};
+
+        const attrProperty = '@';
+
+        if (this.attributes) {
+            object[attrProperty] = {};
+            this.attributes.forEach(attr => attr.setSchema(object[attrProperty], entity));
+        }
+
+        // if (this.children) {
+        //     this.children.forEach(child => child.setSchema(object, entity, isAsync, schemaOptions));
+        // }
+
+        return object;
+
+    }
+
+
 }
 
 const META_KEY = 'design:xml:element';

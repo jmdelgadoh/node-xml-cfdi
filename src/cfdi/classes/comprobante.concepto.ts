@@ -19,13 +19,8 @@ import {
 } from '../types';
 import {sanitizeValues} from '../../utils';
 import {Element} from 'xml-js';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import {XmlAttribute} from '../../annotations';
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'Concepto'
-})
 export class ComprobanteConcepto extends XmlTags {
     public Impuestos?: ComprobanteConceptoImpuestos;
     public ACuentaTerceros?: ComprobanteConceptoACuentaTerceros;

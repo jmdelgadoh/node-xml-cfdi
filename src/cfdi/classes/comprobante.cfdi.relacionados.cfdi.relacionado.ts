@@ -1,11 +1,6 @@
 import {AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement} from '../types';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import {XmlAttribute} from '../../annotations';
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'CfdiRelacionado'
-})
 export class ComprobanteCfdiRelacionadosCfdiRelacionado {
     @XmlAttribute()
     public UUID: string;

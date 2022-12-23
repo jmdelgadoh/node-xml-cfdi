@@ -23,7 +23,7 @@ export const getCertificate = (path: string, options?: SyncOptions) => {
             status: 'ERROR: 001',
             process: 'No se pudo obtener el certificado',
             solutions: [
-                'Verifica la intacion de openssl',
+                'Verifica la instalación de openssl',
                 `Valida la existencia del certificado en ${path}`
             ],
             error: e
@@ -63,7 +63,7 @@ export const getKey = (path: string, password: string, options?: SyncOptions) =>
             status: 'ERROR: 003',
             process: 'No se pudo obtener la clave privada',
             solutions: [
-                'Verifica la intacion de openssl',
+                'Verifica la instalación de openssl',
                 `Valida la existencia de la clave privada en ${path}`
             ],
             error: e

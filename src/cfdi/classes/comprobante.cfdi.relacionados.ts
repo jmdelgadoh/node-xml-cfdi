@@ -5,13 +5,8 @@ import {
     ComprobanteCfdiRelacionadosCfdiRelacionadoElement
 } from '../types';
 import {Element} from 'xml-js';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import {XmlAttribute} from '../../annotations';
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'CfdiRelacionados'
-})
 export class ComprobanteCfdiRelacionados {
     @XmlAttribute()
     public TipoRelacion: TipoRelacionEnum;

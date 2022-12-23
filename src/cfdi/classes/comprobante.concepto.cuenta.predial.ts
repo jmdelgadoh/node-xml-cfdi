@@ -1,11 +1,6 @@
 import {AttributesComprobanteConceptoCuentaPredialElement} from '../types';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import {XmlAttribute} from '../../annotations';
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'CuentaPredial'
-})
 export class ComprobanteConceptoCuentaPredial {
     @XmlAttribute()
     public Numero: string;

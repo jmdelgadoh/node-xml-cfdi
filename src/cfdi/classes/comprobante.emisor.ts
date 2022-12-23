@@ -1,13 +1,8 @@
 import {RegimenFiscalEnum} from '../catalog/enums';
 import {AttributesComprobanteEmisorElement} from '../types';
 import {sanitizeValues} from '../../utils';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import {XmlAttribute} from '../../annotations';
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'Emisor'
-})
 export class ComprobanteEmisor {
     @XmlAttribute()
     public Rfc: string;

@@ -22,7 +22,7 @@ import {
     ComprobanteInformacionGlobalElement,
     ComprobanteReceptorElement,
 } from '../types';
-import {XmlAttribute, XmlElement} from '../../annotations';
+import { XmlAttribute, XmlChild, XmlElement } from '../../annotations';
 import {CFDI_NAME_SPACE} from "..";
 
 @XmlElement({
@@ -30,11 +30,40 @@ import {CFDI_NAME_SPACE} from "..";
     name: 'Comprobante'
 })
 export class Comprobante extends XmlTags {
+    @XmlChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'InformacionGlobal'
+    })
     public InformacionGlobal?: ComprobanteInformacionGlobal;
+
+    @XmlChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'CfdiRelacionados'
+    })
     public CfdiRelacionados: ComprobanteCfdiRelacionados[];
+
+    @XmlChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'Emisor'
+    })
     public Emisor: ComprobanteEmisor;
+
+    @XmlChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'Receptor'
+    })
     public Receptor: ComprobanteReceptor;
+
+    @XmlChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'Conceptos'
+    })
     public Conceptos: ComprobanteConcepto[];
+
+    @XmlChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'Impuestos'
+    })
     public Impuestos?: ComprobanteImpuestos;
     // public Complemento: ComprobanteComplemento;
     // public Addenda: ComprobanteAddenda{

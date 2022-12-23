@@ -1,11 +1,6 @@
 import {AttributesComprobanteConceptoInformacionAduaneraElement} from '../types';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import {XmlAttribute} from '../../annotations';
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'InformacionAduanera'
-})
 export class ComprobanteConceptoInformacionAduanera {
     @XmlAttribute()
     public NumeroPedimento: string;

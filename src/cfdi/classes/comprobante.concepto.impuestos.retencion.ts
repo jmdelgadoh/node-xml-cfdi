@@ -1,12 +1,7 @@
 import {ImpuestoEnum, TipoFactorEnum} from '../catalog/enums';
 import {AttributesComprobanteConceptoImpuestosRetencionesRetencionElement} from '../types';
-import {XmlAttribute, XmlElement} from '../../annotations';
-import {CFDI_NAME_SPACE} from "../index";
+import {XmlAttribute} from '../../annotations';
 
-@XmlElement({
-    namespace: CFDI_NAME_SPACE,
-    name: 'Retencion'
-})
 export class ComprobanteConceptoImpuestosRetencion {
     @XmlAttribute()
     public Base: string;
