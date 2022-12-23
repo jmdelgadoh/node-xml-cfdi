@@ -22,7 +22,7 @@ export class XMLElement {
     static serialize(entity: any): string {
         const schema = this.getSchema(entity);
 
-        console.log(JSON.stringify(schema, null, 3))
+        // console.log(JSON.stringify(schema, null, 3))
 
         // console.log('js2xmlparser', JSON.stringify({root, schema, PARSER_OPTIONS}, null, 3))
 
@@ -86,10 +86,9 @@ export class XMLElement {
 
     private static processSchema(entity: any, isAsync: boolean, schemaOptions: ISchemaOptions): any {
         if (entity && typeof entity === 'object') {
-
             const element = XMLElement.getXMLElement(entity);
-            if (element) {
 
+            if (element) {
                 return element.getSchema(entity, isAsync, schemaOptions);
             }
         }
