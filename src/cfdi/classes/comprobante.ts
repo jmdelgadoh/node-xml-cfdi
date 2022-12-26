@@ -14,9 +14,7 @@ import {
     AttributesComprobanteElement,
 } from '../types';
 import { CFDI_NAME_SPACE } from "..";
-import { XMLElement } from "../../xml-decorator/annotations/XMLElement";
-import { XMLChild } from "../../xml-decorator/annotations/XMLChild";
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLAttribute, XMLChild, XMLElement } from "../../xml-decorator";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,
@@ -25,7 +23,7 @@ import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
 export class Comprobante {
     @XMLChild({
         namespace: CFDI_NAME_SPACE,
-        name: 'InformacionGlobal'
+        name: 'InformacionGlobal',
     })
     public InformacionGlobal?: ComprobanteInformacionGlobal;
 

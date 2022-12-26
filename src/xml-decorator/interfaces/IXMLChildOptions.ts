@@ -2,8 +2,8 @@
 export interface IXMLChildOptions {
 
   name?: string;
-  stripPluralS?: boolean;
   namespace?: string;
+  stripPluralS?: boolean;
   nestedNamespace?: string;
   implicitStructure?: string;
 }

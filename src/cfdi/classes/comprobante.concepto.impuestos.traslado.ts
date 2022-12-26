@@ -1,6 +1,6 @@
 import { ImpuestoEnum, TipoFactorEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoImpuestosTrasladosTrasladoElement } from '../types';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLAttribute } from "../../xml-decorator";
 
 export class ComprobanteConceptoImpuestosTraslado {
     @XMLAttribute({name: 'Base'})

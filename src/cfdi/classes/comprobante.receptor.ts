@@ -2,7 +2,7 @@ import {PaisEnum, RegimenFiscalEnum, UsoCfdiEnum} from '../catalog/enums';
 import {CodigoPostalType} from '../catalog/types';
 import {AttributesComprobanteReceptorElement} from '../types';
 import {sanitizeValues} from '../../utils';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLAttribute } from "../../xml-decorator";
 
 export class ComprobanteReceptor {
     @XMLAttribute({ name: 'Rfc' })

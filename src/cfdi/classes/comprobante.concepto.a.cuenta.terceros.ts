@@ -1,7 +1,7 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoACuentaTercerosElement } from '../types';
 import { sanitizeValues } from '../../utils';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLAttribute } from "../../xml-decorator";
 
 export class ComprobanteConceptoACuentaTerceros {
     @XMLAttribute({name: 'RfcACuentaTerceros'})

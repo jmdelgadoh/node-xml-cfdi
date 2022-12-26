@@ -1,7 +1,7 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteEmisorElement } from '../types';
 import { sanitizeValues } from '../../utils';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLAttribute } from "../../xml-decorator";
 
 export class ComprobanteEmisor {
     @XMLAttribute({name: 'Rfc'})

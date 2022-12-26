@@ -19,7 +19,7 @@ import {
 } from '../../src';
 import { emisor } from '../utils/emisor';
 import { receptor } from '../utils/receptor';
-import { XMLElement } from "../../src/xml-decorator/models/XMLElement";
+import { XMLElementModel } from "../../src/xml-decorator/models/XMLElementModel";
 
 export const testComprobanteEgresos = async () => {
     console.info(`=== === === === === Comprobante de tipo egreso === === === === ===
@@ -110,7 +110,7 @@ export const testComprobanteEgresos = async () => {
 
     // const xmlSellado = await service.getXMLSellado(comprobante);
 
-    XMLElement.serialize(comprobante)
+    // XMLElementModel.serialize(comprobante)
 
     // console.log(JSON.stringify(comprobante, null, 3))
 

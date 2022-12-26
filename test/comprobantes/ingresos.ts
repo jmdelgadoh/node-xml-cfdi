@@ -18,6 +18,7 @@ import { emisor } from '../utils/emisor';
 import { receptor } from '../utils/receptor';
 import { service } from '../utils/service';
 import { printResult } from '../utils/print.result';
+import { XMLElementModel } from "../../src/xml-decorator/models/XMLElementModel";
 
 export const testComprobanteIngresos = async () => {
     console.info(`=== === === === === Comprobante de tipo ingreso === === === === ===
@@ -123,6 +124,8 @@ export const testComprobanteIngresos = async () => {
     impuestos.Traslados.push(traslado);
 
     comprobante.Impuestos = impuestos;
+
+    XMLElementModel.serialize(comprobante)
 
     // const xmlSellado = await service.getXMLSellado(comprobante);
 

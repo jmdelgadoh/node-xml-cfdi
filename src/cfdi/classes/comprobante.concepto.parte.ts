@@ -1,10 +1,8 @@
 import { ComprobanteConceptoParteInformacionAduanera } from './index';
 import { ClaveProdServType } from '../catalog/types';
-import { AttributesComprobanteConceptoParteElement, ComprobanteConceptoInformacionAduaneraElement } from '../types';
+import { AttributesComprobanteConceptoParteElement } from '../types';
 import { sanitizeValues } from '../../utils';
-import { Element } from 'xml-js';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
-import { XMLChild } from "../../xml-decorator/annotations/XMLChild";
+import { XMLAttribute, XMLChild } from "../../xml-decorator";
 import { CFDI_NAME_SPACE } from "../index";
 
 export class ComprobanteConceptoParte {

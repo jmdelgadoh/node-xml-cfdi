@@ -1,6 +1,6 @@
 import { ImpuestoEnum } from '../catalog/enums';
 import { AttributesComprobanteImpuestosRetencionesRetencionElement } from '../types';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLAttribute } from "../../xml-decorator";
 
 export class ComprobanteImpuestosRetencion {
     @XMLAttribute({name: 'Impuesto'})

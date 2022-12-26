@@ -1,12 +1,12 @@
-import {MesesEnum, PeriodicidadEnum} from '../catalog/enums';
-import {AttributesComprobanteInformacionGlobalElement} from '../types';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { MesesEnum, PeriodicidadEnum } from '../catalog/enums';
+import { AttributesComprobanteInformacionGlobalElement } from '../types';
+import { XMLAttribute } from "../../xml-decorator";
 
 export class ComprobanteInformacionGlobal {
-    @XMLAttribute({ name: 'Periodicidad'})
+    @XMLAttribute({name: 'Periodicidad'})
     public Periodicidad: PeriodicidadEnum;
 
-    @XMLAttribute({ name: 'Meses'})
+    @XMLAttribute({name: 'Meses'})
     public Meses: MesesEnum;
 
     @XMLAttribute({name: 'Año'})

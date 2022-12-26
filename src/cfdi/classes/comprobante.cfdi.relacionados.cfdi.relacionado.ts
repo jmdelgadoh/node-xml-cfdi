@@ -1,5 +1,5 @@
 import { AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement } from '../types';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLAttribute } from "../../xml-decorator";
 
 export class ComprobanteCfdiRelacionadosCfdiRelacionado {
     @XMLAttribute({name: 'UUID'})

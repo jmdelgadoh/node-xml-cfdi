@@ -9,8 +9,7 @@ import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
 import { ObjetoImpEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoElement, } from '../types';
 import { sanitizeValues } from '../../utils';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
-import { XMLChild } from "../../xml-decorator/annotations/XMLChild";
+import { XMLAttribute, XMLChild } from "../../xml-decorator";
 import { CFDI_NAME_SPACE } from "../index";
 
 export class ComprobanteConcepto {

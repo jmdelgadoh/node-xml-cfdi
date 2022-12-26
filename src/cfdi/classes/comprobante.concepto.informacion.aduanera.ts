@@ -1,5 +1,5 @@
 import { AttributesComprobanteConceptoInformacionAduaneraElement } from '../types';
-import { XMLAttribute } from "../../xml-decorator/annotations/XMLAttribute";
+import { XMLAttribute } from "../../xml-decorator";
 
 export class ComprobanteConceptoInformacionAduanera {
     @XMLAttribute({name: 'NumeroPedimento'})

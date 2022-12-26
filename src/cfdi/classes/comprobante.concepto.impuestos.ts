@@ -1,5 +1,5 @@
 import { ComprobanteConceptoImpuestosRetencion, ComprobanteConceptoImpuestosTraslado } from "./index";
-import { XMLChild } from "../../xml-decorator/annotations/XMLChild";
+import { XMLChild } from "../../xml-decorator";
 import { CFDI_NAME_SPACE } from "../index";
 
 export class ComprobanteConceptoImpuestos {
