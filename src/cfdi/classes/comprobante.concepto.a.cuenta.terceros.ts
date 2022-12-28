@@ -1,8 +1,13 @@
 import { RegimenFiscalEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoACuentaTercerosElement } from '../types';
 import { sanitizeValues } from '../../utils';
-import { XMLAttribute } from "../../xml-decorator";
+import { XMLAttribute, XMLElement } from "../../xml-decorator";
+import { CFDI_NAME_SPACE } from '../index';
 
+@XMLElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'ACuentaTerceros',
+})
 export class ComprobanteConceptoACuentaTerceros {
     @XMLAttribute({name: 'RfcACuentaTerceros'})
     public RfcACuentaTerceros: string;

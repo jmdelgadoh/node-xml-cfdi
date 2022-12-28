@@ -1,10 +1,13 @@
 import { TipoRelacionEnum } from '../catalog/enums';
 import { ComprobanteCfdiRelacionadosCfdiRelacionado } from './index';
 import { AttributesComprobanteCfdiRelacionadosElement } from '../types';
-import { XMLAttribute, XMLChild } from "../../xml-decorator";
+import { XMLAttribute, XMLChild, XMLElement } from "../../xml-decorator";
 import { CFDI_NAME_SPACE } from "../index";
 
-
+@XMLElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'CfdiRelacionados',
+})
 export class ComprobanteCfdiRelacionados {
     @XMLAttribute({name: 'TipoRelacion'})
     public TipoRelacion: TipoRelacionEnum;

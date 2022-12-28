@@ -7,9 +7,9 @@ import { Attributes, Element } from "xml-js";
 const META_KEY = 'design:xml:element';
 
 export class XMLElementModel {
-    private attributes: XMLAttributeModel[];
+    private name: string;
     private children: XMLChildModel[];
-    private name?: string;
+    private attributes: XMLAttributeModel[];
 
     public addAttribute(attribute: XMLAttributeModel): void {
         if (!this.attributes) this.attributes = [];
@@ -23,10 +23,26 @@ export class XMLElementModel {
         this.children.push(child);
     }
 
+    static annotate(target: any, options: XmlElementOption): void {
+        const {namespace = '', name = target.name} = options;
+
+        let element = this.getOrCreateIfNotExists(target.prototype);
+
+        element.name = `${namespace}${namespace != '' ? ':' : ''}${name}`;
+    }
+
+    static getXMLElement(target: any): XMLElementModel | undefined {
+        return Reflect.getMetadata(META_KEY, target);
+    }
+
+    static setXMLElement(target: any, element: XMLElementModel): void {
+        return Reflect.defineMetadata(META_KEY, element, target);
+    }
+
     static serialize(entity: any): string {
         const schema = this.getSchema(entity);
 
-         //console.log(JSON.stringify(schema, null, 3))
+         // console.log(JSON.stringify(schema, null, 3))
 
         return '';
     }
@@ -39,14 +55,6 @@ export class XMLElementModel {
         return this.processSchema(value);
     }
 
-    static getXMLElement(target: any): XMLElementModel | undefined {
-        return Reflect.getMetadata(META_KEY, target);
-    }
-
-    static setXMLElement(target: any, element: XMLElementModel): void {
-        return Reflect.defineMetadata(META_KEY, element, target);
-    }
-
     static getOrCreateIfNotExists(target: any): XMLElementModel {
         let element = this.getXMLElement(target);
 
@@ -56,14 +64,6 @@ export class XMLElementModel {
         }
 
         return element;
-    }
-
-    static annotate(target: any, options: XmlElementOption): void {
-        const {namespace = '', name = target.name} = options;
-
-        let element = this.getOrCreateIfNotExists(target.prototype);
-
-        element.name = `${namespace}${namespace != '' ? ':' : ''}${name}`;
     }
 
     private static processSchema(entity: any): any {
@@ -79,11 +79,15 @@ export class XMLElementModel {
     }
 
     private getSchema(entity: any): Element {
-        const element: Element = {}
+        const element: Element = {
+            name: this.name,
+        }
 
         const attributes: Attributes = {};
+        //
+        // const elements: Element[] = [];
 
-        const elements: Element[] = [];
+        const obj: any = {};
 
         if (this.attributes) {
             this.attributes.forEach(attr => attr.setSchema(attributes, entity));
@@ -92,11 +96,13 @@ export class XMLElementModel {
         }
 
         if (this.children) {
-            this.children.forEach(child => child.setSchema(elements, entity));
+            this.children.forEach(child => child.setSchema(obj, entity));
 
-            element.elements = elements;
+            // element.elements = elements;
         }
 
-        return element;
+        // console.log(JSON.stringify(element, null, 3))
+
+        return obj;
     }
 }

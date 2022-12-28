@@ -2,8 +2,13 @@ import {PaisEnum, RegimenFiscalEnum, UsoCfdiEnum} from '../catalog/enums';
 import {CodigoPostalType} from '../catalog/types';
 import {AttributesComprobanteReceptorElement} from '../types';
 import {sanitizeValues} from '../../utils';
-import { XMLAttribute } from "../../xml-decorator";
+import { XMLAttribute, XMLElement } from "../../xml-decorator";
+import { CFDI_NAME_SPACE } from '../index';
 
+@XMLElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Receptor',
+})
 export class ComprobanteReceptor {
     @XMLAttribute({ name: 'Rfc' })
     public Rfc: string;

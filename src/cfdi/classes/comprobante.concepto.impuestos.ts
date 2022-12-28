@@ -1,7 +1,11 @@
 import { ComprobanteConceptoImpuestosRetencion, ComprobanteConceptoImpuestosTraslado } from "./index";
-import { XMLChild } from "../../xml-decorator";
+import { XMLChild, XMLElement } from "../../xml-decorator";
 import { CFDI_NAME_SPACE } from "../index";
 
+@XMLElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Impuestos',
+})
 export class ComprobanteConceptoImpuestos {
     @XMLChild({
         namespace: CFDI_NAME_SPACE,

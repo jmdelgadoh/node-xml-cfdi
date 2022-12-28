@@ -9,9 +9,13 @@ import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
 import { ObjetoImpEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoElement, } from '../types';
 import { sanitizeValues } from '../../utils';
-import { XMLAttribute, XMLChild } from "../../xml-decorator";
+import { XMLAttribute, XMLChild, XMLElement } from "../../xml-decorator";
 import { CFDI_NAME_SPACE } from "../index";
 
+@XMLElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'Conceptos',
+})
 export class ComprobanteConcepto {
     @XMLChild({
         namespace: CFDI_NAME_SPACE,
@@ -41,8 +45,8 @@ export class ComprobanteConcepto {
         namespace: CFDI_NAME_SPACE,
         name: 'Parte'
     })
-    // public ComplementoConcepto?: ComprobanteConceptoComplementoConcepto;
     public Parte: ComprobanteConceptoParte[];
+    // public ComplementoConcepto?: ComprobanteConceptoComplementoConcepto;
 
     @XMLAttribute({name: 'ClaveProdServ'})
     public ClaveProdServ: ClaveProdServType;

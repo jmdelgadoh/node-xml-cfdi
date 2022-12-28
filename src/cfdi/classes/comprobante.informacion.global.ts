@@ -1,7 +1,12 @@
 import { MesesEnum, PeriodicidadEnum } from '../catalog/enums';
 import { AttributesComprobanteInformacionGlobalElement } from '../types';
-import { XMLAttribute } from "../../xml-decorator";
+import { XMLAttribute, XMLElement } from "../../xml-decorator";
+import { CFDI_NAME_SPACE } from '../index';
 
+@XMLElement({
+    namespace: CFDI_NAME_SPACE,
+    name: 'InformacionGlobal',
+})
 export class ComprobanteInformacionGlobal {
     @XMLAttribute({name: 'Periodicidad'})
     public Periodicidad: PeriodicidadEnum;

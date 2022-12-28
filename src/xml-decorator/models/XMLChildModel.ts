@@ -29,22 +29,38 @@ export class XMLChildModel {
     }
 
     public setSchema(target: any, parentEntity: any): any {
+
         const entity = parentEntity[this.key];
 
-        if (typeof entity !== 'undefined') {
-            let schema = XMLElementModel.getSchema(entity);
 
-            console.log(this.name, JSON.stringify({target, schema}, null, 3))
+        const process = (schema: any) => {
 
             if (schema !== void 0 && schema !== null) {
-                // console.log(JSON.stringify(schema, null, 3))
 
-                target[this.name] = schema;
+                const structure: string|undefined = this.options.implicitStructure;
+                if (structure) {
+                    [].concat(schema).forEach(_schema => this.resolveImplicitStructure(structure, target, _schema));
+                } else {
+
+                    if (entity === schema && this.options.nestedNamespace) {
+                        let nsSchema = {};
+
+                        for (let key in schema) {
+                            if (schema.hasOwnProperty(key)) {
+                                // @ts-ignore
+                                nsSchema[ns(this.options.nestedNamespace, key)] = schema[key];
+                            }
+                        }
+
+                        schema = nsSchema;
+                    }
+
+                    target[this.name] = schema;
+                }
             }
+        };
 
-        } else if (this.options.required) {
-            throw new Error(`ERROR: 004 - El atributo "${this.key}" es requerido`)
-        }
+        process(XMLElementModel.getSchema(entity))
     }
 
     private resolveImplicitStructure(structure: string, target: any, schema: any): void {
