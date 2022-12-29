@@ -2,6 +2,7 @@ import { XMLElementModel } from "./XMLElementModel";
 import * as _ from "lodash";
 import { XmlChildOption } from "../types";
 import { ns } from "../utils";
+import { Element } from "xml-js";
 
 type Tree = { name: string; attributes: { [name: string]: string } };
 
@@ -28,39 +29,49 @@ export class XMLChildModel {
         element.addChild(child);
     }
 
-    public setSchema(target: any, parentEntity: any): any {
-
+    public setSchema(target: any[], parentEntity: any): any {
         const entity = parentEntity[this.key];
 
+        let schema = XMLElementModel.getSchema(entity);
 
-        const process = (schema: any) => {
+        if (typeof schema === 'object') {
 
-            if (schema !== void 0 && schema !== null) {
+            if (Array.isArray(schema) && schema.length) {
+                const element: Element = {
+                    type: 'element',
+                    name: this.name,
 
-                const structure: string|undefined = this.options.implicitStructure;
-                if (structure) {
-                    [].concat(schema).forEach(_schema => this.resolveImplicitStructure(structure, target, _schema));
-                } else {
-
-                    if (entity === schema && this.options.nestedNamespace) {
-                        let nsSchema = {};
-
-                        for (let key in schema) {
-                            if (schema.hasOwnProperty(key)) {
-                                // @ts-ignore
-                                nsSchema[ns(this.options.nestedNamespace, key)] = schema[key];
-                            }
-                        }
-
-                        schema = nsSchema;
-                    }
-
-                    target[this.name] = schema;
                 }
-            }
-        };
 
-        process(XMLElementModel.getSchema(entity))
+                console.log(JSON.stringify({element, schema}, null, 3))
+            } else {
+                target = [schema];
+            }
+        }
+
+
+        // if (schema !== void 0 && schema !== null) {
+        //     const structure: string | undefined = this.options.implicitStructure;
+        //
+        //     if (structure) {
+        //         [].concat(schema).forEach(_schema => this.resolveImplicitStructure(structure, target, _schema));
+        //     } else {
+        //         if (entity === schema && this.options.nestedNamespace) {
+        //             let nsSchema = {};
+        //
+        //             for (let key in schema) {
+        //                 if (schema.hasOwnProperty(key)) {
+        //                     // @ts-ignore
+        //                     nsSchema[ns(this.options.nestedNamespace, key)] = schema[key];
+        //                 }
+        //             }
+        //
+        //             schema = nsSchema;
+        //         }
+        //
+        //         // target[this.name] = schema;
+        //     }
+        // }
     }
 
     private resolveImplicitStructure(structure: string, target: any, schema: any): void {

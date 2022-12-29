@@ -42,7 +42,7 @@ export class XMLElementModel {
     static serialize(entity: any): string {
         const schema = this.getSchema(entity);
 
-         // console.log(JSON.stringify(schema, null, 3))
+        //console.log(JSON.stringify(schema, null, 3))
 
         return '';
     }
@@ -80,14 +80,13 @@ export class XMLElementModel {
 
     private getSchema(entity: any): Element {
         const element: Element = {
+            type: 'element',
             name: this.name,
         }
 
         const attributes: Attributes = {};
-        //
-        // const elements: Element[] = [];
 
-        const obj: any = {};
+        const elements: Element[] = [];
 
         if (this.attributes) {
             this.attributes.forEach(attr => attr.setSchema(attributes, entity));
@@ -96,13 +95,11 @@ export class XMLElementModel {
         }
 
         if (this.children) {
-            this.children.forEach(child => child.setSchema(obj, entity));
+            this.children.forEach(child => child.setSchema(elements, entity));
 
-            // element.elements = elements;
+            element.elements = elements;
         }
 
-        // console.log(JSON.stringify(element, null, 3))
-
-        return obj;
+        return element;
     }
 }
