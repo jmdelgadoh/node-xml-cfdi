@@ -1,14 +1,22 @@
-export type XmlElementOption = {
+export type XmlOption = {
     name?: string;
     namespace?: string;
 }
 
-export type XmlAttributeOption = XmlElementOption & {
+export type XmlNameSpaceTag = {
+    namespace: string;
+    value: string
+}
+
+export type XmlElementOption = XmlOption & {
+    xmlns?: XmlNameSpaceTag[];
+    schemaLocation?: string[];
+}
+
+export type XmlAttributeOption = XmlOption & {
     required?: boolean;
 }
 
-export type XmlChildOption = XmlAttributeOption & {
-    stripPluralS?: boolean;
-    nestedNamespace?: string;
-    implicitStructure?: string;
+export type XmlChildOption = XmlOption & {
+    required?: boolean;
 }

@@ -1,10 +1,5 @@
 import { XMLElementModel } from "./XMLElementModel";
-import * as _ from "lodash";
 import { XmlChildOption } from "../types";
-import { ns } from "../utils";
-import { Element } from "xml-js";
-
-type Tree = { name: string; attributes: { [name: string]: string } };
 
 export class XMLChildModel {
     private readonly name: string;
@@ -29,122 +24,43 @@ export class XMLChildModel {
         element.addChild(child);
     }
 
-    public setSchema(target: any[], parentEntity: any): any {
+    public setGlobalTag(target: any, parentEntity: any) {
         const entity = parentEntity[this.key];
 
-        let schema = XMLElementModel.getSchema(entity);
+        const obj = {};
 
-        if (typeof schema === 'object') {
+        if (typeof entity !== 'undefined') {
+            if (Array.isArray(entity) && entity.length) {
+                entity.forEach((value) => {
 
-            if (Array.isArray(schema) && schema.length) {
-                const element: Element = {
-                    type: 'element',
-                    name: this.name,
-
-                }
-
-                console.log(JSON.stringify({element, schema}, null, 3))
+                })
             } else {
-                target = [schema];
+                return XMLElementModel.getGlobalTags(entity)
             }
         }
-
-
-        // if (schema !== void 0 && schema !== null) {
-        //     const structure: string | undefined = this.options.implicitStructure;
-        //
-        //     if (structure) {
-        //         [].concat(schema).forEach(_schema => this.resolveImplicitStructure(structure, target, _schema));
-        //     } else {
-        //         if (entity === schema && this.options.nestedNamespace) {
-        //             let nsSchema = {};
-        //
-        //             for (let key in schema) {
-        //                 if (schema.hasOwnProperty(key)) {
-        //                     // @ts-ignore
-        //                     nsSchema[ns(this.options.nestedNamespace, key)] = schema[key];
-        //                 }
-        //             }
-        //
-        //             schema = nsSchema;
-        //         }
-        //
-        //         // target[this.name] = schema;
-        //     }
-        // }
     }
 
-    private resolveImplicitStructure(structure: string, target: any, schema: any): void {
-        const PLACEHOLDER = '$';
+    public setSchema(target: any[], parentEntity: any) {
+        const entity = parentEntity[this.key];
 
-        if (!new RegExp(`.\\.\\${PLACEHOLDER}`).test(structure) &&
-            !new RegExp(`.\\.\\${PLACEHOLDER}\\..`).test(structure) &&
-            !new RegExp(`\\${PLACEHOLDER}\\..`).test(structure)) {
-            throw new Error(`Structure '${structure}' is invalid`);
-        }
+        if (typeof entity !== 'undefined') {
+            const schema = XMLElementModel.getSchema(entity);
 
-        let tree = this.getImplicitNodeTree(structure);
-        const indexOfPlaceholder = tree.findIndex(node => node.name === PLACEHOLDER);
-        tree[indexOfPlaceholder].name = this.name;
-
-        for (let i = 0; i < tree.length; i++) {
-            let node = tree[i];
-            if (!Array.isArray(target)) {
-                if (!target[node.name]) {
-                    if (i !== indexOfPlaceholder) {
-                        target[node.name] = {'@': node.attributes};
-                    } else {
-                        target[node.name] = [];
-                    }
+            if (typeof schema === 'object') {
+                if (Array.isArray(schema) && schema.length) {
+                    target[target.length] = {
+                        type: 'element',
+                        name: this.name,
+                        elements: [...schema]
+                    };
                 }
-                target = target[node.name];
-            } else {
-                const newTarget = {};
-                target.push(newTarget);
-                target = newTarget;
-            }
-            if (i === tree.length - 1) {
-                if (Array.isArray(target)) {
-                    target.push(schema);
-                } else {
-                    target[node.name] = _.merge(schema, {'@': node.attributes});
+
+                if (!Array.isArray(schema)) {
+                    target[target.length] = schema;
                 }
             }
+        } else if (this.options.required) {
+            throw new Error(`ERROR: 005 - El elemento "${this.key}" es requerido`)
         }
-    }
-
-    private getImplicitNodeTree(treeString: string): Tree[] {
-        const REGEX = new RegExp('([a-z\\w0-9-\\$\\:]+?)\\[(.*?)\\]|([a-z\\w0-9-\\$\\:]+)', 'gi');
-        let match = REGEX.exec(treeString);
-        const tree: Tree[] = [];
-
-        while (match !== null) {
-
-            const tagName = match[1] || match[3];
-            const attributeString = match[2];
-            tree.push({
-                name: tagName,
-                attributes: this.getAttributes(attributeString)
-            });
-            match = REGEX.exec(treeString);
-        }
-        return tree;
-    }
-
-    private getAttributes(attributeString: string): { [attrName: string]: string } {
-
-        let attributes = {};
-
-        if (attributeString) {
-
-            attributeString.split(',').forEach(val => {
-
-                const attributesArr = val.split('=');
-                // @ts-ignore
-                attributes[attributesArr[0]] = attributesArr[1];
-            });
-        }
-
-        return attributes;
     }
 }

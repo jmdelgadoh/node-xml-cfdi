@@ -1,3 +1,3 @@
-export { ClaveProdServType } from './clave.prod.serv.type';
-export { ClaveUnidadType } from './clave.unidad.type';
-export { CodigoPostalType } from './codigo.postal.type';
+export * from './clave.prod.serv.type';
+export * from './clave.unidad.type';
+export * from './codigo.postal.type';

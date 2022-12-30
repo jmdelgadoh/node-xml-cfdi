@@ -3,8 +3,8 @@ import {
     ComprobanteConcepto,
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoImpuestosTraslado,
-    ComprobanteImpuestosTraslado,
     ComprobanteImpuestos,
+    ComprobanteImpuestosTraslado,
     ExportacionEnum,
     FormaPagoEnum,
     ImpuestoEnum,
@@ -16,9 +16,8 @@ import {
 } from '../../src';
 import { emisor } from '../utils/emisor';
 import { receptor } from '../utils/receptor';
-import { service } from '../utils/service';
-import { printResult } from '../utils/print.result';
 import { XMLElementModel } from "../../src/xml-decorator/models/XMLElementModel";
+import { service } from "../utils/service";
 
 export const testComprobanteIngresos = async () => {
     console.info(`=== === === === === Comprobante de tipo ingreso === === === === ===
@@ -125,9 +124,5 @@ export const testComprobanteIngresos = async () => {
 
     comprobante.Impuestos = impuestos;
 
-    XMLElementModel.serialize(comprobante)
-
-    // const xmlSellado = await service.getXMLSellado(comprobante);
-
-    // await printResult(xmlSellado);
+    const xmlSellado = await service.getXMLSellado(comprobante);
 }

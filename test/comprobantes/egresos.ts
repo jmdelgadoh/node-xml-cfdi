@@ -107,12 +107,4 @@ export const testComprobanteEgresos = async () => {
     impuestos.Traslados.push(traslado);
 
     comprobante.Impuestos = impuestos;
-
-    // const xmlSellado = await service.getXMLSellado(comprobante);
-
-    // XMLElementModel.serialize(comprobante)
-
-    // console.log(JSON.stringify(comprobante, null, 3))
-
-    // await printResult(xmlSellado);
 }

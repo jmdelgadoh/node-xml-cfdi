@@ -1,12 +1,13 @@
 {
-  "name": "cfdi",
-  "version": "1.0.0",
+  "name": "@munyaal/cfdi",
+  "version": "1.0.0.beta.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rimraf ./lib && tsc --build",
+    "build": "rimraf ./dist && tsc --build",
     "pretest": "npm run build",
-    "test": "node ./lib/test/index.js"
+    "test": "node ./dist/test/index.js"
   },
   "author": "Caleb Isaac Mora Diaz",
   "license": "MIT",

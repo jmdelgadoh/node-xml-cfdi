@@ -15,6 +15,10 @@ import { CFDI_NAME_SPACE } from "../index";
 @XMLElement({
     namespace: CFDI_NAME_SPACE,
     name: 'Concepto',
+    xmlns: [
+        { namespace: 'Pagos20', value: 'http://www.sat.gob.mx/Pagos20' },
+    ],
+    schemaLocation: ['http://www.sat.gob.mx/Pagos20', 'http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos20.xsd%22']
 })
 export class ComprobanteConcepto {
     @XMLChild({

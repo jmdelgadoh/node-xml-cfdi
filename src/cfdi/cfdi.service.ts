@@ -1,13 +1,11 @@
-import { Element, js2xml } from 'xml-js';
-import { ComprobanteElement } from './types';
 import { Comprobante } from './classes';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { writeFileSync } from 'fs';
 import { temporalName } from '../utils/helpers';
-import { getCertificate, getCadenaOriginal } from '../command';
-import { getKey } from '../command/helpers';
+import { getCadenaOriginal, getCertificate, getKey } from '../command';
 import { createSign } from 'crypto';
+import { XMLElementModel } from "../xml-decorator";
 
 export type CFDIServiceParams = {
     pathXsltCfdi40?: string;
@@ -45,6 +43,7 @@ export class CFDIService {
         return new Promise(async (resolve, reject) => {
             try {
                 const nameTemp = temporalName();
+
                 const pathFile = join(this._pathXmlFolder, nameTemp);
 
                 await writeFileSync(pathFile, xml, 'utf8');
@@ -76,8 +75,9 @@ export class CFDIService {
     public async getXML(comprobante: Comprobante): Promise<string> {
         return new Promise((resolve, reject) => {
             try {
-                const xml = js2xml(this.getJsCFDI(comprobante), {spaces: 4});
-                resolve(xml)
+                const xmlJson = XMLElementModel.serialize(comprobante)
+
+                resolve(xmlJson)
             } catch (err) {
                 reject(err);
             }
@@ -164,32 +164,12 @@ export class CFDIService {
                 const pathFile = join(pathTemp, nameTemp);
 
                 await writeFileSync(pathFile, xml, 'utf8')
+
                 resolve(pathFile);
             } catch (e) {
                 reject(e)
             }
         })
-    }
-
-    private getJsCFDI(comprobante: Comprobante): Element {
-        const jsonComprobante = {
-            type: 'element',
-            name: "cfdi:Comprobante",
-            // attributes: comprobante.Attributes,
-            // elements: comprobante.Elements,
-        } as ComprobanteElement;
-
-        return {
-            declaration: {
-                attributes: {
-                    version: '1.0',
-                    encoding: 'utf-8'
-                }
-            },
-            elements: [
-                jsonComprobante
-            ]
-        }
     }
 
     private initService({

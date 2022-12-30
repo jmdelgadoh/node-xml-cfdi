@@ -19,6 +19,11 @@ import { XMLAttribute, XMLChild, XMLElement } from "../../xml-decorator";
 @XMLElement({
     namespace: CFDI_NAME_SPACE,
     name: 'Comprobante',
+    xmlns: [
+        { namespace: 'cfdi', value: 'http://www.sat.gob.mx/cfd/4' },
+        { namespace: 'xsi', value: 'http://www.w3.org/2001/XMLSchema-instance' }
+    ],
+    schemaLocation: ['http://www.sat.gob.mx/cfd/4', 'http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd']
 })
 export class Comprobante {
     @XMLChild({

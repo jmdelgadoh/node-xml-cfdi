@@ -2,12 +2,13 @@ import 'reflect-metadata';
 import { XMLChildModel } from "./XMLChildModel";
 import { XMLAttributeModel } from "./XMLAttributeModel";
 import { XmlElementOption } from "../types";
-import { Attributes, Element } from "xml-js";
+import { Attributes, Element, js2xml } from "xml-js";
 
 const META_KEY = 'design:xml:element';
 
 export class XMLElementModel {
     private name: string;
+    private options: XmlElementOption;
     private children: XMLChildModel[];
     private attributes: XMLAttributeModel[];
 
@@ -29,6 +30,8 @@ export class XMLElementModel {
         let element = this.getOrCreateIfNotExists(target.prototype);
 
         element.name = `${namespace}${namespace != '' ? ':' : ''}${name}`;
+
+        element.options = options
     }
 
     static getXMLElement(target: any): XMLElementModel | undefined {
@@ -39,12 +42,71 @@ export class XMLElementModel {
         return Reflect.defineMetadata(META_KEY, element, target);
     }
 
+    static getGlobalTags(entity: any, obj: any = {}): any {
+        const element = XMLElementModel.getXMLElement(entity);
+
+        if (typeof element !== 'undefined') {
+            const xmlns = element?.options?.xmlns;
+
+            // Se sacan los espacios de nombres y si existe los concatena al objeto recibido
+            if (xmlns && xmlns.length) {
+                xmlns.forEach(value => {
+                    if (`xmlns:${value.namespace}` in obj) {
+                        obj[`xmlns:${value.namespace}`] = `${obj[`xmlns:${value.namespace}`]} ${value.value}`
+                    } else {
+                        obj[`xmlns:${value.namespace}`] = value.value
+                    }
+                })
+            }
+
+            const schemaLocation = element?.options?.schemaLocation;
+
+            // Se sacan las locaciones de esquema y si existe los concatena al objeto recibido
+            if (schemaLocation && schemaLocation.length) {
+                schemaLocation.forEach(value => {
+                    if (`xmlns:schemaLocation` in obj) {
+                        obj[`xmlns:schemaLocation`] = `${obj[`xmlns:schemaLocation`]} ${value}`
+                    } else {
+                        obj[`xmlns:schemaLocation`] = value
+                    }
+                })
+            }
+
+            if (element.children) {
+                element.children.forEach(child => {
+                    // child.setGlobalTag(obj)
+                    console.log(child)
+                })
+            }
+        }
+
+        return obj
+
+    }
+
     static serialize(entity: any): string {
         const schema = this.getSchema(entity);
 
-        //console.log(JSON.stringify(schema, null, 3))
+        const tags = this.getGlobalTags(entity);
 
-        return '';
+        console.log(JSON.stringify(tags, null, 3))
+
+        schema.attributes = {
+            ...schema.attributes,
+            ...tags
+        }
+
+        const xmlJson = {
+            declaration: {
+                attributes: {
+                    version: '1.0',
+                    encoding: 'utf-8'
+                }
+            },
+            elements: [schema]
+        };
+
+        return js2xml(xmlJson, {spaces: 4});
     }
 
     static getSchema(value: any | any[]): any {
