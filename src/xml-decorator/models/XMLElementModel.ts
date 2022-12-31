@@ -52,9 +52,14 @@ export class XMLElementModel {
             if (xmlns && xmlns.length) {
                 xmlns.forEach(value => {
                     if (`xmlns:${value.namespace}` in obj) {
-                        obj[`xmlns:${value.namespace}`] = `${obj[`xmlns:${value.namespace}`]} ${value.value}`
+                        if (!`${obj[`xmlns:${value.namespace}`]}`.includes(value.value)) {
+                            obj[`xmlns:${value.namespace}`] = `${obj[`xmlns:${value.namespace}`]} ${value.value}`
+                        }
                     } else {
-                        obj[`xmlns:${value.namespace}`] = value.value
+                        obj = {
+                            [`xmlns:${value.namespace}`]: value.value,
+                            ...obj,
+                        }
                     }
                 })
             }
@@ -65,17 +70,21 @@ export class XMLElementModel {
             if (schemaLocation && schemaLocation.length) {
                 schemaLocation.forEach(value => {
                     if (`xmlns:schemaLocation` in obj) {
-                        obj[`xmlns:schemaLocation`] = `${obj[`xmlns:schemaLocation`]} ${value}`
+                        if (!`${obj[`xmlns:schemaLocation`]}`.includes(value)) {
+                            obj[`xmlns:schemaLocation`] = `${obj[`xmlns:schemaLocation`]} ${value}`
+                        }
                     } else {
-                        obj[`xmlns:schemaLocation`] = value
+                        obj = {
+                            ...obj,
+                            ['xmlns:schemaLocation']: value
+                        }
                     }
                 })
             }
 
             if (element.children) {
                 element.children.forEach(child => {
-                    // child.setGlobalTag(obj)
-                    console.log(child)
+                    obj = child.getGlobalTag(entity, obj)
                 })
             }
         }
@@ -88,8 +97,6 @@ export class XMLElementModel {
         const schema = this.getSchema(entity);
 
         const tags = this.getGlobalTags(entity);
-
-        console.log(JSON.stringify(tags, null, 3))
 
         schema.attributes = {
             ...schema.attributes,

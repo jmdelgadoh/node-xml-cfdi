@@ -125,4 +125,6 @@ export const testComprobanteIngresos = async () => {
     comprobante.Impuestos = impuestos;
 
     const xmlSellado = await service.getXMLSellado(comprobante);
+
+    console.log(xmlSellado)
 }

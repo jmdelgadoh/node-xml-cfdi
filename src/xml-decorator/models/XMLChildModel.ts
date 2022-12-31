@@ -24,20 +24,23 @@ export class XMLChildModel {
         element.addChild(child);
     }
 
-    public setGlobalTag(target: any, parentEntity: any) {
+    public getGlobalTag(parentEntity: any, obj: any = {}): any {
         const entity = parentEntity[this.key];
-
-        const obj = {};
 
         if (typeof entity !== 'undefined') {
             if (Array.isArray(entity) && entity.length) {
-                entity.forEach((value) => {
+                const [firstObj] = entity;
 
-                })
-            } else {
-                return XMLElementModel.getGlobalTags(entity)
+                obj = XMLElementModel.getGlobalTags(firstObj, obj);
+            }
+
+
+            if (!Array.isArray(entity)) {
+                obj = XMLElementModel.getGlobalTags(entity, obj);
             }
         }
+
+        return obj;
     }
 
     public setSchema(target: any[], parentEntity: any) {
