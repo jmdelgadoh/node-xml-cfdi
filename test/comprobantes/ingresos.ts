@@ -16,7 +16,6 @@ import {
 } from '../../src';
 import { emisor } from '../utils/emisor';
 import { receptor } from '../utils/receptor';
-import { XMLElementModel } from "../../src/xml-decorator/models/XMLElementModel";
 import { service } from "../utils/service";
 
 export const testComprobanteIngresos = async () => {
