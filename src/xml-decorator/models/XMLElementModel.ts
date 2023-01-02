@@ -69,14 +69,14 @@ export class XMLElementModel {
             // Se sacan las locaciones de esquema y si existe los concatena al objeto recibido
             if (schemaLocation && schemaLocation.length) {
                 schemaLocation.forEach(value => {
-                    if (`xmlns:schemaLocation` in obj) {
-                        if (!`${obj[`xmlns:schemaLocation`]}`.includes(value)) {
-                            obj[`xmlns:schemaLocation`] = `${obj[`xmlns:schemaLocation`]} ${value}`
+                    if (`xsi:schemaLocation` in obj) {
+                        if (!`${obj[`xsi:schemaLocation`]}`.includes(value)) {
+                            obj[`xsi:schemaLocation`] = `${obj[`xsi:schemaLocation`]} ${value}`
                         }
                     } else {
                         obj = {
                             ...obj,
-                            ['xmlns:schemaLocation']: value
+                            ['xsi:schemaLocation']: value
                         }
                     }
                 })
