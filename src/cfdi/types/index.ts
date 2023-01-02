@@ -71,3 +71,5 @@ export {
     AttributesComprobanteImpuestosTrasladosTrasladoElement,
     ComprobanteImpuestosTrasladosTrasladoElement
 } from './comprobante.cfdi.impuestos.traslados.element';
+
+export * from './concepto.complemento.iedu.element'

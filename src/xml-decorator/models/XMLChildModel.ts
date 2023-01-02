@@ -59,7 +59,9 @@ export class XMLChildModel {
                 }
 
                 if (!Array.isArray(schema)) {
-                    target[target.length] = schema;
+                    if (schema?.elements?.length || schema?.attributes) {
+                        target[target.length] = schema;
+                    }
                 }
             }
         } else if (this.options.required) {

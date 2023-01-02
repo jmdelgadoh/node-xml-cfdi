@@ -1,4 +1,4 @@
-import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
+import { ClaveProdServType, ClaveUnidadType } from '../catalog';
 import { ObjetoImpEnum } from '../catalog/enums';
 import { Element } from 'xml-js';
 

@@ -1,11 +1,12 @@
 import {
     ComprobanteConceptoACuentaTerceros,
+    ComprobanteConceptoComplementoConcepto,
     ComprobanteConceptoCuentaPredial,
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoInformacionAduanera,
     ComprobanteConceptoParte
 } from './index';
-import { ClaveProdServType, ClaveUnidadType } from '../catalog/types';
+import { ClaveProdServType, ClaveUnidadType } from '../catalog';
 import { ObjetoImpEnum } from '../catalog/enums';
 import { AttributesComprobanteConceptoElement, } from '../types';
 import { sanitizeValues } from '../../utils';
@@ -46,7 +47,12 @@ export class ComprobanteConcepto {
         name: 'Parte'
     })
     public Parte: ComprobanteConceptoParte[];
-    // public ComplementoConcepto?: ComprobanteConceptoComplementoConcepto;
+
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'ComplementoConcepto'
+    })
+    public ComplementoConcepto?: ComprobanteConceptoComplementoConcepto;
 
     @XMLAttribute({name: 'ClaveProdServ'})
     public ClaveProdServ: ClaveProdServType;
