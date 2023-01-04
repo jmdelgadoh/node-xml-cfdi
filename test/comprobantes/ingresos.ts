@@ -19,8 +19,6 @@ import { receptor } from '../utils/receptor';
 import { service } from "../utils/service";
 
 export const testComprobanteIngresos = async () => {
-    console.info(`=== === === === === Comprobante de tipo ingreso === === === === ===
-    `);
     /*
     * Se crea el comprobante
     * */

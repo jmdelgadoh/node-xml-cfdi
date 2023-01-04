@@ -1,6 +1,6 @@
 import { XMLChild, XMLElement } from "../../xml-decorator";
 import { CFDI_NAME_SPACE, CFDI_NAME_SPACE_IEDU } from "../index";
-import { ConceptoComplementoIEDU } from "../complements";
+import { ConceptoComplementoIEDU } from "../complements/ConceptoComplementoIEDU";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

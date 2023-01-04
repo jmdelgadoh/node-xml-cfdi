@@ -172,6 +172,14 @@ export class CFDIService {
         })
     }
 
+    public overridePaths(params: CFDIServiceParams & CertificateParams) {
+        if (params.pathXmlFolder) this._pathXmlFolder = params.pathXmlFolder;
+        if (params.pathKey) this._pathKey = params.pathKey;
+        if (params.pathCertificate) this._pathCertificate = params.pathCertificate;
+        if (params.pathXsltCfdi40) this._pathXsltCfdi40 = params.pathXsltCfdi40;
+        if (params.password) this._password = params.password;
+    }
+
     private initService({
                             pathXsltCfdi40 = `${process.cwd()}/assets/xslt/cadenaoriginal_4_0.xslt`,
                             pathXmlFolder = `${tmpdir()}`

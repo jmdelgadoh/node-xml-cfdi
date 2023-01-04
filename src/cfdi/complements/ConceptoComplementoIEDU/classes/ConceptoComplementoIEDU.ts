@@ -1,6 +1,6 @@
-import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE_IEDU } from "../index";
-import { ConceptoComplementoIeduElement } from "../types";
+import { XMLAttribute, XMLElement } from "../../../../xml-decorator";
+import { CFDI_NAME_SPACE_IEDU } from "../../../index";
+import { ConceptoComplementoIeduElement } from "../../../types";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE_IEDU,

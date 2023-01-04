@@ -19,11 +19,9 @@ import {
 } from '../../src';
 import { emisor } from '../utils/emisor';
 import { receptor } from '../utils/receptor';
-import { XMLElementModel } from "../../src/xml-decorator/models/XMLElementModel";
 
 export const testComprobanteEgresos = async () => {
-    console.info(`=== === === === === Comprobante de tipo egreso === === === === ===
-    `);
+
     /*
     * Se crea el comprobante
     * */
