@@ -19,7 +19,7 @@ export enum TipoComprobanteEnum {
     * */
     N = 'N',
     /*
-    * @value Pago
+    * @value PagosPago
     * */
     P = 'P',
 }

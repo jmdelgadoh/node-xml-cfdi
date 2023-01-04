@@ -5,13 +5,16 @@ import {
     ComprobanteConceptoImpuestos,
     ComprobanteConceptoInformacionAduanera,
     ComprobanteConceptoParte
-} from './index';
-import { ClaveProdServType, ClaveUnidadType } from '../catalog';
-import { ObjetoImpEnum } from '../catalog/enums';
-import { AttributesComprobanteConceptoElement, } from '../types';
+} from '.';
+import {
+    AttributesComprobanteConceptoElement,
+    CFDI_NAME_SPACE,
+    ClaveProdServType,
+    ClaveUnidadType,
+    ObjetoImpEnum
+} from '..';
 import { sanitizeValues } from '../../utils';
 import { XMLAttribute, XMLChild, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from "../index";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

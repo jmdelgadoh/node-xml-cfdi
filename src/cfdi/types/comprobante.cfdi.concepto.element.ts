@@ -1,6 +1,5 @@
-import { ClaveProdServType, ClaveUnidadType } from '../catalog';
-import { ObjetoImpEnum } from '../catalog/enums';
-import { Element } from 'xml-js';
+import { ObjetoImpEnum } from '../catalog';
+import { ClaveProdServType, ClaveUnidadType } from ".";
 
 export type AttributesComprobanteConceptoElement = {
     /*
@@ -54,15 +53,3 @@ export type AttributesComprobanteConceptoElement = {
     * */
     ObjetoImp: ObjetoImpEnum;
 }
-
-export type ComprobanteConceptoElement = {
-    type: 'element',
-    name: 'cfdi:Concepto',
-    attributes?: AttributesComprobanteConceptoElement,
-} & Element
-
-export type ComprobanteConceptosElement = {
-    type: 'element',
-    name: 'cfdi:Conceptos',
-    elements: ComprobanteConceptoElement[]
-} & Element

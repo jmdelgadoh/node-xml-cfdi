@@ -51,11 +51,15 @@ export class XMLChildModel {
 
             if (typeof schema === 'object') {
                 if (Array.isArray(schema) && schema.length) {
-                    target[target.length] = {
-                        type: 'element',
-                        name: this.name,
-                        elements: [...schema]
-                    };
+                    if (this.options?.noImplicitStructure) {
+                        target = [...target, ...schema];
+                    } else {
+                        target[target.length] = {
+                            type: 'element',
+                            name: this.name,
+                            elements: [...schema]
+                        };
+                    }
                 }
 
                 if (!Array.isArray(schema)) {

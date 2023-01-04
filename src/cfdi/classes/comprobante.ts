@@ -1,27 +1,32 @@
-import { CodigoPostalType } from '../catalog/types';
-import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../catalog/enums';
+import {
+    AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
+    AttributesComprobanteElement,
+    CFDI_NAME_SPACE,
+    CodigoPostalType,
+    ExportacionEnum,
+    FormaPagoEnum,
+    MetodoPagoEnum,
+    MonedaEnum,
+    TipoComprobanteEnum
+} from '..';
 import {
     ComprobanteCfdiRelacionados,
     ComprobanteCfdiRelacionadosCfdiRelacionado,
+    ComprobanteComplemento,
     ComprobanteConcepto,
     ComprobanteEmisor,
     ComprobanteImpuestos,
     ComprobanteInformacionGlobal,
     ComprobanteReceptor
-} from './index';
-import {
-    AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement,
-    AttributesComprobanteElement,
-} from '../types';
-import { CFDI_NAME_SPACE } from "..";
+} from '.';
 import { XMLAttribute, XMLChild, XMLElement } from "../../xml-decorator";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,
     name: 'Comprobante',
     xmlns: [
-        { namespace: 'cfdi', value: 'http://www.sat.gob.mx/cfd/4' },
-        { namespace: 'xsi', value: 'http://www.w3.org/2001/XMLSchema-instance' }
+        {namespace: 'cfdi', value: 'http://www.sat.gob.mx/cfd/4'},
+        {namespace: 'xsi', value: 'http://www.w3.org/2001/XMLSchema-instance'}
     ],
     schemaLocation: ['http://www.sat.gob.mx/cfd/4', 'http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd']
 })
@@ -61,7 +66,12 @@ export class Comprobante {
         name: 'Impuestos'
     })
     public Impuestos?: ComprobanteImpuestos;
-    // public Complemento: ComprobanteComplemento;
+
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE,
+        name: 'Complemento'
+    })
+    public Complemento: ComprobanteComplemento;
     // public Addenda: ComprobanteAddenda{
 
     @XMLAttribute({name: 'Version'})
@@ -124,7 +134,7 @@ export class Comprobante {
     public constructor(params: AttributesComprobanteElement) {
         this.Conceptos = [];
         this.CfdiRelacionados = [];
-        this.Version = params.Version;
+        this.Version = params.Version || '4.0';
         this.Serie = params.Serie;
         this.Folio = params.Folio;
         this.Fecha = params.Fecha;

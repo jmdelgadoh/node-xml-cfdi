@@ -1,8 +1,6 @@
-import { RegimenFiscalEnum } from '../catalog/enums';
-import { AttributesComprobanteEmisorElement } from '../types';
+import { AttributesComprobanteEmisorElement, CFDI_NAME_SPACE, RegimenFiscalEnum } from '..';
 import { sanitizeValues } from '../../utils';
 import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from '../index';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

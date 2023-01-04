@@ -1,7 +1,5 @@
-import { ImpuestoEnum } from '../catalog/enums';
-import { AttributesComprobanteImpuestosRetencionesRetencionElement } from '../types';
+import { AttributesComprobanteImpuestosRetencionesRetencionElement, CFDI_NAME_SPACE, ImpuestoEnum } from '..';
 import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from '../index';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

@@ -1,5 +1,4 @@
-import { Element } from 'xml-js';
-import { MesesEnum, PeriodicidadEnum, } from '../catalog/enums';
+import { MesesEnum, PeriodicidadEnum, } from '../catalog';
 
 export type AttributesComprobanteInformacionGlobalElement = {
     /*
@@ -15,9 +14,3 @@ export type AttributesComprobanteInformacionGlobalElement = {
     * */
     Anio: string;
 }
-
-export type ComprobanteInformacionGlobalElement = {
-    type: 'element',
-    name: 'cfdi:InformacionGlobal',
-    attributes?: AttributesComprobanteInformacionGlobalElement,
-} & Element

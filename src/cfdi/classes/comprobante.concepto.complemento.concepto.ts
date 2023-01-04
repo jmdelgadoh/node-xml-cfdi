@@ -1,6 +1,6 @@
 import { XMLChild, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE, CFDI_NAME_SPACE_IEDU } from "../index";
-import { ConceptoComplementoIEDU } from "../complements/ConceptoComplementoIEDU";
+import { CFDI_NAME_SPACE, CFDI_NAME_SPACE_IEDU } from "..";
+import { Iedu } from "../complements";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,
@@ -11,5 +11,5 @@ export class ComprobanteConceptoComplementoConcepto {
         namespace: CFDI_NAME_SPACE_IEDU,
         name: 'instEducativas',
     })
-    iedu?: ConceptoComplementoIEDU
+    iedu?: Iedu
 }

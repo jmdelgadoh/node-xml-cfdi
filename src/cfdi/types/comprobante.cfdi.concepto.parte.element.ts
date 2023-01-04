@@ -1,5 +1,4 @@
-import { Element } from 'xml-js';
-import { ClaveProdServType } from '../catalog/types';
+import { ClaveProdServType } from ".";
 
 export type AttributesComprobanteConceptoParteElement = {
     /*
@@ -39,9 +38,3 @@ export type AttributesComprobanteConceptoParteElement = {
     * */
     Importe?: string;
 }
-
-export type ComprobanteConceptoParteElement = {
-    type: 'element',
-    name: 'cfdi:Parte',
-    attributes?: AttributesComprobanteConceptoParteElement,
-} & Element

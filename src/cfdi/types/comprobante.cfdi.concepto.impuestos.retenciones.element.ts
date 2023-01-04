@@ -1,5 +1,4 @@
-import { Element } from 'xml-js';
-import { ImpuestoEnum, TipoFactorEnum } from '../catalog/enums';
+import { ImpuestoEnum, TipoFactorEnum } from '../catalog';
 
 export type AttributesComprobanteConceptoImpuestosRetencionesRetencionElement = {
     /*
@@ -25,9 +24,3 @@ export type AttributesComprobanteConceptoImpuestosRetencionesRetencionElement = 
     * */
     Importe: string;
 }
-
-export type ComprobanteConceptoImpuestosRetencionesRetencionElement = {
-    type: 'element',
-    name: 'cfdi:Retencion',
-    attributes?: AttributesComprobanteConceptoImpuestosRetencionesRetencionElement,
-} & Element

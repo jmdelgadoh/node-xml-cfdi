@@ -1,6 +1,5 @@
-import { AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement } from '../types';
+import { AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement, CFDI_NAME_SPACE } from '..';
 import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from '../index';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

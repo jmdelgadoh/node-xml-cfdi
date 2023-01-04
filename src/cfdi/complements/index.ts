@@ -1,1 +1,2 @@
-export * from './ConceptoComplementoIEDU'
+export * from './Iedu'
+export * from './Pagos'

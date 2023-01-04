@@ -1,9 +1,7 @@
-import { ComprobanteConceptoParteInformacionAduanera } from './index';
-import { ClaveProdServType } from '../catalog/types';
-import { AttributesComprobanteConceptoParteElement } from '../types';
+import { ComprobanteConceptoParteInformacionAduanera } from '.';
+import { AttributesComprobanteConceptoParteElement, CFDI_NAME_SPACE, ClaveProdServType } from '..';
 import { sanitizeValues } from '../../utils';
 import { XMLAttribute, XMLChild, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from "../index";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

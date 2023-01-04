@@ -1,7 +1,10 @@
-import { ImpuestoEnum, TipoFactorEnum } from '../catalog/enums';
-import { AttributesComprobanteImpuestosTrasladosTrasladoElement } from '../types';
+import {
+    AttributesComprobanteImpuestosTrasladosTrasladoElement,
+    CFDI_NAME_SPACE,
+    ImpuestoEnum,
+    TipoFactorEnum
+} from '..';
 import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from '../index';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

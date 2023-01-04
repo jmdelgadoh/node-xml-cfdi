@@ -7,11 +7,11 @@ exports.MetodoPagoEnum = void 0;
 var MetodoPagoEnum;
 (function (MetodoPagoEnum) {
     /*
-    * @value Pago en una sola exhibición
+    * @value PagosPago en una sola exhibición
     * */
     MetodoPagoEnum["PUE"] = "PUE";
     /*
-    * @value Pago en parcialidades o diferido
+    * @value PagosPago en parcialidades o diferido
     * */
     MetodoPagoEnum["PPD"] = "PPD";
 })(MetodoPagoEnum = exports.MetodoPagoEnum || (exports.MetodoPagoEnum = {}));

@@ -1,6 +1,5 @@
 import { XMLAttribute, XMLElement } from "../../../../xml-decorator";
-import { CFDI_NAME_SPACE_IEDU } from "../../../index";
-import { ConceptoComplementoIeduElement } from "../../../types";
+import { CFDI_NAME_SPACE_IEDU, ConceptoComplementoIeduElement } from "../../..";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE_IEDU,
@@ -10,7 +9,7 @@ import { ConceptoComplementoIeduElement } from "../../../types";
     ],
     schemaLocation: ['http://www.sat.gob.mx/iedu', 'http://www.sat.gob.mx/sitio_internet/cfd/iedu/iedu.xsd']
 })
-export class ConceptoComplementoIEDU {
+export class Iedu {
     @XMLAttribute({name: 'version', required: true})
     version: string;
 

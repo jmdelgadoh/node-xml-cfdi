@@ -1,8 +1,6 @@
-import { TipoRelacionEnum } from '../catalog/enums';
-import { ComprobanteCfdiRelacionadosCfdiRelacionado } from './index';
-import { AttributesComprobanteCfdiRelacionadosElement } from '../types';
+import { AttributesComprobanteCfdiRelacionadosElement, CFDI_NAME_SPACE, TipoRelacionEnum } from '..';
+import { ComprobanteCfdiRelacionadosCfdiRelacionado } from '.';
 import { XMLAttribute, XMLChild, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from "../index";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

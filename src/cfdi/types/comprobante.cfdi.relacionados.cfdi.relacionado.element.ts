@@ -1,5 +1,3 @@
-import { Element } from 'xml-js';
-
 export type AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement = {
     /*
     * Atributo requerido para registrar el folio fiscal (UUID) de un CFDI relacionado con el presente comprobante, por
@@ -9,9 +7,3 @@ export type AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement = {
     * */
     UUID: string;
 }
-
-export type ComprobanteCfdiRelacionadosCfdiRelacionadoElement = {
-    type: 'element',
-    name: 'cfdi:CfdiRelacionado',
-    attributes?: AttributesComprobanteCfdiRelacionadosCfdiRelacionadoElement,
-} & Element

@@ -3,11 +3,11 @@
 * */
 export enum MetodoPagoEnum {
     /*
-    * @value Pago en una sola exhibición
+    * @value PagosPago en una sola exhibición
     * */
     PUE = 'PUE',
     /*
-    * @value Pago en parcialidades o diferido
+    * @value PagosPago en parcialidades o diferido
     * */
     PPD = 'PPD',
 }

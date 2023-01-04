@@ -1,26 +1,29 @@
-import {ImpuestoEnum, TipoFactorEnum} from '../catalog/enums';
-import {AttributesComprobanteConceptoImpuestosRetencionesRetencionElement} from '../types';
+import {
+    AttributesComprobanteConceptoImpuestosRetencionesRetencionElement,
+    CFDI_NAME_SPACE,
+    ImpuestoEnum,
+    TipoFactorEnum
+} from '..';
 import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from '../index';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,
     name: 'Retencion',
 })
 export class ComprobanteConceptoImpuestosRetencion {
-    @XMLAttribute({ name: 'Base' })
+    @XMLAttribute({name: 'Base'})
     public Base: string;
 
-    @XMLAttribute({ name: 'Impuesto' })
+    @XMLAttribute({name: 'Impuesto'})
     public Impuesto: ImpuestoEnum;
 
-    @XMLAttribute({ name: 'TipoFactor' })
+    @XMLAttribute({name: 'TipoFactor'})
     public TipoFactor: TipoFactorEnum;
 
-    @XMLAttribute({ name: 'TasaOCuota' })
+    @XMLAttribute({name: 'TasaOCuota'})
     public TasaOCuota: string;
 
-    @XMLAttribute({ name: 'Importe' })
+    @XMLAttribute({name: 'Importe'})
     public Importe: string;
 
     constructor(params: AttributesComprobanteConceptoImpuestosRetencionesRetencionElement) {

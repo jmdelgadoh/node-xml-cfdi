@@ -1,6 +1,5 @@
-import { Element } from 'xml-js';
-import { RegimenFiscalEnum } from '../catalog/enums';
-import { CodigoPostalType } from '../catalog';
+import { RegimenFiscalEnum } from '../catalog';
+import { CodigoPostalType } from ".";
 
 export type AttributesComprobanteConceptoACuentaTercerosElement = {
     /*
@@ -24,9 +23,3 @@ export type AttributesComprobanteConceptoACuentaTercerosElement = {
     * */
     DomicilioFiscalACuentaTerceros: CodigoPostalType;
 }
-
-export type ComprobanteConceptoACuentaTercerosElement = {
-    type: 'element',
-    name: 'cfdi:ACuentaTerceros',
-    attributes?: AttributesComprobanteConceptoACuentaTercerosElement,
-} & Element

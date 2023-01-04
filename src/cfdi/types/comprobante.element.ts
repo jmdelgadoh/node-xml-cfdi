@@ -1,13 +1,18 @@
-import { Element } from 'xml-js';
-import { ExportacionEnum, FormaPagoEnum, MetodoPagoEnum, MonedaEnum, TipoComprobanteEnum } from '../catalog/enums';
-import { CodigoPostalType } from '../catalog/types';
+import {
+    ExportacionEnum,
+    FormaPagoEnum,
+    MetodoPagoEnum,
+    MonedaEnum,
+    TipoComprobanteEnum
+} from '../catalog';
+import { CodigoPostalType } from ".";
 
 export type AttributesComprobanteElement = {
     /*
     * Atributo requerido con valor prefijado a 4.0 que indica la versión del estándar bajo el que se encuentra
     * expresado el comprobante
     * */
-    Version: '4.0' | string;
+    Version?: '4.0' | string;
     /*
     * Atributo opcional para precisar la serie para control interno del contribuyente. Este atributo acepta una cadena
     * de caracteres.
@@ -107,10 +112,3 @@ export type AttributesComprobanteElement = {
     * */
     Confirmacion?: string;
 }
-
-export type ComprobanteElement = {
-    type: 'element',
-    name: 'cfdi:Comprobante',
-    attributes?: AttributesComprobanteElement,
-    elements: Element[]
-} & Element

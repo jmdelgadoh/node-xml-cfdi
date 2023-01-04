@@ -1,5 +1,4 @@
-import { Element } from 'xml-js';
-import { TipoRelacionEnum } from '../catalog/enums';
+import { TipoRelacionEnum } from '../catalog';
 
 export type AttributesComprobanteCfdiRelacionadosElement = {
     /*
@@ -9,15 +8,11 @@ export type AttributesComprobanteCfdiRelacionadosElement = {
     TipoRelacion: TipoRelacionEnum;
 }
 
-export type AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement = AttributesComprobanteCfdiRelacionadosElement & {
+export type AttributesComprobanteCfdiRelacionadosConCfdiRelacionadoElement =
+    AttributesComprobanteCfdiRelacionadosElement
+    & {
     /*
     * Atributo requerido para registrar el folio fiscal (UUID) de los CFDIs relacionados con el presente comprobante
     * */
     CfdiRelacionado: string[];
 }
-
-export type ComprobanteCfdiRelacionadosElement = {
-    type: 'element',
-    name: 'cfdi:CfdiRelacionados',
-    attributes?: AttributesComprobanteCfdiRelacionadosElement,
-} & Element

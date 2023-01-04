@@ -1,6 +1,5 @@
-import { AttributesComprobanteConceptoCuentaPredialElement } from '../types';
+import { AttributesComprobanteConceptoCuentaPredialElement, CFDI_NAME_SPACE } from '..';
 import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from '../index';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

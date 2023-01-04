@@ -23,7 +23,7 @@ var TipoComprobanteEnum;
     * */
     TipoComprobanteEnum["N"] = "N";
     /*
-    * @value Pago
+    * @value PagosPago
     * */
     TipoComprobanteEnum["P"] = "P";
 })(TipoComprobanteEnum = exports.TipoComprobanteEnum || (exports.TipoComprobanteEnum = {}));

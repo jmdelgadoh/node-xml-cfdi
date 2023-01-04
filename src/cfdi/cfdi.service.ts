@@ -36,13 +36,17 @@ export class CFDIService {
                              }: CertificateParams = {}) {
         this._pathCertificate = pathCertificate;
         this._pathKey = pathKey;
-        this._password = password
+        this._password = password;
     }
 
-    public async saveXml(xml: string): Promise<string> {
+    public async saveXml(xml: string, name?: string): Promise<string> {
         return new Promise(async (resolve, reject) => {
             try {
-                const nameTemp = temporalName();
+                let nameTemp = temporalName();
+
+                if (name) {
+                    nameTemp = `${name}.xml`
+                }
 
                 const pathFile = join(this._pathXmlFolder, nameTemp);
 

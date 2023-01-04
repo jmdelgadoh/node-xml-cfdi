@@ -19,7 +19,7 @@ Esta librería está pensada para ser usada en un entorno back end, dicho entorn
   - [Instrucciones para macOS 20/22](https://ports.macports.org/port/openssl/) (no probado)
   - Es importante comprobar su instalación
 - Descarga y almacena los archivos xslt
-  - [Descargar](https://www.mediafire.com/file/1ae8bfq89smosdw/xslt.zip/file)
+  - [Descargar](https://www.mediafire.com/file/cwc1yvnpnfv6eq6/xslt.zip/file)
 - Debes contar con los siguientes archivos del emisor
   - Certificado CSD (.csd)
   - Llave de seguridad (.key)

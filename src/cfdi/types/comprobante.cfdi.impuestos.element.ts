@@ -1,5 +1,3 @@
-import { Element } from 'xml-js';
-
 export type AttributesComprobanteImpuestosElement = {
     /*
     * Atributo condicional para expresar el total de los impuestos retenidos que se desprenden de los conceptos
@@ -14,19 +12,3 @@ export type AttributesComprobanteImpuestosElement = {
     * */
     TotalImpuestosTrasladados?: string;
 }
-
-export type ComprobanteImpuestosElement = {
-    type: 'element',
-    name: 'cfdi:Impuestos',
-    attributes?: AttributesComprobanteImpuestosElement,
-} & Element
-
-export type ComprobanteImpuestosTrasladosElement = {
-    type: 'element',
-    name: 'cfdi:Traslados',
-} & Element
-
-export type ComprobanteImpuestosRetencionesElement = {
-    type: 'element',
-    name: 'cfdi:Retenciones',
-} & Element

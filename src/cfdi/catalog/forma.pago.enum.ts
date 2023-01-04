@@ -1,97 +1,93 @@
-"use strict";
-exports.__esModule = true;
-exports.FormaPagoEnum = void 0;
 /*
 * Cfdi V4.0 - c_FormaPago
 * */
-var FormaPagoEnum;
-(function (FormaPagoEnum) {
+export enum FormaPagoEnum {
     /*
     * @value Efectivo
     * */
-    FormaPagoEnum["FP01"] = "01";
+    FP01 = '01',
     /*
     * @value Cheque nominativo
     * */
-    FormaPagoEnum["FP02"] = "02";
+    FP02 = '02',
     /*
     * @value Transferencia electrónica de fondos
     * */
-    FormaPagoEnum["FP03"] = "03";
+    FP03 = '03',
     /*
     * @value Tarjeta de crédito
     * */
-    FormaPagoEnum["FP04"] = "04";
+    FP04 = '04',
     /*
     * @value Monedero electrónico
     * */
-    FormaPagoEnum["FP05"] = "05";
+    FP05 = '05',
     /*
     * @value Dinero electrónico
     * */
-    FormaPagoEnum["FP06"] = "06";
+    FP06 = '06',
     /*
     * @value Vales de despensa
     * */
-    FormaPagoEnum["FP08"] = "08";
+    FP08 = '08',
     /*
     * @value Dación en pago
     * */
-    FormaPagoEnum["FP12"] = "12";
+    FP12 = '12',
     /*
-    * @value Pago por subrogación
+    * @value PagosPago por subrogación
     * */
-    FormaPagoEnum["FP13"] = "13";
+    FP13 = '13',
     /*
-    * @value Pago por consignación
+    * @value PagosPago por consignación
     * */
-    FormaPagoEnum["FP14"] = "14";
+    FP14 = '14',
     /*
     * @value Condonación
     * */
-    FormaPagoEnum["FP15"] = "15";
+    FP15 = '15',
     /*
     * @value Compensación
     * */
-    FormaPagoEnum["FP17"] = "17";
+    FP17 = '17',
     /*
     * @value Novación
     * */
-    FormaPagoEnum["FP23"] = "23";
+    FP23 = '23',
     /*
     * @value Confusión
     * */
-    FormaPagoEnum["FP24"] = "24";
+    FP24 = '24',
     /*
     * @value Remisión de deuda
     * */
-    FormaPagoEnum["FP25"] = "25";
+    FP25 = '25',
     /*
     * @value Prescripción o caducidad
     * */
-    FormaPagoEnum["FP26"] = "26";
+    FP26 = '26',
     /*
     * @value A satisfacción del acreedor
     * */
-    FormaPagoEnum["FP27"] = "27";
+    FP27 = '27',
     /*
     * @value Tarjeta de débito
     * */
-    FormaPagoEnum["FP28"] = "28";
+    FP28 = '28',
     /*
     * @value Tarjeta de servicios
     * */
-    FormaPagoEnum["FP29"] = "29";
+    FP29 = '29',
     /*
     * @value Aplicación de anticipos
     * */
-    FormaPagoEnum["FP30"] = "30";
+    FP30 = '30',
     /*
     * @value Intermediario pagos
     * */
-    FormaPagoEnum["FP31"] = "31";
+    FP31 = '31',
     /*
     * @value Por definir
     * */
-    FormaPagoEnum["FP99"] = "99";
-})(FormaPagoEnum = exports.FormaPagoEnum || (exports.FormaPagoEnum = {}));
+    FP99 = '99',
+}

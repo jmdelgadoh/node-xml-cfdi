@@ -19,4 +19,8 @@ export type XmlAttributeOption = XmlOption & {
 
 export type XmlChildOption = XmlOption & {
     required?: boolean;
+    /*
+    * Solo aplica para arrays
+    * */
+    noImplicitStructure?: boolean;
 }

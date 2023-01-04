@@ -1,6 +1,5 @@
-import { Element } from 'xml-js';
-import { PaisEnum, RegimenFiscalEnum, UsoCfdiEnum } from '../catalog/enums';
-import { CodigoPostalType } from '../catalog/types';
+import { PaisEnum, RegimenFiscalEnum, UsoCfdiEnum } from '../catalog';
+import { CodigoPostalType } from "./codigo.postal.type";
 
 export type AttributesComprobanteReceptorElement = {
     /*
@@ -38,9 +37,3 @@ export type AttributesComprobanteReceptorElement = {
     * */
     UsoCFDI: UsoCfdiEnum;
 }
-
-export type ComprobanteReceptorElement = {
-    type: 'element',
-    name: 'cfdi:Receptor',
-    attributes?: AttributesComprobanteReceptorElement,
-} & Element

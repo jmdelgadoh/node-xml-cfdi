@@ -1,5 +1,4 @@
-import { Element } from 'xml-js';
-import { RegimenFiscalEnum } from '../catalog/enums';
+import { RegimenFiscalEnum } from '../catalog';
 
 export type AttributesComprobanteEmisorElement = {
     /*
@@ -23,9 +22,3 @@ export type AttributesComprobanteEmisorElement = {
     * */
     FacAtrAdquirente?: string;
 }
-
-export type ComprobanteEmisorElement = {
-    type: 'element',
-    name: 'cfdi:Emisor',
-    attributes?: AttributesComprobanteEmisorElement,
-} & Element

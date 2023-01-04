@@ -1,6 +1,6 @@
-import { ComprobanteConceptoInformacionAduanera } from './index';
+import { ComprobanteConceptoInformacionAduanera } from '.';
 import { XMLElement } from '../../xml-decorator';
-import { CFDI_NAME_SPACE } from '../index';
+import { CFDI_NAME_SPACE } from '..';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

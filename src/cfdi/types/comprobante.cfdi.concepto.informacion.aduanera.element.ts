@@ -1,5 +1,3 @@
-import { Element } from 'xml-js';
-
 export type AttributesComprobanteConceptoInformacionAduaneraElement = {
     /*
     * Atributo requerido para expresar el número del pedimento que ampara la importación del bien que se expresa en el
@@ -11,9 +9,3 @@ export type AttributesComprobanteConceptoInformacionAduaneraElement = {
     * */
     NumeroPedimento: string;
 }
-
-export type ComprobanteConceptoInformacionAduaneraElement = {
-    type: 'element',
-    name: 'cfdi:InformacionAduanera',
-    attributes?: AttributesComprobanteConceptoInformacionAduaneraElement,
-} & Element

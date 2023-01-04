@@ -1,6 +1,6 @@
 {
   "name": "@munyaal/cfdi",
-  "version": "1.0.0-beta.9",
+  "version": "1.0.0-beta.11",
   "files": [
     "index.d.ts",
     "index.js",

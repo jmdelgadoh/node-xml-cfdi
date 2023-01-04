@@ -1,7 +1,5 @@
-import { MesesEnum, PeriodicidadEnum } from '../catalog/enums';
-import { AttributesComprobanteInformacionGlobalElement } from '../types';
+import { AttributesComprobanteInformacionGlobalElement, CFDI_NAME_SPACE, MesesEnum, PeriodicidadEnum } from '..';
 import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from '../index';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,

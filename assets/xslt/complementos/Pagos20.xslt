@@ -12,12 +12,12 @@
       <xsl:apply-templates select="."/>
     </xsl:for-each>
 
-	<!-- Iniciamos el manejo de los elementos de tipo Pago. -->
-    <xsl:for-each select="./pago20:Pago">
+	<!-- Iniciamos el manejo de los elementos de tipo PagosPago. -->
+    <xsl:for-each select="./pago20:PagosPago">
       <xsl:apply-templates select="."/>
     </xsl:for-each>
   </xsl:template>
-  
+
   <!-- Iniciamos el tratamiento de los atributos de pago20:Totales. -->
   <xsl:template match="pago20:Totales">
     <xsl:call-template name="Opcional">
@@ -55,8 +55,8 @@
     </xsl:call-template>
   </xsl:template>
 
-  <!-- Iniciamos el tratamiento de los atributos de pago20:Pago -->
-  <xsl:template match="pago20:Pago">
+  <!-- Iniciamos el tratamiento de los atributos de pago20:PagosPago -->
+  <xsl:template match="pago20:PagosPago">
     <xsl:call-template name="Requerido">
       <xsl:with-param name="valor" select="./@FechaPago" />
     </xsl:call-template>
@@ -107,7 +107,7 @@
     <xsl:for-each select="./pago20:DoctoRelacionado">
       <xsl:apply-templates select="."/>
     </xsl:for-each>
-    
+
     <!--  Iniciamos el tratamiento de los atributos de pago20:ImpuestosP. -->
     <xsl:for-each select="./pago20:ImpuestosP">
       <xsl:apply-templates select="."/>
@@ -165,7 +165,7 @@
 	    <xsl:with-param name="valor" select="./@ImporteDR" />
 	  </xsl:call-template>
     </xsl:for-each>
-    
+
     <!--  Iniciamos el tratamiento de los atributos del subnodo ImpuestosDR-TrasladosDR-TrasladoDR. -->
     <xsl:for-each select="./pago20:ImpuestosDR/pago20:TrasladosDR/pago20:TrasladoDR">
       <xsl:call-template name="Requerido">

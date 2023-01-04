@@ -1,34 +1,38 @@
-import {PaisEnum, RegimenFiscalEnum, UsoCfdiEnum} from '../catalog/enums';
-import {CodigoPostalType} from '../catalog/types';
-import {AttributesComprobanteReceptorElement} from '../types';
-import {sanitizeValues} from '../../utils';
+import {
+    AttributesComprobanteReceptorElement,
+    CFDI_NAME_SPACE,
+    CodigoPostalType,
+    PaisEnum,
+    RegimenFiscalEnum,
+    UsoCfdiEnum
+} from '..';
+import { sanitizeValues } from '../../utils';
 import { XMLAttribute, XMLElement } from "../../xml-decorator";
-import { CFDI_NAME_SPACE } from '../index';
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE,
     name: 'Receptor',
 })
 export class ComprobanteReceptor {
-    @XMLAttribute({ name: 'Rfc' })
+    @XMLAttribute({name: 'Rfc'})
     public Rfc: string;
 
-    @XMLAttribute({ name: 'Nombre' })
+    @XMLAttribute({name: 'Nombre'})
     public Nombre: string;
 
-    @XMLAttribute({ name: 'DomicilioFiscalReceptor' })
+    @XMLAttribute({name: 'DomicilioFiscalReceptor'})
     public DomicilioFiscalReceptor: CodigoPostalType;
 
-    @XMLAttribute({ name: 'ResidenciaFiscal' })
+    @XMLAttribute({name: 'ResidenciaFiscal'})
     public ResidenciaFiscal?: PaisEnum;
 
-    @XMLAttribute({ name: 'NumRegIdTrib' })
+    @XMLAttribute({name: 'NumRegIdTrib'})
     public NumRegIdTrib?: string;
 
-    @XMLAttribute({ name: 'RegimenFiscalReceptor' })
+    @XMLAttribute({name: 'RegimenFiscalReceptor'})
     public RegimenFiscalReceptor: RegimenFiscalEnum;
 
-    @XMLAttribute({ name: 'UsoCFDI' })
+    @XMLAttribute({name: 'UsoCFDI'})
     public UsoCFDI: UsoCfdiEnum;
 
     constructor(params: AttributesComprobanteReceptorElement) {
