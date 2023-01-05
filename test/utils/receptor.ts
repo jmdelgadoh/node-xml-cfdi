@@ -5,5 +5,5 @@ export const receptor = new ComprobanteReceptor({
     Nombre: 'CALEB ISAAC MORA DIAZ',
     DomicilioFiscalReceptor: '77725',
     RegimenFiscalReceptor: RegimenFiscalEnum.RF612,
-    UsoCFDI: UsoCfdiEnum.G03
+    UsoCFDI: UsoCfdiEnum.P01
 });

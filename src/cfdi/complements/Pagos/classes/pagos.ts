@@ -1,6 +1,6 @@
 import { XMLAttribute, XMLChild, XMLElement } from "../../../../xml-decorator";
-import { CFDI_NAME_SPACE_PAGO, ComprobanteComplementoPagosTotalesElement, PagosPago } from "../../../";
-import { PagosTotales } from ".";
+import { CFDI_NAME_SPACE_PAGO, ComprobanteComplementoPagosTotalesElement } from "../../../";
+import { PagosTotales, PagosPago } from ".";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE_PAGO,

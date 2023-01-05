@@ -1,6 +1,13 @@
-import { XMLAttribute, XMLElement } from "../../../../xml-decorator";
-import { CFDI_NAME_SPACE_PAGO, FormaPagoEnum, MonedaEnum, TipoCadenaPagoEnum } from "../../../";
-import { ComprobanteComplementoPagoElement } from "../types";
+import { XMLAttribute, XMLChild, XMLElement } from "../../../../xml-decorator";
+import {
+    CFDI_NAME_SPACE_PAGO,
+    ComprobanteComplementoPagoElement,
+    FormaPagoEnum,
+    MonedaEnum,
+    PagosPagoDoctoRelacionado,
+    PagosPagoImpuestosP,
+    TipoCadenaPagoEnum
+} from "../../../";
 
 @XMLElement({
     namespace: CFDI_NAME_SPACE_PAGO,
@@ -52,6 +59,20 @@ export class PagosPago {
     @XMLAttribute({name: 'SelloPago'})
     public SelloPago?: string;
 
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE_PAGO,
+        noImplicitStructure: true,
+        required: true,
+        name: 'DoctoRelacionado',
+    })
+    public DoctoRelacionado: PagosPagoDoctoRelacionado[];
+
+    @XMLChild({
+        namespace: CFDI_NAME_SPACE_PAGO,
+        name: 'ImpuestosP',
+    })
+    public ImpuestosP?: PagosPagoImpuestosP;
+
     constructor(params: ComprobanteComplementoPagoElement) {
         this.FechaPago = params.FechaPago;
         this.FormaDePagoP = params.FormaDePagoP;
@@ -68,5 +89,6 @@ export class PagosPago {
         this.CertPago = params.CertPago;
         this.CadPago = params.CadPago;
         this.SelloPago = params.SelloPago;
+        this.DoctoRelacionado = [];
     }
 }

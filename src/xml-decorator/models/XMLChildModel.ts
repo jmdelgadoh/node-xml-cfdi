@@ -52,7 +52,9 @@ export class XMLChildModel {
             if (typeof schema === 'object') {
                 if (Array.isArray(schema) && schema.length) {
                     if (this.options?.noImplicitStructure) {
-                        target = [...target, ...schema];
+                        schema.forEach((value) => {
+                            target[target.length] = value
+                        })
                     } else {
                         target[target.length] = {
                             type: 'element',

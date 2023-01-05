@@ -1,2 +1,7 @@
 export * from './comprobante.complemento.pagos.totales.element'
 export * from './comprobante.complemento.pago.element'
+export * from './comprobante.complemento.pago.docto.relacionado.element'
+export * from './comprobante.complemento.pagos.pago.impuestos.dr.retenciones.dr.element'
+export * from './comprobante.complemento.pagos.pago.impuestos.dr.traslados.dr.element'
+export * from './comprobante.complemento.pagos.pago.impuestos.p.retencion.p.element'
+export * from './comprobante.complemento.pagos.pago.impuestos.p.traslado.p.element'
