@@ -13,6 +13,7 @@ export class ComprobanteCfdiRelacionados {
     @XMLChild({
         namespace: CFDI_NAME_SPACE,
         name: 'CfdiRelacionado',
+        noImplicitStructure: true
     })
     public CfdiRelacionado: ComprobanteCfdiRelacionadosCfdiRelacionado[];
 

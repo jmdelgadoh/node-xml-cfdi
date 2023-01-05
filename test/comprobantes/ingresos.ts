@@ -123,5 +123,5 @@ export const testComprobanteIngresos = async () => {
 
     const xmlSellado = await service.getXMLSellado(comprobante);
 
-    console.log(xmlSellado)
+    // console.log(xmlSellado)
 }

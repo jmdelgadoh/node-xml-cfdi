@@ -19,6 +19,7 @@ import {
 } from '../../src';
 import { emisor } from '../utils/emisor';
 import { receptor } from '../utils/receptor';
+import { service } from "../utils/service";
 
 export const testComprobanteEgresos = async () => {
 
@@ -46,7 +47,7 @@ export const testComprobanteEgresos = async () => {
     });
 
     const cfdiRelacionado = new ComprobanteCfdiRelacionadosCfdiRelacionado({
-        UUID: '327a9930-afe7-42f8-b8ca-532b44d13566\t'
+        UUID: '327a9930-afe7-42f8-b8ca-532b44d13566'
     })
 
     cfdiRelacionados.CfdiRelacionado.push(cfdiRelacionado);
@@ -105,4 +106,8 @@ export const testComprobanteEgresos = async () => {
     impuestos.Traslados.push(traslado);
 
     comprobante.Impuestos = impuestos;
+
+    const xmlSellado = await service.getXMLSellado(comprobante);
+
+    console.log(xmlSellado)
 }
